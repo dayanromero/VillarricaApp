@@ -1,11 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
-import {  StyleSheet, TextInput } from 'react-native';
+import {  Text, StyleSheet, TextInput } from 'react-native';
+//import { theme } from '../core/theme';
 
 // create a component
-const InputText = ({style, ...props}) => {
+const InputText = ({errorText, style, ...props}) => {
   return (
-    <TextInput {...props} style={[styles.input, style]} />
+    <TextInput {...props} style={[styles.input, style]}>
+      {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
+    </TextInput>
   );
 };
 
@@ -17,6 +20,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#f1f1f1',
     borderColor: '#000000',
+  },
+  error: {
+    fontSize: 14,
+    color: 'red',
+    paddingHorizontal: 4,
+    paddingTop: 4,
   },
 });
 

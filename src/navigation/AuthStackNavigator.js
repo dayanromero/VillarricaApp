@@ -7,6 +7,7 @@ import LoginScreen from '../screens/LoginScreen';
 import DashboardMap from '../screens/DashboardMap';
 
 const AuthStack = createStackNavigator();
+const LoginStack = createStackNavigator();
 
 // create a component
 const AuthStackNavigator = () => {
@@ -16,7 +17,17 @@ const AuthStackNavigator = () => {
         headerShown: false,
       }}
     >
-        <AuthStack.Screen name={'LoginScreen'} component={LoginScreen} />
+        <AuthStack.Screen name={'LoginScreen'}>
+          {() => (
+            <LoginStack.Navigator
+              screenOptions={{
+              headerShown: false,
+            }}>
+              <LoginStack.Screen name={'Login'} component={LoginScreen} />
+            </LoginStack.Navigator>
+          )}
+          
+        </AuthStack.Screen>
         <AuthStack.Screen name={'DashboardMap'} component={DashboardMap} />
     </AuthStack.Navigator>
   );
