@@ -1,17 +1,18 @@
 //import liraries
 import React, {useState} from 'react';
-import { View, StyleSheet } from 'react-native';
-import Input from '../components/Input';
+import { StyleSheet } from 'react-native';
 
 //import components
 import Heading from '../components/Heading';
+import Logo from '../components/Logo';
 import Button from '../components/Button';
 import TextButton from '../components/TextButton';
-import Error from '../components/Error';
 import AuthContainer from '../components/AuthContainer';
 import { emailValidator, passwordValidator } from '../core/utils';
-import AuthContext from '../context/AuthContext';
+import InputText from '../components/InputText';
+import { theme } from '../core/theme';
 
+import AuthContext from '../context/AuthContext';
 
 // create a component
 const LoginScreen = ({navigation}) => {
@@ -34,13 +35,13 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <AuthContainer>
-            <Heading style={styles.title}>LOGIN</Heading>
-            <Error error={'Hubo un error'} />
-            <Input 
+            <Logo />
+            <Heading style={styles.title}>Login</Heading>
+            <InputText 
                 style={styles.input}
-                label="Email"
+                label="Correcto electronico"
                 returnKeyType="next"
-                placeholder={'Email'}
+                placeholder={'Correcto electronico'}
                 keyboardType={'email-address'}
                 onChangeText={text => setEmail({ value: text, error: '' })}
                 error={!!email.error}
@@ -50,11 +51,11 @@ const LoginScreen = ({navigation}) => {
                 textContentType="emailAddress"
                 keyboardType="email-address"
             />
-            <Input 
+            <InputText
                 style={styles.input}
-                label="Password"
+                label="Contraseña"
                 returnKeyType="done"
-                placeholder={'Password'}
+                placeholder={'Contraseña'}
                 alue={password.value}
                 onChangeText={text => setPassword({ value: text, error: '' })}
                 error={!!password.error}
@@ -66,9 +67,7 @@ const LoginScreen = ({navigation}) => {
                 style={styles.loginButton}
                 onPress={_onLoginPressed}
             />
-            <TextButton
-                title={'Olvide mi contraseña'}
-            />
+            <TextButton title={'Olvide mi contraseña'} />
         </AuthContainer>
     );
 };
@@ -81,15 +80,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        marginBottom: 16
+        marginBottom: 14,
+        color: theme.colors.primary,
     },
     input: {
-        marginVertical: 8,
         fontSize: 16
     },
     loginButton: {
-        marginVertical: 8
-    }
+        marginVertical: 8,
+    },
+    label: {
+        color: theme.colors.secondary,
+      },
 });
 
 //make this component available to the app

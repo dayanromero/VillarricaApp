@@ -1,6 +1,7 @@
 //import liraries
-import React, { Component } from 'react';
+import * as React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { theme } from '../core/theme';
 
 // create a component
 const Botton = ({title, style, onPress}) => {
@@ -9,7 +10,7 @@ const Botton = ({title, style, onPress}) => {
             style={[styles.container, style]}
             onPress={onPress}
         >
-            <Text style={styles.text}>{title.toUpperCase()}</Text>
+            <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     );
 };
@@ -17,7 +18,7 @@ const Botton = ({title, style, onPress}) => {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'purple',
+        backgroundColor: theme.colors.primary,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '500',
         fontSize: 16,
+        textTransform: 'uppercase'
     }
 });
 

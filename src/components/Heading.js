@@ -14,7 +14,7 @@ const Heading = ({children, style, ...props}) => {
 // define your styles
 const styles = StyleSheet.create({
     text: {
-        fontSize: 32,
+        fontSize: 25,
         fontWeight: 'bold',
         color: 'black',
     },
