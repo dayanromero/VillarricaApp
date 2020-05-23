@@ -10,7 +10,7 @@ import TextButton from '../components/TextButton';
 import Error from '../components/Error';
 
 // create a component
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <Heading style={styles.title}>LOGIN</Heading>
@@ -28,7 +28,9 @@ const LoginScreen = () => {
             <Button
                 title={'Login'}
                 style={styles.loginButton}
-                onPress={()=> {}}
+                onPress={() => {
+                    navigation.navigate('DashboardMap')
+                }}
             />
             <TextButton
                 title={'Olvide mi contraseña'}

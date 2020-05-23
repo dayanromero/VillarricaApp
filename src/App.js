@@ -1,24 +1,23 @@
 //import liraries
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AuthStackNavigator from './navigation/AuthStackNavigator';
+
+const RootStack = createStackNavigator();
 
 // create a component
 const App = () => {
   return (
-    <LoginScreen />
+    <NavigationContainer>
+        <RootStack.Navigator 
+          screenOptions={{
+            headerShown: false,
+          }}>
+            <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
+        </RootStack.Navigator>
+    </NavigationContainer>
   );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-  },
-});
-
-//make this component available to the app
 export default App;
