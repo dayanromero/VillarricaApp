@@ -5,7 +5,7 @@ import { Text, StyleSheet } from 'react-native';
 // create a component
 const Heading = ({children, style, ...props}) => {
     return (
-        <Text {...props} style={styles.text}>
+        <Text {...props} style={[styles.text, style]}>
             {children}
         </Text>
     );

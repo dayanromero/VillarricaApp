@@ -5,13 +5,16 @@ import Input from '../components/Input';
 
 //import components
 import Heading from '../components/Heading';
-import Botton from '../components/Botton';
+import Button from '../components/Button';
+import TextButton from '../components/TextButton';
+import Error from '../components/Error';
 
 // create a component
 const LoginScreen = () => {
     return (
         <View style={styles.container}>
             <Heading style={styles.title}>LOGIN</Heading>
+            <Error error={'Hubo un error'} />
             <Input 
                 style={styles.input}
                 placeholder={'Email'}
@@ -22,7 +25,14 @@ const LoginScreen = () => {
                 placeholder={'Password'}
                 secureTextEntry
             />
-            <Botton title={'Login'} />
+            <Button
+                title={'Login'}
+                style={styles.loginButton}
+                onPress={()=> {}}
+            />
+            <TextButton
+                title={'Olvide mi contraseña'}
+            />
         </View>
     );
 };
@@ -38,6 +48,10 @@ const styles = StyleSheet.create({
         marginBottom: 16
     },
     input: {
+        marginVertical: 8,
+        fontSize: 16
+    },
+    loginButton: {
         marginVertical: 8
     }
 });

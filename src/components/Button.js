@@ -5,8 +5,11 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 // create a component
 const Botton = ({title, style, onPress}) => {
     return (
-        <TouchableOpacity style={[styles.container, style]}>
-            <Text>{title.toUpperCase()}</Text>
+        <TouchableOpacity
+            style={[styles.container, style]}
+            onPress={onPress}
+        >
+            <Text style={styles.text}>{title.toUpperCase()}</Text>
         </TouchableOpacity>
     );
 };
