@@ -1,14 +1,21 @@
 //import liraries
-import React, { Component } from 'react';
-import {  Text, StyleSheet, TextInput } from 'react-native';
-//import { theme } from '../core/theme';
+import React, { memo } from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { TextInput as Input } from 'react-native-paper';
+import { theme } from '../core/theme';
 
 // create a component
 const InputText = ({errorText, style, ...props}) => {
   return (
-    <TextInput {...props} style={[styles.input, style]}>
+    <Input
+      {...props}
+      style={[styles.input, style]}
+      selectionColor={theme.colors.primary}
+      underlineColor="transparent"
+      mode="outlined"
+      >
       {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
-    </TextInput>
+    </Input>
   );
 };
 
@@ -30,4 +37,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default InputText;
+export default memo(InputText);
