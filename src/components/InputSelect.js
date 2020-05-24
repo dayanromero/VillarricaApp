@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 const InputSelect = () => {
   let pickerRef = null;
 
-  const [valueText, setValueText] = useState();
+  const [valueText, setValueText] = useState('Ciudad');
   const [selectedIndex, setSelectedIndex] = useState(null);
   const dataAndImageSet = {
     data: ['Via a Cali', 'Via a Puerto Tejada', 'Via a Jamundi']
@@ -19,7 +19,7 @@ const InputSelect = () => {
       >
           <View style={styles.textContainer}>
             <Text style={[styles.texts, styles.bold]}>Lugar: </Text>
-            <Text style={styles.texts}>{valueText}</Text>
+            <Text style={styles.texts}>TEasdsdsad</Text>
            </View>
       </TouchableOpacity>
 
@@ -35,8 +35,8 @@ const InputSelect = () => {
           console.log("index: ", index)
           setValueText(valueText)
           setSelectedIndex(index)
-        }} */}
-      />
+        }}
+      /> */}
     </View>
   )
 }

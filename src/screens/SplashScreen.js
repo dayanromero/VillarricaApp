@@ -1,16 +1,25 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import React from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { theme } from '../core/theme';
 
-const SplashScreen = () => {
-  const { colors } = useTheme();
-  return <View style={[styles.container, { backgroundColor: colors.primary }]} />;
+const Loader = () => {
+  return (
+    <View style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size="large" color= {theme.colors.primary} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center"
   },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
+  }
 });
 
-export default SplashScreen;
+export default Loader;

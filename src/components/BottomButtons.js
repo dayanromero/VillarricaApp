@@ -15,7 +15,7 @@ export default class BottomButtons extends React.Component {
     return (
       <View style={styles.buttonContainer}>
         <Botton
-          title={'Ingeso'}
+          title={'Ingreso'}
           style={styles.button}
           onPress={() => this._showDialog(ingreso)}
         >
