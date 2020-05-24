@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import MapLocations from '../components/MapLocations';
-// import SlideUp from '../components/SlideUp';
+import SlideUp from '../components/SlideUp';
 import SearchBar from '../components/SearchBar';
 // import ModalDialog from '../components/ModalDialog';
 
@@ -69,11 +69,11 @@ export default class Dashboard extends Component {
                         <MapLocations show = {this.showContent.bind(this)}/>
                     </MapboxGL.MapView>
                 </View>
-                {/* <SlideUp
+                <SlideUp
                     slide={this.state}
                     navigation={navigation}
                     showModal = {this.handleModalOpen}
-                />        */}
+                />       
             </SafeAreaView>
         )
     }
