@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import { Text, TouchableOpacity, View, StyleSheet, Picker } from 'react-native';
+//import { Picker } from '@react-native-community/picker';
 
 const InputSelect = () => {
 
   const [valueText, setValueText] = useState('Seleccione zona');
-  const dataAndImageSet = {
-    data: ['Via a Cali', 'Via a Puerto Tejada', 'Via a Jamundi']
-  }
+  const locations = ['Via a Cali', 'Via a Puerto Tejada', 'Via a Jamundi'];
 
-  state = {
-    language: 'java',
-  };
   return (
     // <View>
     //   <TouchableOpacity
@@ -23,21 +18,6 @@ const InputSelect = () => {
     //         <Text style={styles.texts}>{valueText}</Text>
     //        </View>
     //   </TouchableOpacity>
-
-    //   <ReactNativePickerModule
-    //     pickerRef={e => (pickerRef = e)}
-    //     selectedValue={selectedIndex}
-    //     title={'Seleccionar'}
-    //     items={dataAndImageSet.data}
-    //     onDismiss={() => console.log("onDismiss")}
-    //     onCancel={() => console.log("Cancelled")}
-    //     onValueChange={(valueText, index) => {
-    //       console.log("value: ", valueText)
-    //       console.log("index: ", index)
-    //       setValueText(valueText)
-    //       setSelectedIndex(index)
-    //     }}
-    //   />
     // </View>
   <View>
     <View style={styles.textContainer}>
@@ -45,13 +25,15 @@ const InputSelect = () => {
       <Text style={styles.texts}>{valueText}</Text>
     </View>
         <Picker
-          selectedValue={this.state.language}
-          style={{height: 50, width: 100}}
+          selectedValue={valueText}
+          style={{height: 50}}
           onValueChange={(itemValue, itemIndex) =>
-            this.setState({language: itemValue})
-          }>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
+            setValueText(itemValue)}
+        >
+          {locations.map(loc =>
+            <Picker.Item key={loc} label={loc} value={loc} />
+          )}
+        
         </Picker>
         </View>
   )
