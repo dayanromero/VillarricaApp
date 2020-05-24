@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { theme } from '../core/theme';
-// import BottomButtons from './BottomButtons';
+import BottomButtons from './BottomButtons';
 
 const dragImg = require('../assets/drag-icon.png');
 const userImg = require('../assets/user.png'); 
@@ -42,7 +42,7 @@ const slideUp = ({navigation, ...props}) => {
               </View>   
             </View> 
               <View style={styles.bottons}>
-                {/* <BottomButtons handleModal = {showModal}/> */}
+                <BottomButtons handleModal = {showModal}/>
               </View>
           </View>
         </SlidingUpPanel>

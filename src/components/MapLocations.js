@@ -12,7 +12,7 @@ const MapLocations = (props) => {
         id: '1',
         properties: {
           icon: 'locationIcon',
-        },
+      },
         geometry: {
           type: 'Point',
           coordinates: [-76.4863147, 3.009516]
@@ -23,7 +23,7 @@ const MapLocations = (props) => {
         id: '2',
         properties: {
           icon: 'locationIcon',
-        },
+      },
         geometry: {
           type: 'Point',
           coordinates: [-76.4809974, 3.0089435]
@@ -31,10 +31,10 @@ const MapLocations = (props) => {
       },
       {
         type: 'Feature',
-        id: '2',
+        id: '3',
         properties: {
           icon: 'locationIcon',
-        },
+      },
         geometry: {
           type: 'Point',
           coordinates: [-76.4786371, 3.0086007]
@@ -55,7 +55,8 @@ const MapLocations = (props) => {
       hitbox={{ width: 20, height: 20 }}
       onPress={dataSource => {
         let { features: [data] } = dataSource;
-        let { id } = data;
+        let { id, geometry:{coordinates} } = data;
+        props.centerLocation(coordinates);
         props.show(id);
       }
       }

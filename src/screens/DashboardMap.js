@@ -21,7 +21,9 @@ export default class Dashboard extends Component {
         userId: 0
     };
 
-    handleModalOpen = (data) => {
+    setLocation = data => this.setState({ location: data })
+
+    handleModalOpen = data => {
         this.setState({
             setModalVisible: {
                 visible: true, data
@@ -37,7 +39,7 @@ export default class Dashboard extends Component {
         })
     }
 
-    showContent = (id) => {
+    showContent = id => {
         this.setState({
             showSlide: true,
             userId: id
@@ -66,7 +68,10 @@ export default class Dashboard extends Component {
                         />
                         
                         <MapboxGL.UserLocation/>
-                        <MapLocations show = {this.showContent.bind(this)}/>
+                        <MapLocations
+                            show = {this.showContent}
+                            centerLocation = {this.setLocation}
+                        />
                     </MapboxGL.MapView>
                 </View>
                 <SlideUp
