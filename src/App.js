@@ -10,7 +10,7 @@ const RootStack = createStackNavigator();
 
 // create a component
 const App = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   const [loading, setLoading] = useState(false);
 
   function renderScreens() {
