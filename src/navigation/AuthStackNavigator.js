@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //import components
 import LoginScreen from '../screens/LoginScreen';
-import DashboardMap from '../screens/DashboardMap';
+
 
 const AuthStack = createStackNavigator();
 const LoginStack = createStackNavigator();
@@ -28,7 +28,6 @@ const AuthStackNavigator = () => {
           )}
           
         </AuthStack.Screen>
-        <AuthStack.Screen name={'DashboardMap'} component={DashboardMap} />
     </AuthStack.Navigator>
   );
 };

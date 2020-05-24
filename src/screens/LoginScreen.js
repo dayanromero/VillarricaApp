@@ -1,5 +1,5 @@
 //import liraries
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 //import components
@@ -12,36 +12,33 @@ import { emailValidator, passwordValidator } from '../core/utils';
 import InputText from '../components/InputText';
 import { theme } from '../core/theme';
 
-import AuthContext from '../context/AuthContext';
-
 // create a component
-const LoginScreen = ({navigation}) => {
-    //const { login } = React.useContext(AuthContext);
+const LoginScreen = ({ navigation }) => {
 
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
+    const [email, setEmail] = useState({ value: '', error: '' });
+    const [password, setPassword] = useState({ value: '', error: '' });
 
-  const _onLoginPressed = () => {
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
+    const _onLoginPressed = () => {
+        const emailError = emailValidator(email.value);
+        const passwordError = passwordValidator(password.value);
 
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
-    }
-      navigation.navigate('DashboardMap');
+        if (emailError || passwordError) {
+            setEmail({ ...email, error: emailError });
+            setPassword({ ...password, error: passwordError });
+            return;
+        }
+        navigation.navigate('DashboardMap');
     };
 
     return (
         <AuthContainer>
             <Logo />
             <Heading style={styles.title}>Login</Heading>
-            <InputText 
+            <InputText
                 style={styles.input}
-                label="Correcto electronico"
+                label="Correo electronico"
                 returnKeyType="next"
-                placeholder={'Correcto electronico'}
+                placeholder={'Correo electronico'}
                 keyboardType={'email-address'}
                 onChangeText={text => setEmail({ value: text, error: '' })}
                 error={!!email.error}
@@ -91,7 +88,7 @@ const styles = StyleSheet.create({
     },
     label: {
         color: theme.colors.secondary,
-      },
+    },
 });
 
 //make this component available to the app
