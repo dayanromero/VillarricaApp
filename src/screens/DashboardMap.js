@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
-// import MapPoints from '../components/MapPoints';
+import MapLocations from '../components/MapLocations';
 // import SlideUp from '../components/SlideUp';
 import SearchBar from '../components/SearchBar';
-// import ModalDialog from '../components/ModalDialog'
+// import ModalDialog from '../components/ModalDialog';
 
 MapboxGL.setAccessToken(
     'pk.eyJ1IjoiZGF5cm9tIiwiYSI6ImNrYTc5aXg0YzAxM2oyeXFlZWYwejU4cTYifQ.uQCDALmLyuOI-QzPxo1_EA'
@@ -64,8 +64,9 @@ export default class Dashboard extends Component {
                             animationMode={'flyTo'}
                             centerCoordinate={this.state.location}
                         />
-                        <MapboxGL.UserLocation />
-                        {/* <MapPoints show = {this.showContent.bind(this)}/> */}
+                        
+                        <MapboxGL.UserLocation/>
+                        <MapLocations show = {this.showContent.bind(this)}/>
                     </MapboxGL.MapView>
                 </View>
                 {/* <SlideUp
