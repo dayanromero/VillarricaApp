@@ -66,19 +66,19 @@ export default class Dashboard extends Component {
                             animationMode={'flyTo'}
                             centerCoordinate={this.state.location}
                         />
-                        
-                        <MapboxGL.UserLocation/>
+
+                        <MapboxGL.UserLocation />
                         <MapLocations
-                            show = {this.showContent}
-                            centerLocation = {this.setLocation}
+                            show={this.showContent}
+                            centerLocation={this.setLocation}
                         />
                     </MapboxGL.MapView>
                 </View>
                 <SlideUp
                     slide={this.state}
                     navigation={navigation}
-                    showModal = {this.handleModalOpen}
-                />       
+                    showModal={this.handleModalOpen}
+                />
             </SafeAreaView>
         )
     }

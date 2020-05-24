@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
             setPassword({ ...password, error: passwordError });
             return;
         }
-        navigation.navigate('DashboardMap');
+        // navigation.navigate('DashboardMap');
     };
 
     return (
