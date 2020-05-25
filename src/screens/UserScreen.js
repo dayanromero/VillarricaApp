@@ -1,8 +1,10 @@
 import React, { memo, useState } from 'react';
-import { View, Text, Image, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import BottomButtons from '../components/BottomButtons';
 import UserProfileNavigation from '../navigation/UserProfileNavigation';
-import ModalDialog from '../components/ModalDialog'
+import ModalDialog from '../components/ModalDialog';
+import { theme } from '../core/theme';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const userImg = require('../assets/user.png'); 
 
@@ -20,7 +22,7 @@ const UserScreen = ({ route, ...props }) => {
           onClose = {onClose}
       />
       <View style={styles.userInfo}>
-        <Image source={userImg} style={styles.userImg}/>
+        <Icon name='ios-person' style={styles.icon}/>
         <View >
           <Text style={styles.h1}>Junior Noriega</Text> 
           <Text style={styles.h2}>81 Jenkins Meadow Suite 697</Text>
@@ -44,15 +46,16 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     alignItems: 'center',
   },
-  userImg: {
-    width: 84,
-    height: 84,
-    marginBottom:20,
+  icon: {
+    textAlign: 'center',
+    fontSize: 100,
+    color: theme.colors.secondary
   },
   h1: {
     fontSize: 28,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: theme.colors.primary,
   },
   h2: {
     fontSize: 18,

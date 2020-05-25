@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-//import InfoCard from '../components/InfoCard';
+import InfoCard from '../components/InfoCard';
 
 const UserActivity = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {/* <InfoCard /> */}
+        <InfoCard />
+        <InfoCard />
+        <InfoCard />
       </ScrollView>
     </SafeAreaView>
   );

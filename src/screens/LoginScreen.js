@@ -1,8 +1,5 @@
-//import liraries
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-
-//import components
 import Heading from '../components/Heading';
 import Logo from '../components/Logo';
 import Button from '../components/Button';
@@ -12,7 +9,6 @@ import { emailValidator, passwordValidator } from '../core/utils';
 import InputText from '../components/InputText';
 import { theme } from '../core/theme';
 
-// create a component
 const LoginScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState({ value: '', error: '' });
@@ -69,7 +65,6 @@ const LoginScreen = ({ navigation }) => {
     );
 };
 
-// define your styles
 const styles = StyleSheet.create({
     container: {
         padding: 20,
@@ -91,5 +86,4 @@ const styles = StyleSheet.create({
     },
 });
 
-//make this component available to the app
 export default LoginScreen;

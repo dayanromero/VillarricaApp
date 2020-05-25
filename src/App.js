@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStackNavigator from './navigation/AuthStackNavigator';
 import DrawerStackNavigator from './navigation/MainStackNavigator';
-import SplashScreen from './screens/SplashScreen';
+import Loading from './components/Loading';
 
 const RootStack = createStackNavigator();
 
@@ -14,13 +14,13 @@ const App = () => {
 
   function renderScreens() {
     if (loading) {
-      return <RootStack.Screen name={'Splash'} component={SplashScreen} />;
+      return <RootStack.Screen name={'Loading'} component={Loading} />;
     }
-    return user ? 
+    return user ?
       <RootStack.Screen name={'MainStack'} component={DrawerStackNavigator} />
-      : 
+      :
       <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
-      
+
   }
 
   return (

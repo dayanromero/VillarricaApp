@@ -10,6 +10,7 @@ import {
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { theme } from '../core/theme';
 import BottomButtons from './BottomButtons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const dragImg = require('../assets/drag-icon.png');
 const userImg = require('../assets/user.png'); 
@@ -33,7 +34,7 @@ const slideUp = ({navigation, ...props}) => {
             <Image source={dragImg} style={styles.dragIcon} />
             <View style={styles.userInfo}>
               <TouchableOpacity onPress={userScreen}>
-                <Image source={userImg} style={styles.userImg}/>
+                <Icon name='ios-person' style={styles.icon}/>
               </TouchableOpacity>
               <View >
                 <Text style={styles.h1}>Junior Noriega</Text> 
@@ -74,10 +75,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'space-between'
   },
-  userImg: {
-    width: 74,
-    height: 74,
-    marginRight: 20
+  icon: {
+    width: 100,
+    height: 100,
+    marginRight: 20,
+    textAlign: 'center',
+    fontSize: 100,
+    color: theme.colors.secondary
   },
   h1: {
     fontSize: 24,
