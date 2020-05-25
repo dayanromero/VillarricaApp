@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import DashboardMap from '../screens/DashboardMap';
 import UserScreen from '../screens/UserScreen';
 import NewUserScreen from '../screens/NewUserScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {theme} from '../core/theme';
+import SideMenuContent from './SideMenuContent';
 
 const MainStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
@@ -15,49 +16,53 @@ const MainStackNavigator = ({navigation}) => {
   return (
     <MainStack.Navigator>
       <MainStack.Screen
-        name='DashboardMap'
+        name="DashboardMap"
         component={DashboardMap}
         options={{
           title: '',
-          headerShown: false
+          headerShown: false,
         }}
       />
       <MainStack.Screen
-        name='UserScreen'
+        name="UserScreen"
         component={UserScreen}
-        options={{title:'Usuario'}}
+        options={{title: 'Usuario'}}
       />
     </MainStack.Navigator>
-  )
-}
+  );
+};
 
 const SettingsStackNavigator = ({navigation}) => {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen
-        name='NewUserScreen'
+        name="NewUserScreen"
         component={NewUserScreen}
         options={{
-          title:'Crear usuario',
+          title: 'Crear usuario',
           headerLeft: () => (
-            <Icon.Button name='ios-menu' size={25}
-              backgroundColor= 'black'
-              onPress={()=>navigation.openDrawer()}
-          ></Icon.Button>
-          )
+            <Icon.Button
+              name="menu"
+              size={30}
+              color={theme.colors.primary}
+              backgroundColor="white"
+              onPress={() => navigation.openDrawer()}></Icon.Button>
+          ),
         }}
       />
     </SettingsStack.Navigator>
-  )
-}
-
-const DrawerStackNavigator = ()=> {
-  return (
-      <Drawer.Navigator initialRouteName='Inicio'>
-        <Drawer.Screen name='Inicio' component={MainStackNavigator}/>
-        <Drawer.Screen name='Crear usuario' component={SettingsStackNavigator} />
-      </Drawer.Navigator>
   );
-}
+};
+
+const DrawerStackNavigator = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Inicio"
+      drawerContent={(props) => <SideMenuContent {...props} />}>
+      <Drawer.Screen name="inicio" component={MainStackNavigator} />
+      <Drawer.Screen name="crear-usuario" component={SettingsStackNavigator} />
+    </Drawer.Navigator>
+  );
+};
 
 export default DrawerStackNavigator;

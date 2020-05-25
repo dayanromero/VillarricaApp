@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import InputText from '../components/InputText';
 import BottomButtons from '../components/BottomButtons';
 

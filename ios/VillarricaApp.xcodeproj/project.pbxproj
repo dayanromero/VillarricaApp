@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* VillarricaAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* VillarricaAppTests.m */; };
+		135CDE51247C305000F6A7B1 /* libRNCPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 135CDE50247C305000F6A7B1 /* libRNCPicker.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -60,6 +61,7 @@
 		130B34D22479CF73008B27A8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = ../../../../../Desktop/Fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
 		130B34D32479CF73008B27A8 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = ../../../../../Desktop/Fonts/Ionicons.ttf; sourceTree = "<group>"; };
 		130B34D42479CF73008B27A8 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = ../../../../../Desktop/Fonts/Feather.ttf; sourceTree = "<group>"; };
+		135CDE50247C305000F6A7B1 /* libRNCPicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCPicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* VillarricaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VillarricaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = VillarricaApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = VillarricaApp/AppDelegate.m; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				135CDE51247C305000F6A7B1 /* libRNCPicker.a in Frameworks */,
 				2C263E38CFF831B00DDB3163 /* libPods-VillarricaApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,6 +182,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				135CDE50247C305000F6A7B1 /* libRNCPicker.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				79E8E9AD486A5682D3213B8F /* libPods-VillarricaApp.a */,
