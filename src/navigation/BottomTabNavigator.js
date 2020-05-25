@@ -21,7 +21,7 @@ const MainTabScreen = ({ navigation }) => (
             name='Mapa'
             component={DashboardMap}
             options={{
-                tabBarLabel: 'Home',
+                tabBarLabel: 'Inicio',
                 tabBarColor: theme.colors.primary,
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name='ios-home' color={color} size={size} />

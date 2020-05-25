@@ -49,8 +49,6 @@ const slideUp = ({navigation, ...props}) => {
     )
 }
 
-export default memo(slideUp);
-
 const styles = StyleSheet.create({
   container: {
     height: height / 3.5,
@@ -94,3 +92,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+export default memo(slideUp);
