@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   search: {
     height: 55,
-    width: '88%',
+    width: '85%',
   },
 });
 

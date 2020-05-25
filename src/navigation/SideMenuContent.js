@@ -18,8 +18,8 @@ const SideMenuContent = (props) => {
                 size={50}
               />
               <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                <Title style={styles.title}>John Doe</Title>
-                <Caption style={styles.caption}>@j_doe</Caption>
+                <Title style={styles.title}>Administrador</Title>
+                <Caption style={styles.caption}>admin@villarricaapp.com</Caption>
               </View>
             </View>
           </View>
@@ -27,7 +27,7 @@ const SideMenuContent = (props) => {
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="home-outline" color={color} size={size} />
+                <Icon name="home-outline" color={color} size={30} />
               )}
               label="Inicio"
               onPress={() => {
@@ -36,7 +36,7 @@ const SideMenuContent = (props) => {
             />
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="account-outline" color={color} size={size} />
+                <Icon name="account-outline" color={color} size={30} />
               )}
               label="Crear Usuario"
               onPress={() => {
@@ -49,7 +49,7 @@ const SideMenuContent = (props) => {
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
           icon={({color, size}) => (
-            <Icon name="exit-to-app" color={color} size={size} />
+            <Icon name="exit-to-app" color={color} size={30} />
           )}
           label="Salir"
           onPress={() => {
@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 3,
     fontWeight: 'bold',
   },
   caption: {
-    fontSize: 14,
+    fontSize: 1,
     lineHeight: 14,
   },
   row: {
