@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
                     onClose = {this.handleModalClose}
                 />
                 <View style={styles.container}>
-                    <SearchBar />
+                    <SearchBar navigation={navigation}/>
                     <MapboxGL.MapView
                         style={styles.container}
                         zoomLevel={10}
