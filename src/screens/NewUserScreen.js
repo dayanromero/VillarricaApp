@@ -4,7 +4,7 @@ import InputText from '../components/InputText';
 import BottomButtons from '../components/BottomButtons';
 
 const NewUserScreen = ({navigation}) => {
-  
+
   const userScreen = () => navigation.navigate('DashboardMap')
   const btns = [
     {
@@ -18,9 +18,9 @@ const NewUserScreen = ({navigation}) => {
   ];
 
   return (
-    <View>
+    <View style={styles.container}>
       <ScrollView>
-        <View style={styles.container}>
+        <View >
           <InputText
             style={styles.input}
             returnKeyType="next"
@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    alignItems: 'center',
   },
   input: {
     fontSize: 16,

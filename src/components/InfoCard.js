@@ -10,7 +10,7 @@ const InfoCard = () =>  {
       <Card.Content>
         <Paragraph>
           <Icon name='ios-calendar' style={styles.icon} />
-           20 de marzo de 2020
+           <Text style={styles.t}>20 de marzo de 2020</Text>
         </Paragraph>
           <View style={styles.textsContainer}>
             <Text style={[styles.textL, styles.texts]}>Hora Salida: </Text>
@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
     color: theme.colors.secondary,
     fontSize: 20,
   },
+  t: {
+    paddingLeft:30,
+  }
 })
 
 export default InfoCard;

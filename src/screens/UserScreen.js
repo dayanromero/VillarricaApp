@@ -46,7 +46,7 @@ const UserScreen = ({route, ...props}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.tertiary,
     paddingTop: 0,
   },
   userInfo: {
@@ -63,16 +63,18 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: theme.colors.primary,
+    color: 'black'
   },
   h2: {
     fontSize: 18,
     textAlign: 'center',
+    color: 'black'
   },
   h3: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'black'
   },
 });
 

@@ -1,5 +1,5 @@
-import React from "react";
-import MapboxGL from "@react-native-mapbox-gl/maps";
+import React from 'react';
+import MapboxGL from '@react-native-mapbox-gl/maps';
 
 const locationIcon = require('../assets/icon_location.png');
 
@@ -12,10 +12,10 @@ const MapLocations = (props) => {
         id: '1',
         properties: {
           icon: 'locationIcon',
-      },
+        },
         geometry: {
           type: 'Point',
-          coordinates: [-76.4863147, 3.009516]
+          coordinates: [-76.4863147, 3.009516],
         },
       },
       {
@@ -23,10 +23,10 @@ const MapLocations = (props) => {
         id: '2',
         properties: {
           icon: 'locationIcon',
-      },
+        },
         geometry: {
           type: 'Point',
-          coordinates: [-76.4809974, 3.0089435]
+          coordinates: [-76.4809974, 3.0089435],
         },
       },
       {
@@ -34,10 +34,10 @@ const MapLocations = (props) => {
         id: '3',
         properties: {
           icon: 'locationIcon',
-      },
+        },
         geometry: {
           type: 'Point',
-          coordinates: [-76.4786371, 3.0086007]
+          coordinates: [-76.4786371, 3.0086007],
         },
       },
     ],
@@ -47,25 +47,28 @@ const MapLocations = (props) => {
     iconImage: locationIcon,
     iconAllowOverlap: true,
     iconSize: 1.2,
-  }
+  };
 
   let viewItem = (
     <MapboxGL.ShapeSource
       id={'exampleShapeSource'}
-      hitbox={{ width: 20, height: 20 }}
-      onPress={dataSource => {
-        let { features: [data] } = dataSource;
-        let { id, geometry:{coordinates} } = data;
+      hitbox={{width: 20, height: 20}}
+      onPress={(dataSource) => {
+        let {
+          features: [data],
+        } = dataSource;
+        let {
+          id,
+          geometry: {coordinates},
+        } = data;
         props.centerLocation(coordinates);
         props.show(id);
-      }
-      }
-      shape={dataSource}
-    >
+      }}
+      shape={dataSource}>
       <MapboxGL.SymbolLayer id={'locationIcon'} style={icon} />
     </MapboxGL.ShapeSource>
-  )
-  return viewItem
+  );
+  return viewItem;
 };
 
-export default MapLocations
+export default MapLocations;
