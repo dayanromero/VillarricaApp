@@ -19,7 +19,7 @@ const NewUserScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View >
           <InputText
             style={styles.input}
@@ -95,9 +95,7 @@ const NewUserScreen = ({navigation}) => {
           />
         </View>
       </ScrollView>
-      <View style={styles.bottons}>
         <BottomButtons btns={btns}/>
-      </View>
     </View>
   );
 };
@@ -105,22 +103,12 @@ const NewUserScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+  },
+  scrollView: {
+    padding: 16
   },
   input: {
     fontSize: 16,
-  },
-  buttonContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-    paddingBottom: Platform.OS === 'ios' ? 20 : 2,
-  },
-  bottons: {
-    width: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   },
 });
 
