@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Dialog, Portal, Divider } from 'react-native-paper';
+import { format, compareAsc } from 'date-fns';
+import { es } from 'date-fns/locale';
 import InputSelect from './InputSelect';
 import Button from './Button';
 
-let date = new Date()
+let date = format(new Date(), "dd/MMMM/YYY", {locale: es})
+let hour = format(new Date(), "HH:mm.aaaa", {locale: es})
 
 export default class ModalDialog extends React.Component {
   constructor(props) {
@@ -28,12 +31,12 @@ export default class ModalDialog extends React.Component {
             <Dialog.Content>
               <View style={styles.textContainer}>
                 <Text style={[styles.texts, styles.bold]}>Fecha: </Text>
-                <Text style={styles.texts}>Fecha</Text>
+                <Text style={styles.texts}>{date}</Text>
               </View>
               <Divider />
               <View style={styles.textContainer}>
                 <Text style={[styles.texts, styles.bold]}>Hora: </Text>
-                <Text style={styles.texts}>Hora</Text>
+                <Text style={styles.texts}>{hour}</Text>
               </View>
               <Divider />
               <View style={{ marginBottom: 40 }}>
