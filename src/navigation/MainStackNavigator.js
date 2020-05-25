@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DashboardMap from '../screens/DashboardMap';
-import SettingsScreen from '../screens/SettingsScreen';
+import NewUserScreen from '../screens/NewUserScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {theme} from '../core/theme';
 
@@ -26,8 +26,8 @@ const SettingsStackNavigator = ({navigation}) => {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen
-        name="SettingsStack"
-        component={SettingsScreen}
+        name="NewUserScreen"
+        component={NewUserScreen}
         options={{
           title:'Settings',
           headerLeft: () => (
