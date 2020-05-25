@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStackNavigator from './navigation/AuthStackNavigator';
-import MainStackNavigator from './navigation/MainStackNavigator';
+import DrawerStackNavigator from './navigation/MainStackNavigator';
 import SplashScreen from './screens/SplashScreen';
 
 const RootStack = createStackNavigator();
@@ -17,7 +17,7 @@ const App = () => {
       return <RootStack.Screen name={'Splash'} component={SplashScreen} />;
     }
     return user ? 
-      <RootStack.Screen name={'MainStack'} component={MainStackNavigator} />
+      <RootStack.Screen name={'MainStack'} component={DrawerStackNavigator} />
       : 
       <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
       
