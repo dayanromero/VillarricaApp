@@ -1,15 +1,10 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Dialog, Portal, Divider } from 'react-native-paper';
-// import Moment from 'moment';
-
-//Components
 import InputSelect from './InputSelect';
 import Button from './Button';
 
-// Moment.locale('es');
-
-let date = new Date();
+let date = new Date()
 
 export default class ModalDialog extends React.Component {
   constructor(props) {
@@ -32,19 +27,19 @@ export default class ModalDialog extends React.Component {
             <Dialog.Content>
               <View style={styles.textContainer}>
                 <Text style={[styles.texts, styles.bold]}>Fecha: </Text>
-                {/* <Text style={styles.texts}>{Moment(date).format('LL')}</Text> */}
+                <Text style={styles.texts}>Fecha</Text>
               </View>
               <Divider />
               <View style={styles.textContainer}>
                 <Text style={[styles.texts, styles.bold]}>Hora: </Text>
-                {/* <Text style={styles.texts}>{Moment(date).format('LT')}</Text> */}
+                <Text style={styles.texts}>Hora</Text>
               </View>
               <Divider />
               <View style={{ marginBottom: 40 }}>
                 <InputSelect />
               </View>
               <Button
-                title={'Login'}
+                title={'Registrar'}
                 style={styles.loginButton}
                 onPress={this._hideDialog}
               />

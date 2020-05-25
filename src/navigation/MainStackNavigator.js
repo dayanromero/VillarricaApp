@@ -15,7 +15,7 @@ const MainStackNavigator = ({navigation}) => {
   return (
     <MainStack.Navigator>
       <MainStack.Screen
-        name='Mapa'
+        name='DashboardMap'
         component={DashboardMap}
         options={{
           title: '',

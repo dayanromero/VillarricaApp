@@ -1,11 +1,10 @@
 import React, { memo, useState } from 'react';
 import { View, Text, Image, StyleSheet} from 'react-native';
-// import BottomButtons from '../components/BottomButtons';
-// import UserProfile from '../components/UserProfile';
-// import ModalDialog from '../components/ModalDialog'
+import BottomButtons from '../components/BottomButtons';
+import UserProfileNavigation from '../navigation/UserProfileNavigation';
+import ModalDialog from '../components/ModalDialog'
 
 const userImg = require('../assets/user.png'); 
-
 
 const UserScreen = ({ route, ...props }) => {
   const [modalVisible, setModalVisible] = useState({ visible:false, data:'' });
@@ -16,10 +15,10 @@ const UserScreen = ({ route, ...props }) => {
 
   return (
     <View style={styles.container}>
-      {/* <ModalDialog
+      <ModalDialog
           showModal = {modalVisible}
           onClose = {onClose}
-      /> */}
+      />
       <View style={styles.userInfo}>
         <Image source={userImg} style={styles.userImg}/>
         <View >
@@ -28,8 +27,8 @@ const UserScreen = ({ route, ...props }) => {
           <Text style={styles.h3}>Prueba: Negativo {userId}</Text>
         </View>   
       </View>
-      {/* <UserProfile/>
-      <BottomButtons handleModal = {handleModalOpen}/> */}
+      <UserProfileNavigation/>
+      <BottomButtons handleModal = {handleModalOpen}/>
     </View>
   )
 };
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     backgroundColor: 'white',
-    paddingTop:'5%'
+    paddingTop: 0
   },
   userInfo: {
     width: '100%',

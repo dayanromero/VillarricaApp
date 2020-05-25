@@ -14,11 +14,11 @@ const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = ({ navigation }) => (
     <Tab.Navigator
-        initialRouteName='Mapa'
+        initialRouteName='Inicio'
         activeColor='white'
     >
         <Tab.Screen
-            name='Mapa'
+            name='Inicio'
             component={DashboardMap}
             options={{
                 tabBarLabel: 'Inicio',
@@ -29,13 +29,13 @@ const MainTabScreen = ({ navigation }) => (
             }}
         />
         <Tab.Screen
-            name='usuario'
+            name='Agregar usuario'
             component={NewUserScreen}
             screenOptions={{
                 headerShown: true,
             }}
             options={{
-                tabBarLabel: 'agregar',
+                tabBarLabel: 'Agregar usuario',
                 tabBarColor: theme.colors.primary,
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name='ios-person' color={color} size={size} />

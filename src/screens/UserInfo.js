@@ -3,8 +3,7 @@ import { Text, View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-paper';
 import { theme } from '../core/theme';
 
-export default class UserInfo extends React.Component {
-  render() {
+const UserInfo = () => {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
@@ -37,7 +36,7 @@ export default class UserInfo extends React.Component {
       </SafeAreaView>
     );
   }
-}
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
@@ -65,3 +64,5 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize'
   },
 })
+
+export default UserInfo;
