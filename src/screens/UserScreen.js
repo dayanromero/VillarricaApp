@@ -1,45 +1,53 @@
-import React, { memo, useState } from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import React, {memo, useState} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import BottomButtons from '../components/BottomButtons';
 import UserProfileNavigation from '../navigation/UserProfileNavigation';
 import ModalDialog from '../components/ModalDialog';
-import { theme } from '../core/theme';
+import {theme} from '../core/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const userImg = require('../assets/user.png'); 
+const userImg = require('../assets/user.png');
 
-const UserScreen = ({ route, ...props }) => {
-  const [modalVisible, setModalVisible] = useState({ visible:false, data:'' });
-  const { userId } = route.params;
+const UserScreen = ({route, ...props}) => {
+  const [modalVisible, setModalVisible] = useState({visible: false, data: ''});
+  const {userId} = route.params;
 
-  handleModalOpen = data => setModalVisible({ visible: true, data:data });
+  handleModalOpen = (data) => setModalVisible({visible: true, data: data});
   onClose = () => setModalVisible(false);
+
+  const btns = [
+    {
+      title: 'Salida',
+      action: () => handleModalOpen('Salida'),
+    },
+    {
+      title: 'Ingreso',
+      action: () => handleModalOpen('Ingreso'),
+    },
+  ];
 
   return (
     <View style={styles.container}>
-      <ModalDialog
-          showModal = {modalVisible}
-          onClose = {onClose}
-      />
+      <ModalDialog showModal={modalVisible} onClose={onClose} />
       <View style={styles.userInfo}>
-        <Icon name='ios-person' style={styles.icon}/>
-        <View >
-          <Text style={styles.h1}>Junior Noriega</Text> 
+        <Icon name="ios-person" style={styles.icon} />
+        <View>
+          <Text style={styles.h1}>Junior Noriega</Text>
           <Text style={styles.h2}>81 Jenkins Meadow Suite 697</Text>
           <Text style={styles.h3}>Prueba: Negativo {userId}</Text>
-        </View>   
+        </View>
       </View>
-      <UserProfileNavigation/>
-      <BottomButtons handleModal = {handleModalOpen}/>
+      <UserProfileNavigation />
+      <BottomButtons btns={btns} />
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor: 'white',
-    paddingTop: 0
+    paddingTop: 0,
   },
   userInfo: {
     width: '100%',
@@ -49,7 +57,7 @@ const styles = StyleSheet.create({
   icon: {
     textAlign: 'center',
     fontSize: 100,
-    color: theme.colors.secondary
+    color: theme.colors.secondary,
   },
   h1: {
     fontSize: 28,
@@ -59,13 +67,13 @@ const styles = StyleSheet.create({
   },
   h2: {
     fontSize: 18,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   h3: {
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'center'
-  }
-})
+    textAlign: 'center',
+  },
+});
 
 export default memo(UserScreen);

@@ -14,7 +14,8 @@ export default class ModalDialog extends React.Component {
   _hideDialog = () => this.props.onClose();
 
   render() {
-    const { showModal: { visible, data } } = this.props;
+    const { showModal: { visible, data }, userId } = this.props;
+
     return (
       <View>
         <Portal>
@@ -22,7 +23,7 @@ export default class ModalDialog extends React.Component {
             visible={visible}
             onDismiss={this._hideDialog}
           >
-            <Dialog.Title style={styles.title}>Registrar {data}</Dialog.Title>
+            <Dialog.Title style={styles.title}>Registrar {data} </Dialog.Title>
 
             <Dialog.Content>
               <View style={styles.textContainer}>

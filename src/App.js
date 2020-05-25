@@ -1,4 +1,3 @@
-//import liraries
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,7 +19,6 @@ const App = () => {
       <RootStack.Screen name={'MainStack'} component={DrawerStackNavigator} />
       :
       <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
-
   }
 
   return (

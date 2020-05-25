@@ -16,7 +16,8 @@ export default class Dashboard extends Component {
         location: [-76.4863147, 3.009516],
         showSlide: false,
         setModalVisible: {
-            visible: false, data: ''
+            visible: false,
+            data: ''
         },
         userId: 0
     };
@@ -26,7 +27,8 @@ export default class Dashboard extends Component {
     handleModalOpen = data => {
         this.setState({
             setModalVisible: {
-                visible: true, data
+                visible: true,
+                data: data
             }
         })
     }
@@ -34,7 +36,8 @@ export default class Dashboard extends Component {
     handleModalClose = () => {
         this.setState({
             setModalVisible: {
-                visible: false, data: ''
+                visible: false,
+                data: ''
             }
         })
     }
