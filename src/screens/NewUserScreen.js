@@ -1,11 +1,24 @@
-import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import InputText from '../components/InputText';
+import DatePicker from '../components/DatePicker';
+import InputSelect from '../components/InputSelect';
 import BottomButtons from '../components/BottomButtons';
 
 const NewUserScreen = ({navigation}) => {
+  const [expedicionDate, setExpedicionDate] = useState();
+  const [documentType, setDocumentType] = useState();
+  const [testData, setTestData] = useState();
+
   const userScreen = () => navigation.navigate('DashboardMap');
+  const handleDatePicker = dateP => setExpedicionDate(dateP);
+  const handleState = text => setDocumentType(text);
+  const handleStateTest = text => setTestData(text);
+
+  let optionsId = ['Tarjeta de identidad', 'Cedula', 'Pasaporte', 'Cedula de extranjeria'];
+  let optionsTest = ['Positivo', 'Negativo', 'Sin prueba', 'En espera de resultados'];
+
   const btns = [
     {
       title: 'Cancelar',
@@ -46,13 +59,11 @@ const NewUserScreen = ({navigation}) => {
               onChangeText={() => {}}
               autoCapitalize="none"
             />
-            <InputText
-              style={styles.input}
-              returnKeyType="next"
+            <InputSelect
+              data={optionsId}
+              value={documentType}
+              onPress={handleState}
               placeholder={'Tipo de documento'}
-              keyboardType={'default'}
-              onChangeText={() => {}}
-              autoCapitalize="none"
             />
             <InputText
               style={styles.input}
@@ -62,21 +73,16 @@ const NewUserScreen = ({navigation}) => {
               onChangeText={() => {}}
               autoCapitalize="none"
             />
-            <InputText
-              style={styles.input}
-              returnKeyType="next"
-              placeholder={'Fecha de expedicion'}
-              keyboardType={'default'}
-              onChangeText={() => {}}
-              autoCapitalize="none"
+            <DatePicker
+              value={expedicionDate}
+              onPress={handleDatePicker}
+              styles={styles.input}
             />
-            <InputText
-              style={styles.input}
-              returnKeyType="next"
+            <InputSelect
+              data={optionsTest}
+              value={testData}
+              onPress={handleStateTest}
               placeholder={'Prueba'}
-              keyboardType={'default'}
-              onChangeText={() => {}}
-              autoCapitalize="none"
             />
             <InputText
               style={styles.input}
