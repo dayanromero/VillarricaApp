@@ -10,7 +10,7 @@ import {
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import {theme} from '../core/theme';
 import BottomButtons from './BottomButtons';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const dragImg = require('../assets/drag-icon.png');
 const {height} = Dimensions.get('window');
@@ -46,7 +46,7 @@ const slideUp = ({navigation, ...props}) => {
         <Image source={dragImg} style={styles.dragIcon} />
         <View style={styles.userInfo}>
           <TouchableOpacity onPress={userScreen}>
-            <Icon name="ios-person" style={styles.icon} />
+            <Icon name='account-circle-outline' style={styles.icon} />
           </TouchableOpacity>
           <View>
             <Text style={styles.h1}>Junior Noriega</Text>

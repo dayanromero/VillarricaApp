@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { View } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { formatDate } from "../core/utils";
-import InputText from "./InputText";
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { formatDate } from '../core/utils';
+import InputText from './InputText';
 
 const DatePicker = ({...props}) => {
-  const {value, styles, onPress} = props;
+  const {value, styles, onPress, placeholder} = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => setDatePickerVisibility(true);
@@ -20,17 +20,18 @@ const DatePicker = ({...props}) => {
     <View>
       <InputText
         style={styles}
-        placeholder={"Fecha de expedicion"}
-        autoCapitalize="none"
+        placeholder={placeholder}
+        autoCapitalize='none'
         onTouchStart={showDatePicker}
-        value={formatDate(value, "f")}
+        value={formatDate(value, 'f')}
       />
 
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode='date'
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        headerTextIOS={'Seleccionar fecha'}
       />
     </View>
   );

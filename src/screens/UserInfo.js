@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Text, View, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {Divider, Card} from 'react-native-paper';
+import {theme} from '../core/theme';
 
 const UserInfo = () => {
   return (
@@ -49,6 +50,7 @@ const UserInfo = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.grey,
   },
   scrollView: {
     marginTop: 10,

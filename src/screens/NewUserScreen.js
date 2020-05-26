@@ -5,6 +5,9 @@ import InputText from '../components/InputText';
 import DatePicker from '../components/DatePicker';
 import InputSelect from '../components/InputSelect';
 import BottomButtons from '../components/BottomButtons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {theme} from '../core/theme';
+
 
 const NewUserScreen = ({navigation}) => {
   const [expedicionDate, setExpedicionDate] = useState();
@@ -43,6 +46,12 @@ const NewUserScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
+        <View>
+          <Icon name='account-circle-outline' style={styles.icon} />
+          <Text style={styles.text}>
+            Por favor provea la informacion necesaria para registrar un nuevo usuario
+          </Text>
+        </View>
         <KeyboardAwareScrollView>
           <>
             <InputText
@@ -88,6 +97,7 @@ const NewUserScreen = ({navigation}) => {
               value={expedicionDate}
               onPress={handleDatePicker}
               styles={styles.input}
+              placeholder={'Fecha de expedicion'}
             />
             <InputSelect
               items={optionsTest}
@@ -123,12 +133,21 @@ const NewUserScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.grey
   },
   scrollView: {
     padding: 16,
   },
   input: {
     fontSize: 16,
+  },
+  text: {
+    fontSize: 16
+  },
+  icon: {
+    textAlign: 'center',
+    fontSize: 100,
+    color: theme.colors.secondary,
   },
 });
 

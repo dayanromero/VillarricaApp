@@ -1,8 +1,6 @@
-//import liraries
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-// create a component
 const TextButton = ({title, style, onPress}) => {
     return (
         <TouchableOpacity
@@ -14,7 +12,6 @@ const TextButton = ({title, style, onPress}) => {
     );
 };
 
-// define your styles
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -30,5 +27,4 @@ const styles = StyleSheet.create({
     }
 });
 
-//make this component available to the app
 export default TextButton;

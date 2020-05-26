@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import InfoCard from '../components/InfoCard';
+import {theme} from '../core/theme';
 
 const UserActivity = () => {
   return (
@@ -17,6 +18,7 @@ const UserActivity = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.colors.grey,
   },
   scrollView: {
     marginTop: 10,

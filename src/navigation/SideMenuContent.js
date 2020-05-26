@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Avatar, Title, Caption, Drawer} from 'react-native-paper';
+import {Title, Drawer} from 'react-native-paper';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import {theme} from '../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SideMenuContent = (props) => {
@@ -10,24 +11,26 @@ const SideMenuContent = (props) => {
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 15}}>
-              <Avatar.Image
-                source={{
-                  uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
-                }}
-                size={50}
-              />
-              <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                <Title style={styles.title}>Administrador</Title>
-                <Caption style={styles.caption}>admin@villarricaapp.com</Caption>
-              </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 15,
+              }}>
+              <Icon name="account-circle-outline" style={styles.icon} />
+              <Title style={styles.title}>Administrador</Title>
             </View>
           </View>
 
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="home-outline" color={color} size={30} />
+              labelStyle={{fontSize: 16}}
+              icon={() => (
+                <Icon
+                  name="home-circle"
+                  color={theme.colors.grey}
+                  size={30}
+                />
               )}
               label="Inicio"
               onPress={() => {
@@ -35,8 +38,13 @@ const SideMenuContent = (props) => {
               }}
             />
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon name="account-outline" color={color} size={30} />
+              labelStyle={{fontSize: 16}}
+              icon={() => (
+                <Icon
+                  name="account-circle"
+                  color={theme.colors.grey}
+                  size={30}
+                />
               )}
               label="Crear Usuario"
               onPress={() => {
@@ -49,7 +57,7 @@ const SideMenuContent = (props) => {
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
           icon={({color, size}) => (
-            <Icon name="exit-to-app" color={color} size={30} />
+            <Icon name="logout-variant" color={color} size={30} />
           )}
           label="Salir"
           onPress={() => {
@@ -67,29 +75,12 @@ const styles = StyleSheet.create({
   },
   userInfoSection: {
     paddingLeft: 20,
+    backgroundColor: theme.colors.primary
   },
   title: {
     fontSize: 18,
-    marginTop: 3,
     fontWeight: 'bold',
-  },
-  caption: {
-    fontSize: 1,
-    lineHeight: 14,
-  },
-  row: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 15,
-  },
-  paragraph: {
-    fontWeight: 'bold',
-    marginRight: 3,
+    color: 'white'
   },
   drawerSection: {
     marginTop: 15,
@@ -99,11 +90,11 @@ const styles = StyleSheet.create({
     borderTopColor: '#f4f4f4',
     borderTopWidth: 1,
   },
-  preference: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+  icon: {
+    textAlign: 'center',
+    fontSize: 80,
+    fontWeight: '100',
+    color: theme.colors.secondary,
   },
 });
 

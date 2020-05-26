@@ -4,7 +4,7 @@ import BottomButtons from '../components/BottomButtons';
 import UserProfileNavigation from '../navigation/UserProfileNavigation';
 import ModalDialog from '../components/ModalDialog';
 import {theme} from '../core/theme';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const userImg = require('../assets/user.png');
 
@@ -30,7 +30,7 @@ const UserScreen = ({route, ...props}) => {
     <View style={styles.container}>
       <ModalDialog showModal={modalVisible} onClose={onClose} />
       <View style={styles.userInfo}>
-        <Icon name="ios-person" style={styles.icon} />
+        <Icon name='account-circle-outline' style={styles.icon} />
         <View>
           <Text style={styles.h1}>Junior Noriega</Text>
           <Text style={styles.h2}>81 Jenkins Meadow Suite 697</Text>
@@ -46,7 +46,7 @@ const UserScreen = ({route, ...props}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.tertiary,
+    backgroundColor: theme.colors.grey,
     paddingTop: 0,
   },
   userInfo: {

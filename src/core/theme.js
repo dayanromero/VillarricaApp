@@ -9,5 +9,6 @@ export const theme = {
     tertiary: '#D5D7E0',
     error: '#f13a59',
     backg: 'white',
+    grey: '#D4D7E0'
   }
 };
