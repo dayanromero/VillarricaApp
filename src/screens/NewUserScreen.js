@@ -12,12 +12,22 @@ const NewUserScreen = ({navigation}) => {
   const [testData, setTestData] = useState();
 
   const userScreen = () => navigation.navigate('DashboardMap');
-  const handleDatePicker = dateP => setExpedicionDate(dateP);
-  const handleState = text => setDocumentType(text);
-  const handleStateTest = text => setTestData(text);
+  const handleDatePicker = (dateP) => setExpedicionDate(dateP);
+  const handleState = (text) => setDocumentType(text);
+  const handleStateTest = (text) => setTestData(text);
 
-  let optionsId = ['Tarjeta de identidad', 'Cedula', 'Pasaporte', 'Cedula de extranjeria'];
-  let optionsTest = ['Positivo', 'Negativo', 'Sin prueba', 'En espera de resultados'];
+  let optionsId = [
+    'Tarjeta de identidad',
+    'Cedula',
+    'Pasaporte',
+    'Cedula de extranjeria',
+  ];
+  let optionsTest = [
+    'Positivo',
+    'Negativo',
+    'Sin prueba',
+    'En espera de resultados',
+  ];
 
   const btns = [
     {
@@ -34,7 +44,7 @@ const NewUserScreen = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <KeyboardAwareScrollView>
-          <View>
+          <>
             <InputText
               style={styles.input}
               returnKeyType="next"
@@ -60,10 +70,11 @@ const NewUserScreen = ({navigation}) => {
               autoCapitalize="none"
             />
             <InputSelect
-              data={optionsId}
+              items={optionsId}
               value={documentType}
               onPress={handleState}
               placeholder={'Tipo de documento'}
+              type={'input'}
             />
             <InputText
               style={styles.input}
@@ -79,10 +90,11 @@ const NewUserScreen = ({navigation}) => {
               styles={styles.input}
             />
             <InputSelect
-              data={optionsTest}
+              items={optionsTest}
               value={testData}
               onPress={handleStateTest}
               placeholder={'Prueba'}
+              type={'input'}
             />
             <InputText
               style={styles.input}
@@ -100,7 +112,7 @@ const NewUserScreen = ({navigation}) => {
               onChangeText={() => {}}
               autoCapitalize="none"
             />
-          </View>
+          </>
         </KeyboardAwareScrollView>
       </ScrollView>
       <BottomButtons btns={btns} />

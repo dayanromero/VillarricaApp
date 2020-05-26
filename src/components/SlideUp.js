@@ -13,7 +13,6 @@ import BottomButtons from './BottomButtons';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const dragImg = require('../assets/drag-icon.png');
-const userImg = require('../assets/user.png');
 const {height} = Dimensions.get('window');
 
 const slideUp = ({navigation, ...props}) => {

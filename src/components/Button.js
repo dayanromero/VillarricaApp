@@ -2,7 +2,8 @@ import * as React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {theme} from '../core/theme';
 
-const Botton = ({title, style, onPress}) => {
+const Botton = ({...props}) => {
+  const {title, style, onPress} = props;
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>

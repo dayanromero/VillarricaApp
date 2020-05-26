@@ -3,11 +3,13 @@ import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import ReactNativePickerModule from 'react-native-picker-module';
 import InputText from '../components/InputText';
 
-const InputSelect = ({data, value, onPress, placeholder}) => {
+const InputSelect = ({...props}) => {
+  const {items, value, onPress, placeholder, type} = props;
   const handleData = (text) => onPress(text);
+  let pickerRef = null;
 
   return (
-    <View>
+    <>
       <TouchableOpacity style={styles.text}>
         <InputText
           onTouchStart={() => pickerRef.show()}
@@ -19,11 +21,11 @@ const InputSelect = ({data, value, onPress, placeholder}) => {
           pickerRef={(e) => (pickerRef = e)}
           selectedValue={value}
           title="Seleccione"
-          items={data}
+          items={items}
           onValueChange={(value, index) => handleData(value)}
         />
       </TouchableOpacity>
-    </View>
+    </>
   );
 };
 

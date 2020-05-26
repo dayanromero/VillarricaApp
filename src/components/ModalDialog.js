@@ -41,7 +41,7 @@ export default class ModalDialog extends React.Component {
               <Divider />
               <View style={{marginBottom: 40}}>
                 <InputSelect
-                  data={this.state.options}
+                  items={this.state.options}
                   value={this.state.lugar}
                   onPress={this.handleState}
                 />

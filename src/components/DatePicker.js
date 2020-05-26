@@ -4,8 +4,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { formatDate } from "../core/utils";
 import InputText from "./InputText";
 
-const DatePicker = ({value, styles, onPress}) => {
-
+const DatePicker = ({...props}) => {
+  const {value, styles, onPress} = props;
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => setDatePickerVisibility(true);
