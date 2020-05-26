@@ -23,7 +23,7 @@ const InputSelect = () => {
       <ReactNativePickerModule
         pickerRef={(e) => (pickerRef = e)}
         selectedValue={selectedIndex}
-        title={'Select a language'}
+        title={'Seleccione una locaion'}
         items={locations.data}
         onDismiss={() => console.log('onDismiss')}
         onCancel={() => console.log('Cancelled')}
