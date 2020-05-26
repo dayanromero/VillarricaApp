@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
-    paddingBottom: Platform.OS === 'ios' ? 20 : 2,
+    paddingBottom: Platform.OS === 'ios' ? 10 : 2,
   },
   button: {
     width: '49%',

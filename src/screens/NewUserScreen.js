@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import InputText from '../components/InputText';
@@ -8,17 +8,17 @@ import BottomButtons from '../components/BottomButtons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {theme} from '../core/theme';
 
-
 const NewUserScreen = ({navigation}) => {
-  const [expedicionDate, setExpedicionDate] = useState();
-  const [documentType, setDocumentType] = useState();
-  const [testData, setTestData] = useState();
+  const [expedicionDate, setExpedicionDate] = useState(null);
+  const [documentType, setDocumentType] = useState(null);
+  const [testData, setTestData] = useState(null);
 
-  const userScreen = () => navigation.navigate('DashboardMap');
   const handleDatePicker = (dateP) => setExpedicionDate(dateP);
   const handleState = (text) => setDocumentType(text);
   const handleStateTest = (text) => setTestData(text);
 
+  const userScreen = () => navigation.navigate('DashboardMap');
+  
   let optionsId = [
     'Tarjeta de identidad',
     'Cedula',
@@ -49,49 +49,48 @@ const NewUserScreen = ({navigation}) => {
         <View>
           <Icon name='account-circle-outline' style={styles.icon} />
           <Text style={styles.text}>
-            Por favor provea la informacion necesaria para registrar un nuevo usuario
+            Por favor llegue los campos a continuacion para registrar un nuevo usuario.
           </Text>
         </View>
         <KeyboardAwareScrollView>
           <>
             <InputText
               style={styles.input}
-              returnKeyType="next"
+              returnKeyType='next'
               placeholder={'Nombres'}
               keyboardType={'default'}
               onChangeText={() => {}}
-              autoCapitalize="none"
+              autoCapitalize='none'
             />
             <InputText
               style={styles.input}
-              returnKeyType="next"
+              returnKeyType='next'
               placeholder={'Apellidos'}
               keyboardType={'default'}
               onChangeText={() => {}}
-              autoCapitalize="none"
+              autoCapitalize='none'
             />
             <InputText
               style={styles.input}
-              returnKeyType="next"
+              returnKeyType='next'
               placeholder={'Direccion'}
               keyboardType={'default'}
               onChangeText={() => {}}
-              autoCapitalize="none"
+              autoCapitalize='none'
             />
             <InputSelect
               items={optionsId}
               value={documentType}
               onPress={handleState}
               placeholder={'Tipo de documento'}
-              type={'input'}
             />
             <InputText
               style={styles.input}
-              returnKeyType="next"
+              returnKeyType='next'
               placeholder={'Numero de documento'}
               keyboardType={'number-pad'}
               onChangeText={() => {}}
-              autoCapitalize="none"
+              autoCapitalize='none'
             />
             <DatePicker
               value={expedicionDate}
@@ -104,23 +103,22 @@ const NewUserScreen = ({navigation}) => {
               value={testData}
               onPress={handleStateTest}
               placeholder={'Prueba'}
-              type={'input'}
             />
             <InputText
               style={styles.input}
-              returnKeyType="next"
+              returnKeyType='next'
               placeholder={'Telefono'}
               keyboardType={'phone-pad'}
               onChangeText={() => {}}
-              autoCapitalize="none"
+              autoCapitalize='none'
             />
             <InputText
               style={styles.input}
-              returnKeyType="next"
+              returnKeyType='next'
               placeholder={'Correo electronico'}
               keyboardType={'email-address'}
               onChangeText={() => {}}
-              autoCapitalize="none"
+              autoCapitalize='none'
             />
           </>
         </KeyboardAwareScrollView>
@@ -133,7 +131,7 @@ const NewUserScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.grey
+    backgroundColor: theme.colors.grey,
   },
   scrollView: {
     padding: 16,
@@ -142,7 +140,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   text: {
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20
   },
   icon: {
     textAlign: 'center',
