@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { formatDate } from '../core/utils';
-import InputText from './InputText';
+import { formatDate } from '../../core/utils';
+import InputText from '../Input/InputText';
 
 const DatePicker = ({...props}) => {
   const {value, styles, onPress, placeholder} = props;

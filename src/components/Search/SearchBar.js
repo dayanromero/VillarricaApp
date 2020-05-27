@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Searchbar as Search} from 'react-native-paper';
-import {theme} from '../core/theme';
+import {theme} from '../../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SearchBar = ({navigation}) => {

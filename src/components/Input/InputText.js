@@ -2,7 +2,7 @@
 import React, {memo} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {TextInput as Input} from 'react-native-paper';
-import {theme} from '../core/theme';
+import {theme} from '../../core/theme';
 
 // create a component
 const InputText = ({errorText, style, ...props}) => (

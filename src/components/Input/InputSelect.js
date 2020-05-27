@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import ReactNativePickerModule from 'react-native-picker-module';
-import InputText from '../components/InputText';
+import InputText from './InputText';
 
 const InputSelect = ({...props}) => {
   const {items, value, onPress, placeholder, type} = props;

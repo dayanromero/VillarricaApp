@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
-import {theme} from '../core/theme';
-import BottomButtons from './BottomButtons';
+import {theme} from '../../core/theme';
+import BottomButtons from '../Button/BottomButtons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const dragImg = require('../assets/drag-icon.png');
+const dragImg = require('../../assets/drag-icon.png');
 const {height} = Dimensions.get('window');
 
 const slideUp = ({navigation, ...props}) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 
-const locationIcon = require('../assets/icon_location.png');
+const locationIcon = require('../../assets/icon_location.png');
 
 const MapLocations = (props) => {
   let dataSource = {

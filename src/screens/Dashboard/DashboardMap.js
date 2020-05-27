@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, SafeAreaView, StyleSheet} from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
-import MapLocations from '../components/MapLocations';
-import SlideUp from '../components/SlideUp';
-import SearchBar from '../components/SearchBar';
-import ModalDialog from '../components/ModalDialog';
+import MapLocations from '../../components/MapLocations/MapLocations';
+import SlideUp from '../../components/SlideUp/SlideUp';
+import SearchBar from '../../components/Search/SearchBar';
+import ModalDialog from '../../components/Modal/ModalDialog';
 
 MapboxGL.setAccessToken(
   'pk.eyJ1IjoiZGF5cm9tIiwiYSI6ImNrYTc5aXg0YzAxM2oyeXFlZWYwejU4cTYifQ.uQCDALmLyuOI-QzPxo1_EA',

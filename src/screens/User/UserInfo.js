@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Text, View, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {Divider, Card} from 'react-native-paper';
-import {theme} from '../core/theme';
+import {theme} from '../../core/theme';
 
 const UserInfo = () => {
   return (

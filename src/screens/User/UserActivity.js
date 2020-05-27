@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import InfoCard from '../components/InfoCard';
-import {theme} from '../core/theme';
+import InfoCard from '../../components/Card/InfoCard';
+import {theme} from '../../core/theme';
 
 const UserActivity = () => {
   return (

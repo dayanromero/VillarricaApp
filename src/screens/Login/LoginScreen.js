@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import Heading from '../components/Heading';
-import Logo from '../components/Logo';
-import Button from '../components/Button';
-import TextButton from '../components/TextButton';
-import AuthContainer from '../components/AuthContainer';
-import {emailValidator, passwordValidator} from '../core/utils';
-import InputText from '../components/InputText';
-import {theme} from '../core/theme';
+import Heading from '../../components/Heading/Heading';
+import Logo from '../../components/Logo';
+import Button from '../../components/Button/Button';
+import TextButton from '../../components/Button/TextButton';
+import AuthContainer from '../../components/AuthContainer';
+import {emailValidator, passwordValidator} from '../../core/utils';
+import InputText from '../../components/Input/InputText';
+import {theme} from '../../core/theme';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState({value: '', error: ''});

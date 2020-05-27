@@ -2,9 +2,9 @@ import * as React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Dialog, Portal, Divider} from 'react-native-paper';
 
-import {formatDate} from '../core/utils';
-import InputSelect from './InputSelect';
-import Button from './Button';
+import {formatDate} from '../../core/utils';
+import InputSelect from '../Input/InputSelect';
+import Button from '../Button/Button';
 
 let date = new Date();
 

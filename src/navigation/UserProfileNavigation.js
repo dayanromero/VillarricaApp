@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import UserInfo from '../screens/UserInfo';
-import UserActivity from '../screens/UserActivity';
+import UserInfo from '../screens/User/UserInfo';
+import UserActivity from '../screens/User/UserActivity';
 import { theme } from '../core/theme';
 
 const Tab = createMaterialTopTabNavigator();

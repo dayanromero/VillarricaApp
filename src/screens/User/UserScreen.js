@@ -1,12 +1,12 @@
 import React, {memo, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import BottomButtons from '../components/BottomButtons';
-import UserProfileNavigation from '../navigation/UserProfileNavigation';
-import ModalDialog from '../components/ModalDialog';
-import {theme} from '../core/theme';
+import BottomButtons from '../../components/Button/BottomButtons';
+import UserProfileNavigation from '../../navigation/UserProfileNavigation';
+import ModalDialog from '../../components/Modal/ModalDialog';
+import {theme} from '../../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const userImg = require('../assets/user.png');
+const userImg = require('../../assets/user.png');
 
 const UserScreen = ({route, ...props}) => {
   const [modalVisible, setModalVisible] = useState({visible: false, data: ''});

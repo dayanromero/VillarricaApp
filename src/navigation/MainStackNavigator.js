@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import DashboardMap from '../screens/DashboardMap';
-import UserScreen from '../screens/UserScreen';
-import NewUserScreen from '../screens/NewUserScreen';
+import DashboardMap from '../screens/Dashboard/DashboardMap';
+import UserScreen from '../screens/User/UserScreen';
+import NewUserScreen from '../screens/NewUser/NewUserScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {theme} from '../core/theme';
 import SideMenuContent from './SideMenuContent';

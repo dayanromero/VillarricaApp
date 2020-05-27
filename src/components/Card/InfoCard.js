@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, Paragraph, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { theme } from '../core/theme';
+import { theme } from '../../core/theme';
 
 const InfoCard = () =>  {
   return (

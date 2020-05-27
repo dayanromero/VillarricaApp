@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, StyleSheet, Platform} from 'react-native';
-import Botton from '../components/Button';
+import Botton from './Button';
 
 const BottomButtons = (props) => {
   const {btns} = props;

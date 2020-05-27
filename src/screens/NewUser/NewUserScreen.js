@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import InputText from '../components/InputText';
-import DatePicker from '../components/DatePicker';
-import InputSelect from '../components/InputSelect';
-import BottomButtons from '../components/BottomButtons';
+import InputText from '../../components/Input/InputText';
+import DatePicker from '../../components/DatePicker/DatePicker';
+import InputSelect from '../../components/Input/InputSelect';
+import BottomButtons from '../../components/Button/BottomButtons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {theme} from '../core/theme';
+import {theme} from '../../core/theme';
 
 const NewUserScreen = ({navigation}) => {
   const [expedicionDate, setExpedicionDate] = useState(null);

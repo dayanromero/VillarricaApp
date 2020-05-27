@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {theme} from '../core/theme';
+import {theme} from '../../core/theme';
 
 const Botton = ({...props}) => {
   const {title, style, onPress} = props;
