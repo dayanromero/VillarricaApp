@@ -1,29 +1,30 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
+import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE } from '../constants';
 
 const initialState = {
     data: [],
-    isFeching: false,
+    loading: false,
     error: false,
 };
 
-export default LoginReducer = (state = initialState, action) => {
+export default searchReducer = (state = initialState, action) => {
+    console.log('initial', state)
     switch (action.type) {
-        case LOGIN:
+        case SEARCH:
             return {
                 ...state,
                 data: [],
-                isFeching: true,
+                loading: true,
             };
-        case LOGIN_SUCCESS:
+        case SEARCH_SUCCESS:
             return {
                 ...state,
                 data: action.payload.data,
-                isFeching: false,
+                loading: false,
             };
-        case LOGIN_FAILURE:
+        case SEARCH_FAILURE:
             return {
                 ...state,
-                isFeching: false,
+                loading: false,
                 error: true,
             };
         default:

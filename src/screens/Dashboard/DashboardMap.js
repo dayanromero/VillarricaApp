@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchData } from '../../store/actions';
+import { fetchData } from './actions';
 import Map from '../../components/MapLocations/Map';
 import SlideUp from '../../components/SlideUp/SlideUp';
 import SearchBar from '../../components/Search/SearchBar';
@@ -49,19 +49,23 @@ class Dashboard extends Component {
     };
 
     getUserData = (id) => {
-        this.props.getData(id);
+        this.props.searchData(id);
+        
     };
 
     render() {
         const { navigation, data } = this.props;
-        console.log('data', data)
+        const { loading } = this.state;
+
+        console.log('DATA2', data)
+
         return (
             <SafeAreaView style={styles.container}>
                 <ModalDialog
                     showModal={this.state.setModalVisible}
                     onClose={this.handleModalClose}
                 />
-                {!Loading ? (
+                {loading ? (
                     <Loading />
                 ) : (
                     <View style={styles.container}>
@@ -94,13 +98,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        dataUser: state.login.data,
+        search: state.login.data,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getData: (id) => {
+        searchData: (id) => {
             return dispatch(fetchData(id));
         },
     };
