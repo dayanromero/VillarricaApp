@@ -17,7 +17,7 @@ export default LoginReducer = (state = initialState, action) => {
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                data: action.data,
+                data: action.payload.data,
                 isFeching: false,
             };
         case LOGIN_FAILURE:

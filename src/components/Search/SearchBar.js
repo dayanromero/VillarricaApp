@@ -20,6 +20,7 @@ const SearchBar = ({navigation}) => {
         placeholder="Buscar numero de cedula"
         onChangeText={(query) => setSearchQuery(query)}
         value={searchQuery}
+        onIconPress = {()=> console.log('Press')}
       />
     </View>
   );
