@@ -1,93 +1,109 @@
-import React, {Component} from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
-import MapboxGL from '@react-native-mapbox-gl/maps';
-import MapLocations from '../../components/MapLocations/MapLocations';
+import React, { Component } from 'react';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { fetchData } from '../../store/actions';
+import Map from '../../components/MapLocations/Map';
 import SlideUp from '../../components/SlideUp/SlideUp';
 import SearchBar from '../../components/Search/SearchBar';
 import ModalDialog from '../../components/Modal/ModalDialog';
+import Loading from '../../components/Loading/Loading';
 
-MapboxGL.setAccessToken(
-  'pk.eyJ1IjoiZGF5cm9tIiwiYSI6ImNrYTc5aXg0YzAxM2oyeXFlZWYwejU4cTYifQ.uQCDALmLyuOI-QzPxo1_EA',
-);
+class Dashboard extends Component {
+    state = {
+        showUserLocation: true,
+        location: [-76.4863147, 3.009516],
+        showSlide: false,
+        setModalVisible: {
+            visible: false,
+            data: '',
+            loading: false,
+        },
+        userId: 0,
+    };
 
-export default class Dashboard extends Component {
-  state = {
-    showUserLocation: true,
-    location: [-76.4863147, 3.009516],
-    showSlide: false,
-    setModalVisible: {
-      visible: false,
-      data: '',
-    },
-    userId: 0,
-  };
+    setLocation = (data) => this.setState({ location: data });
 
-  setLocation = (data) => this.setState({location: data});
+    handleModalOpen = (data) => {
+        this.setState({
+            setModalVisible: {
+                visible: true,
+                data: data,
+            },
+        });
+    };
 
-  handleModalOpen = (data) => {
-    this.setState({
-      setModalVisible: {
-        visible: true,
-        data: data,
-      },
-    });
-  };
+    handleModalClose = () => {
+        this.setState({
+            setModalVisible: {
+                visible: false,
+                data: '',
+            },
+        });
+    };
 
-  handleModalClose = () => {
-    this.setState({
-      setModalVisible: {
-        visible: false,
-        data: '',
-      },
-    });
-  };
+    showContent = (id) => {
+        this.setState({
+            showSlide: true,
+            userId: id,
+        });
+    };
 
-  showContent = (id) => {
-    this.setState({
-      showSlide: true,
-      userId: id,
-    });
-  };
+    getUserData = (id) => {
+        this.props.getData(id);
+    };
 
-  render() {
-    const {navigation} = this.props;
-    return (
-      <SafeAreaView style={styles.container}>
-        <ModalDialog
-          showModal={this.state.setModalVisible}
-          onClose={this.handleModalClose}
-        />
-        <View style={styles.container}>
-          <SearchBar navigation={navigation} />
-          <MapboxGL.MapView
-            style={styles.container}
-            zoomLevel={10}
-            showUserLocation={true}>
-            <MapboxGL.Camera
-              zoomLevel={15}
-              animationMode={'flyTo'}
-              centerCoordinate={this.state.location}
-            />
-
-            <MapboxGL.UserLocation />
-            <MapLocations
-              show={this.showContent}
-              centerLocation={this.setLocation}
-            />
-          </MapboxGL.MapView>
-        </View>
-        <SlideUp
-          slide={this.state}
-          navigation={navigation}
-          showModal={this.handleModalOpen}
-        />
-      </SafeAreaView>
-    );
-  }
+    render() {
+        const { navigation, data } = this.props;
+        console.log('data', data)
+        return (
+            <SafeAreaView style={styles.container}>
+                <ModalDialog
+                    showModal={this.state.setModalVisible}
+                    onClose={this.handleModalClose}
+                />
+                {!Loading ? (
+                    <Loading />
+                ) : (
+                    <View style={styles.container}>
+                        <SearchBar
+                            navigation={navigation}
+                            onPress={this.getUserData}
+                        />
+                        <Map
+                            location={this.state.location}
+                            setLocation={this.setLocation}
+                            showContent={this.showContent}
+                        />
+                    </View>
+                )}
+                <SlideUp
+                    slide={this.state}
+                    navigation={navigation}
+                    showModal={this.handleModalOpen}
+                />
+            </SafeAreaView>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+    container: {
+        flex: 1,
+    },
 });
+
+const mapStateToProps = (state) => {
+    return {
+        dataUser: state.login.data,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getData: (id) => {
+            return dispatch(fetchData(id));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

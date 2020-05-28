@@ -4,45 +4,7 @@ import MapboxGL from '@react-native-mapbox-gl/maps';
 const locationIcon = require('../../assets/icon_location.png');
 
 const MapLocations = (props) => {
-  let dataSource = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        id: '1',
-        properties: {
-          icon: 'locationIcon',
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [-76.4863147, 3.009516],
-        },
-      },
-      {
-        type: 'Feature',
-        id: '2',
-        properties: {
-          icon: 'locationIcon',
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [-76.4809974, 3.0089435],
-        },
-      },
-      {
-        type: 'Feature',
-        id: '3',
-        properties: {
-          icon: 'locationIcon',
-        },
-        geometry: {
-          type: 'Point',
-          coordinates: [-76.4786371, 3.0086007],
-        },
-      },
-    ],
-  };
-
+const points = props.point;
   let icon = {
     iconImage: locationIcon,
     iconAllowOverlap: true,
@@ -53,10 +15,10 @@ const MapLocations = (props) => {
     <MapboxGL.ShapeSource
       id={'exampleShapeSource'}
       hitbox={{width: 20, height: 20}}
-      onPress={(dataSource) => {
+      onPress={(points) => {
         let {
           features: [data],
-        } = dataSource;
+        } = points;
         let {
           id,
           geometry: {coordinates},
@@ -64,7 +26,7 @@ const MapLocations = (props) => {
         props.centerLocation(coordinates);
         props.show(id);
       }}
-      shape={dataSource}>
+      shape={points}>
       <MapboxGL.SymbolLayer id={'locationIcon'} style={icon} />
     </MapboxGL.ShapeSource>
   );
