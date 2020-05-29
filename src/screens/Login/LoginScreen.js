@@ -35,7 +35,6 @@ class LoginScreen extends Component {
 
     _onLoginPressed = () => {
         const { email, password } = this.state;
-        console.log('mail', email.value)
         const emailError = emailValidator(email.value);
         const passwordError = passwordValidator(password.value);
 
@@ -50,8 +49,6 @@ class LoginScreen extends Component {
     };
     
     render() {
-        console.log('data', this.props);
-
         const { email, password } = this.state;
         return (
             <AuthContainer>

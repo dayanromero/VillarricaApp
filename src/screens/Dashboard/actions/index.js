@@ -1,19 +1,16 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
+import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE } from '../constants';
 
 import { fetchUser } from '../../../api';
 
-export const searchData = (id) => {
+export const searchData = () => {
     return {
-        type: LOGIN,
-        payload: {
-            id,
-        },
+        type: SEARCH,
     };
 };
 
 export const searchDataSuccess = (data) => {
     return {
-        type: LOGIN_SUCCESS,
+        type: SEARCH_SUCCESS,
         payload: {
             data,
         },
@@ -21,16 +18,16 @@ export const searchDataSuccess = (data) => {
 };
 
 export const searchDataFailure = (data) => {
-    return { type: LOGIN_FAILURE };
+    return { type: SEARCH_FAILURE };
 };
 
 export const fetchData = (id) => {
     return (dispatch) => {
+        dispatch(searchData());
         fetchUser(id)
             .then(([response, json]) => {
-                console.log(json);
                 dispatch(searchDataSuccess(json));
             })
-            .catch((error) => searchDataFailure(error));
+            .catch((error) => dispatch(searchDataFailure(error)));
     };
 };

@@ -7,6 +7,7 @@ import SlideUp from '../../components/SlideUp/SlideUp';
 import SearchBar from '../../components/Search/SearchBar';
 import ModalDialog from '../../components/Modal/ModalDialog';
 import Loading from '../../components/Loading/Loading';
+import { MapLocationContext } from './context';
 
 class Dashboard extends Component {
     state = {
@@ -16,12 +17,13 @@ class Dashboard extends Component {
         setModalVisible: {
             visible: false,
             data: '',
-            loading: false,
         },
         userId: 0,
     };
 
-    setLocation = (data) => this.setState({ location: data });
+    setLocation = (data) => {
+        this.setState({ location: data });
+    };
 
     handleModalOpen = (data) => {
         this.setState({
@@ -48,17 +50,51 @@ class Dashboard extends Component {
         });
     };
 
+    dataSource = {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                id: '1',
+                properties: {
+                    icon: 'locationIcon',
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [-76.4863147, 3.009516],
+                },
+            },
+            {
+                type: 'Feature',
+                id: '2',
+                properties: {
+                    icon: 'locationIcon',
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [-76.4809974, 3.0089435],
+                },
+            },
+            {
+                type: 'Feature',
+                id: '3',
+                properties: {
+                    icon: 'locationIcon',
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [-76.4786371, 3.0086007],
+                },
+            },
+        ],
+    };
+
     getUserData = (id) => {
         this.props.searchData(id);
-        
     };
 
     render() {
-        const { navigation, data } = this.props;
-        const { loading } = this.state;
-
-        console.log('DATA2', data)
-
+        const { navigation, data, loading } = this.props;
         return (
             <SafeAreaView style={styles.container}>
                 <ModalDialog
@@ -73,11 +109,15 @@ class Dashboard extends Component {
                             navigation={navigation}
                             onPress={this.getUserData}
                         />
-                        <Map
-                            location={this.state.location}
-                            setLocation={this.setLocation}
-                            showContent={this.showContent}
-                        />
+                        <MapLocationContext.Provider
+                            value={{
+                                showContent: this.showContent,
+                                setLocation: this.setLocation,
+                                location: this.state.location,
+                                dataSource: this.dataSource,
+                            }}>
+                            <Map />
+                        </MapLocationContext.Provider>
                     </View>
                 )}
                 <SlideUp
@@ -97,8 +137,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
+    const { loading, data, error } = state.search;
     return {
-        search: state.login.data,
+        data,
+        loading,
+        error,
     };
 };
 

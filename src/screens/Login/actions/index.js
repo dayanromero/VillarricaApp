@@ -28,7 +28,6 @@ export const fetchData = (id) => {
     return (dispatch) => {
         fetchUser(id)
             .then(([response, json]) => {
-                console.log(json)
                 dispatch(getDataSuccess(json));
             })
             .catch((error) => console.log(error));
