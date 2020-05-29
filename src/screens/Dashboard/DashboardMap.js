@@ -12,7 +12,7 @@ import { MapLocationContext } from './context';
 class Dashboard extends Component {
     state = {
         showUserLocation: true,
-        location: [-76.4863147, 3.009516],
+        location: [-76.481856, 3.006929],
         showSlide: false,
         setModalVisible: {
             visible: false,
@@ -20,7 +20,6 @@ class Dashboard extends Component {
         },
         userId: 0,
     };
-
 
     setLocation = (data) => {
         this.setState({ location: data });
@@ -75,13 +74,20 @@ class Dashboard extends Component {
     };
 
     render() {
+        const { navigation, loading, data, error } = this.props;
         let coor;
-        const { navigation, loading, data } = this.props;
+
+        if(error) {
+            console.log('Hubo un error')
+        }
+
         if (data) {
             const {
-                data: { location: { coordinates } = { coordinates: [] } },
+                data: { location },
             } = this.props;
-            coor = coordinates.split(',').reverse().map(Number);
+            if(location) {
+                coor = location.coordinates.split(',').reverse().map(Number);
+            }         
         }
 
         return (

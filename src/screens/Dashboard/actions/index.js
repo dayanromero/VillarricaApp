@@ -27,6 +27,9 @@ export const fetchData = (id) => {
         fetchUser(id)
             .then(([response, json]) => {
                 dispatch(searchDataSuccess(json));
+                if(!json) {
+                    dispatch(searchDataFailure());
+                }
             })
             .catch((error) => dispatch(searchDataFailure(error)));
     };

@@ -31,7 +31,7 @@ const MapLocations = (props) => {
             </MapboxGL.ShapeSource>
         );
     }
-    return null;
+    return <MapboxGL.ShapeSource />;
 };
 
 export default MapLocations;
