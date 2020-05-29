@@ -1,7 +1,7 @@
 import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE } from '../constants';
 
 const initialState = {
-    data: [],
+    data: null,
     loading: false,
     error: false,
 };
@@ -11,7 +11,7 @@ export default searchReducer = (state = initialState, action) => {
         case SEARCH:
             return {
                 ...state,
-                data: [],
+                data: null,
                 loading: true,
             };
         case SEARCH_SUCCESS:

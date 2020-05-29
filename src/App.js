@@ -17,7 +17,7 @@ class App extends Component {
     }
 
     renderScreens() {
-      const {user, loading}= this.state;
+        const { user, loading } = this.state;
         if (loading) {
             return <RootStack.Screen name={'Loading'} component={Loading} />;
         }

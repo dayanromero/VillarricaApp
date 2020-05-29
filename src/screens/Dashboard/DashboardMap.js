@@ -21,6 +21,7 @@ class Dashboard extends Component {
         userId: 0,
     };
 
+
     setLocation = (data) => {
         this.setState({ location: data });
     };
@@ -50,43 +51,23 @@ class Dashboard extends Component {
         });
     };
 
-    dataSource = {
-        type: 'FeatureCollection',
-        features: [
-            {
-                type: 'Feature',
-                id: '1',
-                properties: {
-                    icon: 'locationIcon',
+    dataSource = (coor) => {
+        return {
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    id: '1',
+                    properties: {
+                        icon: 'locationIcon',
+                    },
+                    geometry: {
+                        type: 'Point',
+                        coordinates: coor,
+                    },
                 },
-                geometry: {
-                    type: 'Point',
-                    coordinates: [-76.4863147, 3.009516],
-                },
-            },
-            {
-                type: 'Feature',
-                id: '2',
-                properties: {
-                    icon: 'locationIcon',
-                },
-                geometry: {
-                    type: 'Point',
-                    coordinates: [-76.4809974, 3.0089435],
-                },
-            },
-            {
-                type: 'Feature',
-                id: '3',
-                properties: {
-                    icon: 'locationIcon',
-                },
-                geometry: {
-                    type: 'Point',
-                    coordinates: [-76.4786371, 3.0086007],
-                },
-            },
-        ],
+            ],
+        };
     };
 
     getUserData = (id) => {
@@ -94,7 +75,15 @@ class Dashboard extends Component {
     };
 
     render() {
-        const { navigation, data, loading } = this.props;
+        let coor;
+        const { navigation, loading, data } = this.props;
+        if (data) {
+            const {
+                data: { location: { coordinates } = { coordinates: [] } },
+            } = this.props;
+            coor = coordinates.split(',').reverse().map(Number);
+        }
+
         return (
             <SafeAreaView style={styles.container}>
                 <ModalDialog
@@ -113,8 +102,8 @@ class Dashboard extends Component {
                             value={{
                                 showContent: this.showContent,
                                 setLocation: this.setLocation,
-                                location: this.state.location,
-                                dataSource: this.dataSource,
+                                location: coor || this.state.location,
+                                dataSource: coor ? this.dataSource(coor) : null,
                             }}>
                             <Map />
                         </MapLocationContext.Provider>
