@@ -18,13 +18,10 @@ const MapLocations = (props) => {
                 id={'MapPoints'}
                 hitbox={{ width: 20, height: 20 }}
                 onPress={(points) => {
-                    let { features: [data], } = points;
-                    let {
-                        id,
-                        geometry: { coordinates },
-                    } = data;
+                    let { features: [data] } = points;
+                    let { geometry: { coordinates } } = data;
                     props.centerLocation(coordinates);
-                    props.show(id);
+                    props.show();
                 }}
                 shape={points}>
                 <MapboxGL.SymbolLayer id={'locationIcon'} style={icon} />

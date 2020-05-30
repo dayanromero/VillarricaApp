@@ -1,81 +1,118 @@
-import React, {memo, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import BottomButtons from '../../components/Button/BottomButtons';
 import UserProfileNavigation from '../../navigation/UserProfileNavigation';
 import ModalDialog from '../../components/Modal/ModalDialog';
-import {theme} from '../../core/theme';
+import { theme } from '../../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {UserContext} from './context/UserContext';
 
 const userImg = require('../../assets/user.png');
 
-const UserScreen = ({route, ...props}) => {
-  const [modalVisible, setModalVisible] = useState({visible: false, data: ''});
-  const {userId} = route.params;
+class UserScreen extends Component {
+    state = {
+        modalVisible: {
+            visible: false,
+            data: '',
+        },
+    };
 
-  handleModalOpen = (data) => setModalVisible({visible: true, data: data});
-  onClose = () => setModalVisible(false);
+    handleModalOpen = (data) => {
+        this.setState({
+            modalVisible: { visible: true, data: data },
+        });
+    };
+    onClose = () => {
+        this.setState({
+            modalVisible: { visible: false, data: '' },
+        });
+    };
 
-  const btns = [
-    {
-      title: 'Salida',
-      action: () => handleModalOpen('Salida'),
-    },
-    {
-      title: 'Ingreso',
-      action: () => handleModalOpen('Ingreso'),
-    },
-  ];
+    btns = [
+        {
+            title: 'Salida',
+            action: () => this.handleModalOpen('Salida'),
+        },
+        {
+            title: 'Ingreso',
+            action: () => this.handleModalOpen('Ingreso'),
+        },
+    ];
 
-  return (
-    <View style={styles.container}>
-      <ModalDialog showModal={modalVisible} onClose={onClose} />
-      <View style={styles.userInfo}>
-        <Icon name='account-circle-outline' style={styles.icon} />
-        <View>
-          <Text style={styles.h1}>Junior Noriega</Text>
-          <Text style={styles.h2}>81 Jenkins Meadow Suite 697</Text>
-          <Text style={styles.h3}>Prueba: Negativo {userId}</Text>
-        </View>
-      </View>
-      <UserProfileNavigation />
-      <BottomButtons btns={btns} />
-    </View>
-  );
-};
+    render() {
+        const {
+            id,
+            name,
+            testResult,
+            documentType,
+            phone,
+            location: { address },
+        } = this.props.data;
+
+        const userData = {
+            cedula: id,
+            nombre: name,
+            prueba: testResult,
+            tipoDoc: documentType,
+            celular: phone,
+            direccion: address,
+        };
+
+        return (
+            <View style={styles.container}>
+                <ModalDialog
+                    showModal={this.state.modalVisible}
+                    onClose={this.onClose}
+                />
+                <View style={styles.userInfo}>
+                    <Icon name="account-circle-outline" style={styles.icon} />
+                    <View>
+                        <Text style={styles.h1}>{name}</Text>
+                        <Text style={styles.h3}>{testResult}</Text>
+                    </View>
+                </View>
+                <UserContext.Provider value={userData}>
+                    <UserProfileNavigation />
+                </UserContext.Provider>
+                <BottomButtons btns={this.btns} />
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.grey,
-    paddingTop: 0,
-  },
-  userInfo: {
-    width: '100%',
-    marginVertical: 30,
-    alignItems: 'center',
-  },
-  icon: {
-    textAlign: 'center',
-    fontSize: 100,
-    color: theme.colors.secondary,
-  },
-  h1: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'black'
-  },
-  h2: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: 'black'
-  },
-  h3: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'black'
-  },
+    container: {
+        flex: 1,
+        backgroundColor: theme.colors.grey,
+        paddingTop: 0,
+    },
+    userInfo: {
+        width: '100%',
+        marginVertical: 30,
+        alignItems: 'center',
+    },
+    icon: {
+        textAlign: 'center',
+        fontSize: 100,
+        color: theme.colors.secondary,
+    },
+    h1: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'black',
+    },
+    h3: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'black',
+    },
 });
 
-export default memo(UserScreen);
+const mapStateToProps = (state) => {
+    const { data } = state.search;
+    return { data };
+};
+export default connect(mapStateToProps)(UserScreen);

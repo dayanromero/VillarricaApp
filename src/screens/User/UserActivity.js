@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import InfoCard from '../../components/Card/InfoCard';
 import {theme} from '../../core/theme';
@@ -26,4 +27,24 @@ const styles = StyleSheet.create({
   },
 })
 
-export default UserActivity 
+const mapStateToProps = (state) => {
+  const { loading, data, error } = state.search;
+  return {
+      data,
+      loading,
+      error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      searchById: (id) => {
+          return dispatch(fetchData(id));
+      },
+      setError: () => {
+          return dispatch(setErrorFalse());
+      },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserActivity);

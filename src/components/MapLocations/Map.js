@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 import MapLocations from '../../components/MapLocations/MapLocations';
@@ -21,7 +21,6 @@ const Dashboard = () => {
                         animationMode={'flyTo'}
                         centerCoordinate={value.location}
                     />
-
                     <MapboxGL.UserLocation />
                     <MapLocations
                         show={value.showContent}

@@ -12,7 +12,6 @@ import ShowAlert from '../../components/Alert/Alert';
 
 class Dashboard extends Component {
     state = {
-        showUserLocation: true,
         location: [-76.481856, 3.006929],
         showSlide: false,
         showAlert: false,
@@ -47,11 +46,8 @@ class Dashboard extends Component {
         });
     };
 
-    showContent = (id) => {
-        this.setState({
-            showSlide: true,
-            userId: id,
-        });
+    showContent = () => {
+        this.setState({ showSlide: !this.state.showSlide});
     };
 
     dataSource = (coor) => {
@@ -73,9 +69,7 @@ class Dashboard extends Component {
         };
     };
 
-    getUserData = (id) => {
-        this.props.searchById(id);
-    };
+    getUserData = (id) => this.props.searchById(id);
 
     render() {
         const { navigation, loading, data, error } = this.props;
@@ -92,7 +86,7 @@ class Dashboard extends Component {
                 coor = location.coordinates.split(',').reverse().map(Number);
             }
         }
-        console.log('error', error);
+
         return (
             <SafeAreaView style={styles.container}>
                 <ModalDialog
@@ -125,9 +119,10 @@ class Dashboard extends Component {
                     </View>
                 )}
                 <SlideUp
-                    slide={this.state}
+                    slide={this.state.showSlide}
                     navigation={navigation}
                     showModal={this.handleModalOpen}
+                    userData= {this.props.data}
                 />
             </SafeAreaView>
         );
