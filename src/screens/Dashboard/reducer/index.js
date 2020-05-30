@@ -1,4 +1,4 @@
-import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE } from '../constants';
+import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE, SET_ERROR_FALSE } from '../constants';
 
 const initialState = {
     data: null,
@@ -26,6 +26,11 @@ export default searchReducer = (state = initialState, action) => {
                 loading: false,
                 error: true,
             };
+        case SET_ERROR_FALSE:
+            return {
+                ...state,
+                error: false
+            }
         default:
             return state;
     }

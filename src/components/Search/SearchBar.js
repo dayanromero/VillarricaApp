@@ -3,14 +3,25 @@ import { View, StyleSheet } from 'react-native';
 import { Searchbar as Search } from 'react-native-paper';
 import { theme } from '../../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ShowAlert from '../Alert/Alert';
+import { numValidator } from '../../core/utils';
 
 const SearchBar = ({ onPress, navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState('');
 
-    const consultUser = () => onPress(searchQuery);
+    const consultUser = () => {
+        const queryVal = numValidator(searchQuery);
+        if (queryVal) {
+            setError(queryVal);
+            return;
+        }
+        return onPress(searchQuery);
+    };
 
     return (
         <View style={styles.container}>
+            {error ? <ShowAlert msg={error} setE={setError} /> : null}
             <Icon.Button
                 name="menu"
                 size={30}
@@ -22,7 +33,7 @@ const SearchBar = ({ onPress, navigation }) => {
                 placeholder="Buscar numero de cedula"
                 onChangeText={(query) => setSearchQuery(query)}
                 value={searchQuery}
-                onIconPress={() => searchQuery && consultUser()}
+                onIconPress={() => consultUser()}
             />
         </View>
     );

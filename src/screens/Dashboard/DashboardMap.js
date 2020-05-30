@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchData } from './actions';
+import { fetchData, setErrorFalse } from './actions';
 import Map from '../../components/MapLocations/Map';
 import SlideUp from '../../components/SlideUp/SlideUp';
 import SearchBar from '../../components/Search/SearchBar';
 import ModalDialog from '../../components/Modal/ModalDialog';
 import Loading from '../../components/Loading/Loading';
 import { MapLocationContext } from './context';
+import ShowAlert from '../../components/Alert/Alert';
 
 class Dashboard extends Component {
     state = {
         showUserLocation: true,
         location: [-76.481856, 3.006929],
         showSlide: false,
+        showAlert: false,
         setModalVisible: {
             visible: false,
             data: '',
@@ -24,6 +26,8 @@ class Dashboard extends Component {
     setLocation = (data) => {
         this.setState({ location: data });
     };
+
+    hideAlert = () => this.props.setError();
 
     handleModalOpen = (data) => {
         this.setState({
@@ -70,32 +74,37 @@ class Dashboard extends Component {
     };
 
     getUserData = (id) => {
-        this.props.searchData(id);
+        this.props.searchById(id);
     };
 
     render() {
         const { navigation, loading, data, error } = this.props;
         let coor;
 
-        if(error) {
-            console.log('Hubo un error')
+        if (error) {
+            console.log('hubo un error');
         }
-
         if (data) {
             const {
                 data: { location },
             } = this.props;
-            if(location) {
+            if (location) {
                 coor = location.coordinates.split(',').reverse().map(Number);
-            }         
+            }
         }
-
+        console.log('error', error);
         return (
             <SafeAreaView style={styles.container}>
                 <ModalDialog
                     showModal={this.state.setModalVisible}
                     onClose={this.handleModalClose}
                 />
+                {error ? (
+                    <ShowAlert
+                        msg={'Numero de cedula no encontrado.'}
+                        setE={this.hideAlert}
+                    />
+                ) : null}
                 {loading ? (
                     <Loading />
                 ) : (
@@ -142,8 +151,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        searchData: (id) => {
+        searchById: (id) => {
             return dispatch(fetchData(id));
+        },
+        setError: () => {
+            return dispatch(setErrorFalse());
         },
     };
 };

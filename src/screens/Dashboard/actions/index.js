@@ -1,6 +1,6 @@
-import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE } from '../constants';
+import { SEARCH, SEARCH_SUCCESS, SEARCH_FAILURE, SET_ERROR_FALSE } from '../constants';
 
-import { fetchUser } from '../../../api';
+import { fetchUser } from '../../../config/api';
 
 export const searchData = () => {
     return {
@@ -19,6 +19,10 @@ export const searchDataSuccess = (data) => {
 
 export const searchDataFailure = (data) => {
     return { type: SEARCH_FAILURE };
+};
+
+export const setErrorFalse = () => {
+    return { type: SET_ERROR_FALSE};
 };
 
 export const fetchData = (id) => {

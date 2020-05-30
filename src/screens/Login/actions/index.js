@@ -1,6 +1,6 @@
 import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
 
-import { fetchUser } from '../../../api';
+import { fetchUser } from '../../../config/api';
 
 export const getData = (id) => {
     return {
