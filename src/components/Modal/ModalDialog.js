@@ -1,33 +1,41 @@
-import * as React from 'react';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { fetchDataLocations } from '../../store/actions/index';
 import {View, Text, StyleSheet} from 'react-native';
 import {Dialog, Portal, Divider} from 'react-native-paper';
-
 import {formatDate} from '../../core/utils';
 import InputSelect from '../Input/InputSelect';
 import Button from '../Button/Button';
 
 let date = new Date();
 
-export default class ModalDialog extends React.Component {
+class ModalDialog extends Component {
   state = {
     lugar: 'Seleccione locacion',
     options: ['Via a Cali', 'Via a Puerto Tejada', 'Via a Jamundi']
   };
+
+  componentDidMount() {
+    this.props.getLocationById();
+  }
 
   _hideDialog = () => this.props.onClose();
   handleState = text => this.setState({ lugar: text });
 
   render() {
     const {
-      showModal: {visible, data},
+      showModal: {visible, typeOfRegister},
     } = this.props;
+
+    data.map((loc)=> {
+      console.log('loc', loc.name)
+    })
 
     return (
       <View>
         <Portal>
           <Dialog visible={visible} onDismiss={this._hideDialog}>
-            <Dialog.Title style={styles.title}>Registrar {data}</Dialog.Title>
-
+            <Dialog.Title style={styles.title}>Registrar {typeOfRegister}</Dialog.Title>
             <Dialog.Content>
               <View style={styles.textContainer}>
                 <Text style={[styles.texts, styles.bold]}>Fecha: </Text>
@@ -82,3 +90,22 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
 });
+
+const mapStateToProps = (state) => {
+  const { loading, data, error } = state.location;
+  return {
+    data,
+    loading,
+    error,
+};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      getLocationById: (id) => {
+          return dispatch(fetchDataLocations(id));
+      },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalDialog);

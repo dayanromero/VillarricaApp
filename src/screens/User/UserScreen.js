@@ -14,18 +14,18 @@ class UserScreen extends Component {
     state = {
         modalVisible: {
             visible: false,
-            data: '',
+            typeOfRegister: '',
         },
     };
 
-    handleModalOpen = (data) => {
+    handleModalOpen = (regisType) => {
         this.setState({
-            modalVisible: { visible: true, data: data },
+            modalVisible: { visible: true, typeOfRegister: regisType },
         });
     };
     onClose = () => {
         this.setState({
-            modalVisible: { visible: false, data: '' },
+            modalVisible: { visible: false, typeOfRegister: '' },
         });
     };
 
@@ -66,7 +66,7 @@ class UserScreen extends Component {
                     onClose={this.onClose}
                 />
                 <View style={styles.userInfo}>
-                    <Icon name="account-circle-outline" style={styles.icon} />
+                    <Icon name='account-circle-outline' style={styles.icon} />
                     <View>
                         <Text style={styles.h1}>{name}</Text>
                         <Text style={styles.h3}>{testResult}</Text>

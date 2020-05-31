@@ -47,7 +47,7 @@ class Dashboard extends Component {
     };
 
     showContent = () => {
-        this.setState({ showSlide: !this.state.showSlide});
+        this.setState({ showSlide: !this.state.showSlide });
     };
 
     dataSource = (coor) => {
@@ -122,7 +122,7 @@ class Dashboard extends Component {
                     slide={this.state.showSlide}
                     navigation={navigation}
                     showModal={this.handleModalOpen}
-                    userData= {this.props.data}
+                    userData={this.props.data}
                 />
             </SafeAreaView>
         );

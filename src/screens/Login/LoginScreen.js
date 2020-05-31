@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from './actions';
-
 import { StyleSheet } from 'react-native';
 import Heading from '../../components/Heading/Heading';
 import Logo from '../../components/Logo';
