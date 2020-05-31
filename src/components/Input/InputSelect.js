@@ -20,7 +20,7 @@ const InputSelect = ({...props}) => {
         <ReactNativePickerModule
           pickerRef={(e) => (pickerRef = e)}
           selectedValue={value}
-          title="Seleccione"
+          title='Seleccione'
           items={items}
           onValueChange={(value, index) => handleData(value)}
         />

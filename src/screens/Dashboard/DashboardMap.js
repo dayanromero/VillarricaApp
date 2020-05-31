@@ -17,7 +17,7 @@ class Dashboard extends Component {
         showAlert: false,
         setModalVisible: {
             visible: false,
-            data: '',
+            typeOfRegister: '',
         },
         userId: 0,
     };
@@ -29,10 +29,11 @@ class Dashboard extends Component {
     hideAlert = () => this.props.setError();
 
     handleModalOpen = (data) => {
+        console.log('handle', data)
         this.setState({
             setModalVisible: {
                 visible: true,
-                data: data,
+                typeOfRegister: data,
             },
         });
     };
@@ -41,7 +42,7 @@ class Dashboard extends Component {
         this.setState({
             setModalVisible: {
                 visible: false,
-                data: '',
+                typeOfRegister: '',
             },
         });
     };
@@ -121,7 +122,7 @@ class Dashboard extends Component {
                 <SlideUp
                     slide={this.state.showSlide}
                     navigation={navigation}
-                    showModal={this.handleModalOpen}
+                    handleModal={this.handleModalOpen}
                     userData={this.props.data}
                 />
             </SafeAreaView>

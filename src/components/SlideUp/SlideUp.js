@@ -16,7 +16,7 @@ const dragImg = require('../../assets/drag-icon.png');
 const { height } = Dimensions.get('window');
 
 const slideUp = ({ ...props }) => {
-    let { slide, showModal, userData, navigation } = props;
+    let { slide, handleModal, userData, navigation } = props;
 
     if (slide) this._panel.show();
 
@@ -27,20 +27,13 @@ const slideUp = ({ ...props }) => {
     const btns = [
         {
             title: 'Salida',
-            action: () => showModal('Salida'),
+            action: () => handleModal('Salida'),
         },
         {
             title: 'Ingreso',
-            action: () => showModal('Ingreso'),
+            action: () => handleModal('Ingreso'),
         },
     ];
-
-    useEffect(() => {
-        console.log('mount');
-        return function cleanup() {
-            console.log('unmount');
-        };
-    });
 
     return (
         <SlidingUpPanel
@@ -51,7 +44,7 @@ const slideUp = ({ ...props }) => {
                 <View style={styles.userInfo}>
                     <TouchableOpacity onPress={userScreen}>
                         <Icon
-                            name="account-circle-outline"
+                            name='account-circle-outline'
                             style={styles.icon}
                         />
                     </TouchableOpacity>
