@@ -29,7 +29,6 @@ class Dashboard extends Component {
     hideAlert = () => this.props.setError();
 
     handleModalOpen = (data) => {
-        console.log('handle', data)
         this.setState({
             setModalVisible: {
                 visible: true,

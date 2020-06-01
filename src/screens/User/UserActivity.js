@@ -1,19 +1,28 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { fetchDataActivities } from './actions';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import InfoCard from '../../components/Card/InfoCard';
 import {theme} from '../../core/theme';
 
-const UserActivity = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-      </ScrollView>
-    </SafeAreaView>
-  );
+class UserActivity extends React.Component {
+
+  componentDidMount() {
+    this.props.getActivityByUserId('94537619');
+}
+  
+  render() {
+    console.log('porps', this.props)
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <InfoCard />
+          <InfoCard />
+          <InfoCard />
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -28,7 +37,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-  const { loading, data, error } = state.search;
+  const { loading, data, error } = state.activity;
   return {
       data,
       loading,
@@ -38,8 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      searchById: (id) => {
-          return dispatch(fetchData(id));
+      getActivityByUserId: (id) => {
+          return dispatch(fetchDataActivities(id));
       },
       setError: () => {
           return dispatch(setErrorFalse());

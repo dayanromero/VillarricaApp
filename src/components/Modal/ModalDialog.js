@@ -127,8 +127,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getLocationById: (id) => {
-            return dispatch(fetchDataLocations(id));
+        getLocationById: () => {
+            return dispatch(fetchDataLocations());
         },
     };
 };
