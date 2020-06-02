@@ -120,6 +120,7 @@ class Dashboard extends Component {
                 )}
                 <SlideUp
                     slide={this.state.showSlide}
+                    showContent= {this.showContent}
                     navigation={navigation}
                     handleModal={this.handleModalOpen}
                     userData={this.props.data}

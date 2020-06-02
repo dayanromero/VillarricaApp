@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import SlidingUpPanel from 'rn-sliding-up-panel';
+import Modal from 'react-native-modal';
 import { theme } from '../../core/theme';
 import BottomButtons from '../Button/BottomButtons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,9 +17,7 @@ const dragImg = require('../../assets/drag-icon.png');
 const { height } = Dimensions.get('window');
 
 const slideUp = ({ ...props }) => {
-    let { slide, handleModal, userData, navigation } = props;
-
-    if (slide) this._panel.show();
+    const { slide, showContent, handleModal, userData, navigation } = props;
 
     const userScreen = () => {
         navigation.navigate('UserScreen');
@@ -36,33 +35,41 @@ const slideUp = ({ ...props }) => {
     ];
 
     return (
-        <SlidingUpPanel
-            ref={(c) => (this._panel = c)}
-            draggableRange={{ top: height / 3.5, bottom: 0 }}>
-            <View style={styles.container}>
-                <Image source={dragImg} style={styles.dragIcon} />
-                <View style={styles.userInfo}>
-                    <TouchableOpacity onPress={userScreen}>
-                        <Icon
-                            name='account-circle-outline'
-                            style={styles.icon}
-                        />
-                    </TouchableOpacity>
-                    {userData ? (
-                        <View>
-                            <Text style={styles.h1}>{userData.name}</Text>
-                            <Text style={styles.h2}>C.C {userData.id}</Text>
-                            <Text style={styles.h3}>
-                                Prueba: {userData.testResult}
-                            </Text>
-                        </View>
-                    ) : null}
+        <View>
+            <Modal
+                isVisible={slide}
+                onBackdropPress={() => showContent(false)}
+                onSwipeComplete={() => showContent(false)}
+                swipeDirection={['down']}
+                style={styles.view}
+            >
+                <View style={styles.container}>
+                    <Image source={dragImg} style={styles.dragIcon} />
+                    <View style={styles.userInfo}>
+                        <TouchableOpacity 
+                            onPress={userScreen}
+                            onPressOut={() => showContent(false)}>
+                            <Icon
+                                name='account-circle-outline'
+                                style={styles.icon}
+                            />
+                        </TouchableOpacity>
+                        {userData ? (
+                            <View>
+                                <Text style={styles.h1}>{userData.name}</Text>
+                                <Text style={styles.h2}>C.C {userData.id}</Text>
+                                <Text style={styles.h3}>
+                                    Prueba: {userData.testResult}
+                                </Text>
+                            </View>
+                        ) : null}
+                    </View>
+                    <View style={styles.bottons}>
+                        <BottomButtons btns={btns} />
+                    </View>
                 </View>
-                <View style={styles.bottons}>
-                    <BottomButtons btns={btns} />
-                </View>
-            </View>
-        </SlidingUpPanel>
+            </Modal>
+        </View>
     );
 };
 
@@ -110,6 +117,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
+    view: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
 });
 
-export default memo(slideUp);
+export default slideUp;
