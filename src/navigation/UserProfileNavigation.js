@@ -21,9 +21,11 @@ const UserProfileNavigation = (props) => {
                 component={UserInfo}
                 options={{ title: 'Informacion' }}
             />
-            <Tab.Screen name="UserActivity" options={{ title: 'Actividad' }}>
-                {() => <UserActivity user={props} />}
-            </Tab.Screen>
+            <Tab.Screen
+                name="UserActivity"
+                component={UserActivity}
+                options={{ title: 'Actividad' }}
+            />
         </Tab.Navigator>
     );
 };

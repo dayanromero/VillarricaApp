@@ -119,6 +119,7 @@ class Dashboard extends Component {
                     </View>
                 )}
                 <SlideUp
+                    style={styles.slide}
                     slide={this.state.showSlide}
                     showContent= {this.showContent}
                     navigation={navigation}
@@ -133,6 +134,9 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    slide: {
+        zIndex: 0
     },
 });
 

@@ -13,12 +13,11 @@ export const emailValidator = (email) => {
 export const passwordValidator = (password) => {
     if (!password || password.length <= 0)
         return 'La clave no puede estar vacia.';
-
     return '';
 };
 
 export const formatDate = (date, type) => {
-    let returnType = type === 'f' ? 'dd / MMMM / YYY' : 'HH:mm.aaaa';
+    let returnType = type === 'f' ? 'dd / MMMM / YYY' : 'hh:mm.aaaa';
     return date ? ('Format', format(date, returnType, { locale: es })) : null;
 };
 

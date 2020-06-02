@@ -5,7 +5,7 @@ import { theme } from '../../core/theme';
 import { UserContext } from './context/UserContext';
 
 const UserInfo = () => {
-    const data = useContext(UserContext);
+    const user = useContext(UserContext);
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
@@ -16,7 +16,7 @@ const UserInfo = () => {
                                 Nombre:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>
-                                {data.nombre}
+                                {user.nombre}
                             </Text>
                         </View>
                         <Divider />
@@ -25,7 +25,7 @@ const UserInfo = () => {
                                 Direccion:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>
-                                {data.address}
+                                {user.address}
                             </Text>
                         </View>
                         <Divider />
@@ -34,7 +34,7 @@ const UserInfo = () => {
                                 Tipo de Documento:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>
-                                {data.tipoDoc}
+                                {user.tipoDoc}
                             </Text>
                         </View>
                         <Divider />
@@ -43,7 +43,7 @@ const UserInfo = () => {
                                 Numero de Documento:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>
-                                {data.cedula}
+                                {user.cedula}
                             </Text>
                         </View>
                         <Divider />
@@ -52,7 +52,7 @@ const UserInfo = () => {
                                 Telefono:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>
-                                {data.celular}
+                                {user.celular}
                             </Text>
                         </View>
                     </Card.Content>

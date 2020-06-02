@@ -6,12 +6,11 @@ import InfoCard from '../../components/Card/InfoCard';
 import { theme } from '../../core/theme';
 
 class UserActivity extends React.Component {
-    state = {
-        userId: this.props.user.userId,
-    };
     componentDidMount() {
-        //const {user: {userId}} = this.props
-        this.props.getActivityByUserId(this.state.userId);
+        const {
+            userInfo: { id },
+        } = this.props;
+        this.props.getActivityByUserId(id);
     }
 
     userEvents = (data) =>
@@ -45,10 +44,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     const { loading, data, error } = state.activity;
+    const { data: userInfo } = state.search;
     return {
         data,
         loading,
         error,
+        userInfo,
     };
 };
 

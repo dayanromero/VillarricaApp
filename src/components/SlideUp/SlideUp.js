@@ -7,7 +7,6 @@ import {
     Dimensions,
     TouchableOpacity,
 } from 'react-native';
-import SlidingUpPanel from 'rn-sliding-up-panel';
 import Modal from 'react-native-modal';
 import { theme } from '../../core/theme';
 import BottomButtons from '../Button/BottomButtons';
@@ -26,11 +25,17 @@ const slideUp = ({ ...props }) => {
     const btns = [
         {
             title: 'Salida',
-            action: () => handleModal('Salida'),
+            action: () => {
+                showContent(false);
+                handleModal('Salida');
+            },
         },
         {
             title: 'Ingreso',
-            action: () => handleModal('Ingreso'),
+            action: () => {
+                showContent(false);
+                handleModal('Ingreso');
+            },
         },
     ];
 
@@ -41,16 +46,15 @@ const slideUp = ({ ...props }) => {
                 onBackdropPress={() => showContent(false)}
                 onSwipeComplete={() => showContent(false)}
                 swipeDirection={['down']}
-                style={styles.view}
-            >
+                style={styles.view}>
                 <View style={styles.container}>
                     <Image source={dragImg} style={styles.dragIcon} />
                     <View style={styles.userInfo}>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={userScreen}
                             onPressOut={() => showContent(false)}>
                             <Icon
-                                name='account-circle-outline'
+                                name="account-circle-outline"
                                 style={styles.icon}
                             />
                         </TouchableOpacity>

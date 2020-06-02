@@ -73,7 +73,7 @@ class UserScreen extends Component {
                     </View>
                 </View>
                 <UserContext.Provider value={userData}>
-                    <UserProfileNavigation userId={id} />
+                    <UserProfileNavigation />
                 </UserContext.Provider>
                 <BottomButtons btns={this.btns} />
             </View>
