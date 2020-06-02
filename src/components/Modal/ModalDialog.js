@@ -27,7 +27,6 @@ class ModalDialog extends Component {
         } = this.props;
 
         const { data } = this.props;
-
         const items = data
             ? data.map((item, index, array) => {
                   return item.name;

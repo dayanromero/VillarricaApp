@@ -29,9 +29,9 @@ export const fetchData = (id) => {
     return (dispatch) => {
         dispatch(searchData());
         fetchUser(id)
-            .then(([response, json]) => {
-                dispatch(searchDataSuccess(json));
-                if(!json) {
+            .then((response) => {
+                dispatch(searchDataSuccess(response));
+                if(!response) {
                     dispatch(searchDataFailure());
                 }
             })

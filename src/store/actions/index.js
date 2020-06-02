@@ -27,8 +27,8 @@ export const getLocationFailure = (data) => {
 export const fetchDataLocations = () => {
     return (dispatch) => {
         fetchLocation()
-            .then(([response, json]) => {
-                dispatch(getLocationSuccess(json));
+            .then((response) => {
+                dispatch(getLocationSuccess(response));
             })
             .catch((error) => dispatch(getLocationFailure(error)));
     };

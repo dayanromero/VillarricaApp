@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 8,
         fontSize: 14,
+        textTransform: 'uppercase',
     },
     textL: {
         fontWeight: 'bold',

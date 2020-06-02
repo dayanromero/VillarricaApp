@@ -24,9 +24,9 @@ export const getActivityFailure = (data) => {
 export const fetchDataActivities = (id) => {
     return (dispatch) => {
         fetchActivity(id)
-            .then(([response, json]) => {
-                dispatch(getActivitySuccess(json));
-                if(!json) {
+            .then((response) => {
+                dispatch(getActivitySuccess(response));
+                if(!response) {
                     dispatch(getActivityFailure());
                 }
             })
