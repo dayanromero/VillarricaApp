@@ -18,7 +18,7 @@ export const passwordValidator = (password) => {
 };
 
 export const formatDate = (date, type) => {
-    let returnType = type === 'f' ? 'dd/MMMM/YYY' : 'HH:mm.aaaa';
+    let returnType = type === 'f' ? 'dd / MMMM / YYY' : 'HH:mm.aaaa';
     return date ? ('Format', format(date, returnType, { locale: es })) : null;
 };
 

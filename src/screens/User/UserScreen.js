@@ -6,7 +6,7 @@ import UserProfileNavigation from '../../navigation/UserProfileNavigation';
 import ModalDialog from '../../components/Modal/ModalDialog';
 import { theme } from '../../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {UserContext} from './context/UserContext';
+import { UserContext } from './context/UserContext';
 
 const userImg = require('../../assets/user.png');
 
@@ -66,14 +66,14 @@ class UserScreen extends Component {
                     onClose={this.onClose}
                 />
                 <View style={styles.userInfo}>
-                    <Icon name='account-circle-outline' style={styles.icon} />
+                    <Icon name="account-circle-outline" style={styles.icon} />
                     <View>
                         <Text style={styles.h1}>{name}</Text>
                         <Text style={styles.h3}>{testResult}</Text>
                     </View>
                 </View>
                 <UserContext.Provider value={userData}>
-                    <UserProfileNavigation />
+                    <UserProfileNavigation userId={id} />
                 </UserContext.Provider>
                 <BottomButtons btns={this.btns} />
             </View>
