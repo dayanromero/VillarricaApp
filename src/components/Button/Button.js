@@ -1,22 +1,26 @@
 import * as React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { theme } from '../../core/theme';
+import Loading from '../Loading/Loading';
 
 const Botton = ({ ...props }) => {
-    const { title, style, onPress } = props;
+    const { title, style, onPress, loading } = props;
     return (
         <TouchableOpacity
             onPress={onPress}
-            disabled= {false}
-            style={[styles.container, style]}>
-            <Text style={styles.text}>{title}</Text>
+            disabled={loading}
+            style={[
+                { backgroundColor: loading ? 'white' : theme.colors.primary },
+                styles.container,
+                style,
+            ]}>
+            {loading ? <Loading /> : <Text style={styles.text}>{title}</Text>}
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: theme.colors.primary,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',

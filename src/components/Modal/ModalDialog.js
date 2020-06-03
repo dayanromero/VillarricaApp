@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchDataLocations } from '../../store/actions/index';
-import { View, Text, StyleSheet } from 'react-native';
+import { fetchActivity } from '../../components/Modal/actions/index';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Dialog, Portal, Divider } from 'react-native-paper';
 import { formatDate } from '../../core/utils';
 import InputSelect from '../Input/InputSelect';
 import Button from '../Button/Button';
+import Loading from '../../components/Loading/Loading';
 
-let date = new Date();
+const date = new Date();
 
 class ModalDialog extends Component {
     state = {
-        lugar: 'Seleccione locacion',
+        location: '',
+        locationId: null,
+        placeholder: 'Seleccione Zona',
+        warning: false,
+        items: [],
     };
 
     componentDidMount() {
@@ -19,19 +25,38 @@ class ModalDialog extends Component {
     }
 
     _hideDialog = () => this.props.onClose();
-    handleState = (text) => this.setState({ lugar: text });
+    handleState = (locId, index) => {
+        const locationId = this.props.data[index].id;
+        this.setState({
+            location: locId,
+            locationId: locationId,
+            warning: false,
+        });
+    };
+
+    handleCreate = () => {
+        if (!this.state.location) {
+            this.setState({ warning: true });
+            return;
+        }
+        const data = {
+            type: this.props.showModal.typeOfRegister,
+            date: date,
+            hour: date,
+            userId: this.props.userData.id,
+            locationId: this.state.locationId,
+        };
+        this.props.saveActivyById(data);
+    };
 
     render() {
         const {
             showModal: { visible, typeOfRegister },
+            userData,
+            data, activityLoading
         } = this.props;
 
-        const { data } = this.props;
-        const items = data
-            ? data.map((item, index, array) => {
-                  return item.name;
-              })
-            : null;
+        const items = data ? data.map((item) => item.name) : null;
 
         return (
             <View>
@@ -40,50 +65,73 @@ class ModalDialog extends Component {
                         <Dialog.Title style={styles.title}>
                             Registrar {typeOfRegister}
                         </Dialog.Title>
-
-                        <Dialog.Content>
-                            <View style={styles.textContainer}>
-                                <Text style={[styles.texts, styles.bold]}>
-                                    Fecha:{' '}
-                                </Text>
-                                <Text style={styles.texts}>
-                                    {formatDate(date, 'f')}
-                                </Text>
-                            </View>
-                            <Divider />
-                            <View style={styles.textContainer}>
-                                <Text style={[styles.texts, styles.bold]}>
-                                    Hora:{' '}
-                                </Text>
-                                <Text style={styles.texts}>
-                                    {formatDate(date, 'h')}
-                                </Text>
-                            </View>
-                            <Divider />
-                            <View style={{ marginBottom: 40 }}>
-                                {data ? (
-                                    <InputSelect
-                                        items={items}
-                                        value={this.state.lugar}
-                                        onPress={this.handleState}
-                                    />
-                                ) : (
-                                    <Text
-                                        style={{
-                                            marginTop: 40,
-                                            textAlign: 'center',
-                                        }}>
-                                        {' '}
-                                        No hay lacaciones disponibles.
+                        {userData ? (
+                            <Dialog.Content>
+                                <View style={styles.textContainer}>
+                                    <Text style={[styles.texts, styles.bold]}>
+                                        Nombre:
                                     </Text>
-                                )}
-                            </View>
-                            <Button
-                                title={'Registrar'}
-                                style={styles.loginButton}
-                                onPress={this._hideDialog}
-                            />
-                        </Dialog.Content>
+                                    <Text style={styles.texts}>
+                                        {userData.name}
+                                    </Text>
+                                </View>
+                                <Divider />
+                                <View style={styles.textContainer}>
+                                    <Text style={[styles.texts, styles.bold]}>
+                                        Cedula:
+                                    </Text>
+                                    <Text style={styles.texts}>
+                                        {userData.id}
+                                    </Text>
+                                </View>
+                                <Divider />
+                                <View style={styles.textContainer}>
+                                    <Text style={[styles.texts, styles.bold]}>
+                                        Fecha:
+                                    </Text>
+                                    <Text style={styles.texts}>
+                                        {formatDate(date, 'f')}
+                                    </Text>
+                                </View>
+                                <Divider />
+                                <View style={styles.textContainer}>
+                                    <Text style={[styles.texts, styles.bold]}>
+                                        Hora:
+                                    </Text>
+                                    <Text style={styles.texts}>
+                                        {formatDate(date, 'h')}
+                                    </Text>
+                                </View>
+                                <Divider />
+                                <View style={{ marginBottom: 20 }}>
+                                    {items ? (
+                                        <InputSelect
+                                            items={items}
+                                            value={this.state.location.toUpperCase()}
+                                            placeholder={'Seleccione una zona'}
+                                            onPress={this.handleState}
+                                        />
+                                    ) : (
+                                        <Text style={styles.warning}>
+                                            No hay zonas disponibles.
+                                        </Text>
+                                    )}
+                                    {this.state.warning ? (
+                                        <Text style={styles.warning}>
+                                            Por favor seleccione una zona.
+                                        </Text>
+                                    ) : null}
+                                </View>
+                                <Button
+                                    title={'Registrar'}
+                                    style={styles.loginButton}
+                                    onPress={this.handleCreate}
+                                    loading={activityLoading}
+                                />
+                            </Dialog.Content>
+                        ) : (
+                            <Loading />
+                        )}
                     </Dialog>
                 </Portal>
             </View>
@@ -98,8 +146,8 @@ const styles = StyleSheet.create({
     },
     texts: {
         fontSize: 16,
-        paddingTop: 20,
-        paddingBottom: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
         textTransform: 'uppercase',
     },
     bold: {
@@ -113,14 +161,30 @@ const styles = StyleSheet.create({
     loginButton: {
         marginVertical: 8,
     },
+    warning: {
+        marginTop: 30,
+        textAlign: 'center',
+        fontSize: 16,
+        color: 'red',
+    },
 });
 
 const mapStateToProps = (state) => {
     const { loading, data, error } = state.location;
+    const { data: userData } = state.search;
+    const {
+        data: activityData,
+        loading: activityLoading,
+        error: activityError,
+    } = state.createActivity;
     return {
         data,
         loading,
         error,
+        userData,
+        activityData,
+        activityLoading,
+        activityError,
     };
 };
 
@@ -128,6 +192,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getLocationById: () => {
             return dispatch(fetchDataLocations());
+        },
+        saveActivyById: (data) => {
+            return dispatch(fetchActivity(data));
         },
     };
 };

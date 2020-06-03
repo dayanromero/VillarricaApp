@@ -4,8 +4,8 @@ import ReactNativePickerModule from 'react-native-picker-module';
 import InputText from './InputText';
 
 const InputSelect = ({...props}) => {
-  const {items, value, onPress, placeholder, type} = props;
-  const handleData = (text) => onPress(text);
+  const {items, value, onPress, placeholder} = props;
+  const handleData = (value, index) => onPress(value, index);
   let pickerRef = null;
 
   return (
@@ -22,7 +22,9 @@ const InputSelect = ({...props}) => {
           selectedValue={value}
           title='Seleccione'
           items={items}
-          onValueChange={(value, index) => handleData(value)}
+          onValueChange={(value, index) =>{
+             handleData(value, index)
+            }}
         />
       </TouchableOpacity>
     </>

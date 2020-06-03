@@ -1,8 +1,8 @@
 import {
-    LOCATION,
-    LOCATION_SUCCESS,
-    LOCATION_FAILURE,
-} from '../constants/index';
+    CREATE_ACTIVITY,
+    CREATE_ACTIVITY_SUCCESS,
+    CREATE_ACTIVITY_FAILURE,
+} from '../constants';
 
 const initialState = {
     data: null,
@@ -10,24 +10,21 @@ const initialState = {
     error: false,
 };
 
-export default locationReducer = (state = initialState, action) => {
+export default createActivityReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOCATION:
+        case CREATE_ACTIVITY:
             return {
                 ...state,
                 data: null,
                 loading: true,
             };
-        case LOCATION_SUCCESS:
-            const items = action.payload.data.map((item, index, array) => {
-                return { name: item.name, id: item.id };
-            });
+        case CREATE_ACTIVITY_SUCCESS:
             return {
                 ...state,
-                data: items,
+                data: action.payload.data,
                 loading: false,
             };
-        case LOCATION_FAILURE:
+        case CREATE_ACTIVITY_FAILURE:
             return {
                 ...state,
                 loading: false,

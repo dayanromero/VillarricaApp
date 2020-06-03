@@ -12,13 +12,10 @@ import InputText from '../../components/Input/InputText';
 import { theme } from '../../core/theme';
 
 class LoginScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: { value: '', error: '' },
-            password: { value: '', error: '' },
-        };
-    }
+    state = {
+        email: { value: '', error: '' },
+        password: { value: '', error: '' },
+    };
 
     setEmail = (text) => {
         this.setState({
@@ -46,7 +43,7 @@ class LoginScreen extends Component {
         }
         this.props.getData('94537619');
     };
-    
+
     render() {
         const { email, password } = this.state;
         return (
@@ -55,22 +52,22 @@ class LoginScreen extends Component {
                 <Heading style={styles.title}>Login</Heading>
                 <InputText
                     style={styles.input}
-                    label='Correo electronico'
-                    returnKeyType='next'
+                    label="Correo electronico"
+                    returnKeyType="next"
                     placeholder={'Correo electronico'}
                     keyboardType={'email-address'}
                     onChangeText={(text) => this.setEmail(text)}
                     error={!!email.error}
                     errorText={email.error}
-                    autoCapitalize='none'
-                    autoCompleteType='email'
-                    textContentType='emailAddress'
-                    keyboardType='email-address'
+                    autoCapitalize="none"
+                    autoCompleteType="email"
+                    textContentType="emailAddress"
+                    keyboardType="email-address"
                 />
                 <InputText
                     style={styles.input}
-                    label='Contraseña'
-                    returnKeyType='done'
+                    label="Contraseña"
+                    returnKeyType="done"
                     placeholder={'Contraseña'}
                     value={password.value}
                     onChangeText={(text) => this.setPassword(text)}
