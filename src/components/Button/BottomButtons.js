@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, StyleSheet, Platform} from 'react-native';
-import Botton from './Button';
+import Button from './Button';
 
 const BottomButtons = (props) => {
   const {btns} = props;
@@ -8,13 +8,13 @@ const BottomButtons = (props) => {
   return (
     <View style={styles.buttonContainer}>
       {btns.map((btn, i) => (
-        <Botton
+        <Button
           key={i}
           title={btn.title}
           style={styles.button}
           onPress={btn.action}>
           {btn.title}
-        </Botton>
+        </Button>
       ))}
     </View>
   );

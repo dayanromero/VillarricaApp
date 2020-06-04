@@ -21,10 +21,10 @@
     "@react-navigation/stack": "5.4.0",
     "axios": "^0.19.2",
     "date-fns": "2.14.0",
+    "formik": "^2.1.4",
     "react": "16.13.1",
     "react-native": "0.62.2",
     "react-native-gesture-handler": "1.6.1",
-    "react-native-keyboard-aware-scroll-view": "0.9.1",
     "react-native-modal": "^11.5.6",
     "react-native-modal-datetime-picker": "8.7.0",
     "react-native-paper": "3.10.1",
@@ -36,7 +36,8 @@
     "react-native-vector-icons": "6.6.0",
     "react-redux": "7.2.0",
     "redux": "4.0.5",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { theme } from '../../core/theme';
 import Loading from '../Loading/Loading';
 
-const Botton = ({ ...props }) => {
+const Button = ({ ...props }) => {
     const { title, style, onPress, loading } = props;
     return (
         <TouchableOpacity
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Botton;
+export default Button;

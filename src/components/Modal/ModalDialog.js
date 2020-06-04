@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchDataLocations } from '../../store/actions/index';
 import { fetchActivity } from '../../components/Modal/actions/index';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Dialog, Portal, Divider } from 'react-native-paper';
 import { formatDate } from '../../core/utils';
 import InputSelect from '../Input/InputSelect';
 import Button from '../Button/Button';
 import Loading from '../../components/Loading/Loading';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { theme } from '../../core/theme';
 
 const date = new Date();
 
@@ -53,7 +55,8 @@ class ModalDialog extends Component {
         const {
             showModal: { visible, typeOfRegister },
             userData,
-            data, activityLoading
+            data,
+            activityLoading,
         } = this.props;
 
         const items = data ? data.map((item) => item.name) : null;
@@ -62,6 +65,9 @@ class ModalDialog extends Component {
             <View>
                 <Portal>
                     <Dialog visible={visible} onDismiss={this._hideDialog}>
+                        <TouchableOpacity onPress={this._hideDialog}>
+                            <Icon name="close-circle" style={styles.icon} />
+                        </TouchableOpacity>
                         <Dialog.Title style={styles.title}>
                             Registrar {typeOfRegister}
                         </Dialog.Title>
@@ -166,6 +172,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         color: 'red',
+    },
+    icon: {
+        alignSelf: 'flex-end',
+        width: 30,
+        height: 30,
+        marginRight: 10,
+        marginTop: 10,
+        marginBottom: 0,
+        fontSize: 30,
+        color: theme.colors.secondary,
     },
 });
 
