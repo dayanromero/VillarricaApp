@@ -16,7 +16,7 @@ const MapLocations = (props) => {
         return (
             <MapboxGL.ShapeSource
                 id={'MapPoints'}
-                hitbox={{ width: 20, height: 20 }}
+                hitbox={{ width: 30, height: 30 }}
                 onPress={(points) => {
                     let { features: [data] } = points;
                     let { geometry: { coordinates } } = data;

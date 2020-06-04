@@ -8,7 +8,7 @@ import {
    KeyboardAvoidingView,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { saveNewUser } from './actions/';
+import { saveNewUser, resetValues } from './actions/';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import InputText from '../../components/Input/InputText';
@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { theme } from '../../core/theme';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
+import ShowAlert from '../../components/Alert/Alert';
 
 class NewUserScreen extends Component {
    state = {
@@ -41,7 +42,27 @@ class NewUserScreen extends Component {
          testData: text,
       });
 
+   hideAlert = () => this.props.setError();
    userScreen = () => this.props.navigation.navigate('DashboardMap');
+
+   alertCreation = (registro, error) => {
+      if (registro) {
+         return (
+            <ShowAlert
+               msg={'Registro exitoso'}
+               setE={this.hideAlert}
+            />
+         );
+      } else if (error) {
+         return (
+            <ShowAlert
+               msg={'Hubo un error, intente nuevamente.'}
+               setE={this.hideAlert}
+            />
+         );
+      }
+      return null;
+   };
 
    optionsId = [
       'Tarjeta de identidad',
@@ -78,9 +99,11 @@ class NewUserScreen extends Component {
    };
 
    render() {
-      const { loading } =this.props;
+      const { loading, registro, error } = this.props;
+      console.log('data', this.props)
       return (
          <SafeAreaView style={styles.container}>
+            {this.alertCreation(registro, error)}
             {loading ? (
                <Loading />
             ) : (
@@ -100,6 +123,7 @@ class NewUserScreen extends Component {
                            validationSchema={this.validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
+                              this.props.saveNewCiudadano(values);
                               console.log('values', values);
                               resetForm({});
                               setSubmitting(false);
@@ -269,14 +293,17 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-   const { data, loading, error } = state.createUser;
-   return { data, loading, error };
+   const { data, loading, error, registro } = state.createUser;
+   return { data, loading, error, registro };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
       saveNewCiudadano: (data) => {
          return dispatch(saveNewUser(data));
+      },
+      setError: () => {
+         return dispatch(resetValues());
       },
    };
 };

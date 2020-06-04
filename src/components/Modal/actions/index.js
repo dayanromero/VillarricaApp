@@ -3,6 +3,7 @@ import {
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
 } from '../constants';
+import { RESET } from '../../../screens/NewUser/constants';
 
 import { createActivity } from '../../../config/api';
 
@@ -26,6 +27,10 @@ export const saveActivitySuccess = (data) => {
 
 export const saveActivityFailure = (data) => {
     return { type: CREATE_ACTIVITY_FAILURE };
+};
+
+export const resetValues = () => {
+    return { type: RESET};
 };
 
 export const fetchActivity = (data) => {

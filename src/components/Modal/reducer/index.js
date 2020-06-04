@@ -3,6 +3,7 @@ import {
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
 } from '../constants';
+import { RESET } from '../../../screens/NewUser/constants';
 
 const initialState = {
     data: null,
@@ -30,6 +31,11 @@ export default createActivityReducer = (state = initialState, action) => {
                 loading: false,
                 error: true,
             };
+        case RESET:
+            return {
+                ...state,
+                data: null
+            }
         default:
             return state;
     }
