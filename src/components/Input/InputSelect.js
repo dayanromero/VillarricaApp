@@ -4,7 +4,6 @@ import ReactNativePickerModule from 'react-native-picker-module';
 import InputText from './InputText';
 import { theme } from '../../core/theme';
 
-
 const InputSelect = ({ errorText, ...props }) => {
    const { items, value, onPress, placeholder, onChangeText } = props;
    const handleData = (value, index) => onPress(value, index);

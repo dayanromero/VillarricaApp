@@ -5,6 +5,7 @@ const GET_USER = '/user/id/'
 const GET_LOCATIONS = '/location/all'
 const GET_ACTIVITY = '/event/find?userId='
 const CREATE_ACTIVITY = '/event/create/'
+const CREATE_USER = '/user/create/'
 
 const instance = axios.create({
     baseURL: URL,
@@ -27,5 +28,10 @@ export const fetchLocation = () => {
 
 export const createActivity = (data) => {
     return instance.post(`${CREATE_ACTIVITY}`, data)
+    .then(Response =>  Response.data)
+}
+
+export const createUser = (data) => {
+    return instance.post(`${CREATE_USER}`, data)
     .then(Response =>  Response.data)
 }
