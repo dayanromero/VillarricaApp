@@ -80,10 +80,11 @@ class Dashboard extends Component {
         }
         if (data) {
             const {
-                data: { location },
+                data: { coordinates },
             } = this.props;
-            if (location) {
-                coor = location.coordinates.split(',').reverse().map(Number);
+            console.log('data', data)
+            if (coordinates) {
+                coor = coordinates.split(',').reverse().map(Number);
             }
         }
 

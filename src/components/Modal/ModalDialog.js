@@ -64,7 +64,6 @@ class ModalDialog extends Component {
          data,
          activityLoading, activityData
       } = this.props;
-      console.log('activityData', activityData)
 
       const items = data ? data.map((item) => item.name) : null;
 

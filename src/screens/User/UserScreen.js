@@ -47,8 +47,10 @@ class UserScreen extends Component {
             testResult,
             documentType,
             phone,
-            location: { address },
+            address,
+            city
         } = this.props.data;
+        console.log('data2', this.props.data)
 
         const userData = {
             cedula: id,
@@ -57,7 +59,9 @@ class UserScreen extends Component {
             tipoDoc: documentType,
             celular: phone,
             direccion: address,
+            ciudad: city,
         };
+
 
         return (
             <View style={styles.container}>
@@ -109,6 +113,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'black',
     },
+    edit: {
+
+    }
 });
 
 const mapStateToProps = (state) => {

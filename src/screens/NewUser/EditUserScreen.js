@@ -8,7 +8,7 @@ import {
    KeyboardAvoidingView,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { saveNewUser, resetValues } from './actions/';
+import { editNewUser, resetValues } from './actions';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import InputText from '../../components/Input/InputText';
@@ -20,13 +20,13 @@ import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
 
-class NewUserScreen extends Component {
+class EditUserScreen extends Component {
    state = {
       expeditionDate: '',
       documentType: '',
       testData: '',
       city: '',
-      state: ''
+      state: '',
    };
 
    handleDatePicker = (dateP) =>
@@ -43,27 +43,23 @@ class NewUserScreen extends Component {
       this.setState({
          testData: text,
       });
-   
+
    handleCity = (text) =>
       this.setState({
          city: text,
       });
 
-  handleDept = (text) =>
+   handleDept = (text) =>
       this.setState({
          state: text,
       });
 
-   hideAlert = () => this.props.setError();
-   userScreen = () => this.props.navigation.navigate('DashboardMap');
+   hideAlert = () => this.props.navigation.goBack();
 
-   alertCreation = (registro, error) => {
-      if (registro) {
+   alertCreation = (editData, error) => {
+      if (editData) {
          return (
-            <ShowAlert
-               msg={'Registro exitoso'}
-               setE={this.hideAlert}
-            />
+            <ShowAlert msg={'Actualizacion exitosa!'} setE={this.hideAlert} />
          );
       } else if (error) {
          return (
@@ -75,31 +71,30 @@ class NewUserScreen extends Component {
       }
       return null;
    };
-   cities = [
-      'Santander de quilichao',
-      'Villarrica',
-      'Puerto tejada',
-      'Caloto',
-   ];
-   departments = [
-      'Cauca'
-   ];
+
+   cities = ['Santander de quilichao', 'Villarrica', 'Puerto tejada', 'Caloto'];
+
+   departments = ['Cauca'];
+
    optionsId = [
       'Tarjeta de identidad',
       'Cedula de ciudadania',
       'Pasaporte',
       'Cedula de extranjeria',
    ];
+
    optionsTest = [
       'Positivo',
       'Negativo',
       'Sin prueba',
       'En espera de resultados',
    ];
+
    validationSchema = yup.object({
       name: yup.string().required('Campo requerido'),
       address: yup.string().required('Campo requerido'),
       city: yup.string().required('Campo requerido'),
+      state: yup.string().required('Campo requerido'),
       documentType: yup.string().required('Campo requerido'),
       id: yup.number().required('Campo requerido'),
       expeditionDate: yup.string().required('Campo requerido'),
@@ -109,15 +104,16 @@ class NewUserScreen extends Component {
    });
 
    initialValues = {
-      name: '',
-      address: '',
-      city: '',
-      documentType: '',
-      id: '',
-      expeditionDate: '',
-      testResult: '',
-      phone: '',
-      email: '',
+      name: this.props.data.name,
+      address: this.props.data.address,
+      city: this.props.data.city,
+      state: this.props.data.state,
+      documentType: this.props.data.documentType,
+      id: this.props.data.id,
+      expeditionDate: this.props.data.expeditionDate,
+      testResult: this.props.data.testResult,
+      phone: this.props.data.phone,
+      email: this.props.data.email,
    };
 
    render() {
@@ -132,8 +128,7 @@ class NewUserScreen extends Component {
                   <View>
                      <Icon name="account-circle-outline" style={styles.icon} />
                      <Text style={styles.text}>
-                        Por favor llegue los campos a continuacion para
-                        registrar un ciudadano.
+                        Editar la informacion del usuario
                      </Text>
                   </View>
                   <KeyboardAvoidingView>
@@ -144,7 +139,7 @@ class NewUserScreen extends Component {
                            validationSchema={this.validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              this.props.saveNewCiudadano(values);
+                              this.props.UpdateCiudadano(values);
                               console.log('values', values);
                               resetForm({});
                               setSubmitting(false);
@@ -190,10 +185,7 @@ class NewUserScreen extends Component {
                                     placeholder={'Ciudad'}
                                     onBlur={handleBlur}
                                     value={values.city}
-                                    errorText={
-                                       touched.city &&
-                                       errors.city
-                                    }
+                                    errorText={touched.city && errors.city}
                                  />
                                  <InputSelect
                                     items={this.departments}
@@ -203,10 +195,7 @@ class NewUserScreen extends Component {
                                     placeholder={'Departamento'}
                                     onBlur={handleBlur}
                                     value={values.state}
-                                    errorText={
-                                       touched.state &&
-                                       errors.state
-                                    }
+                                    errorText={touched.state && errors.state}
                                  />
                                  <InputSelect
                                     items={this.optionsId}
@@ -282,14 +271,15 @@ class NewUserScreen extends Component {
                                     <Button
                                        style={styles.button}
                                        title={'Cancelar'}
-                                       onPress={this.userScreen}>
+                                       onPress={this.hideAlert}>
                                        {'Cancelar'}
                                     </Button>
                                     <Button
                                        style={styles.button}
-                                       title={'Guardar'}
-                                       onPress={handleSubmit}>
-                                       {'Guardar'}
+                                       title={'Editar'}
+                                       // onPress={handleSubmit}
+                                    >
+                                       {'Editare'}
                                     </Button>
                                  </View>
                               </View>
@@ -339,14 +329,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-   const { data, loading, error, registro } = state.createUser;
-   return { data, loading, error, registro };
+   const { data } = state.search;
+   const { data: editData, loading, error } = state.editUser;
+   return { data, editData, loading, error };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      saveNewCiudadano: (data) => {
-         return dispatch(saveNewUser(data));
+      UpdateCiudadano: (data) => {
+         return dispatch(editNewUser(data));
       },
       setError: () => {
          return dispatch(resetValues());
@@ -354,4 +345,4 @@ const mapDispatchToProps = (dispatch) => {
    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewUserScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EditUserScreen);

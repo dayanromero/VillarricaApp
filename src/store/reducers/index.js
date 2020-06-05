@@ -4,7 +4,7 @@ import searchReducer from '../../screens/Dashboard/reducer';
 import locationReducer from './locationReducer';
 import activityReducer from '../../screens/User/reducer';
 import createActivityReducer from '../../components/Modal/reducer';
-import createUserReducer from '../../screens/NewUser/reducer';
+import {createUserReducer, editUserReducer} from '../../screens/NewUser/reducer';
 
 export default combineReducers({
     login: loginReducer,
@@ -12,5 +12,6 @@ export default combineReducers({
     location:locationReducer,
     activity: activityReducer,
     createActivity: createActivityReducer,
-    createUser: createUserReducer
+    createUser: createUserReducer,
+    editUser: editUserReducer
 })

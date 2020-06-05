@@ -2,10 +2,13 @@ import {
     CREATE_USER,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAILURE,
-    RESET
+    RESET,
+    EDIT_USER,
+    EDIT_USER_SUCCESS,
+    EDIT_USER_FAILURE
 } from '../constants';
 
-import { createUser } from '../../../config/api';
+import { createUser, updateUser } from '../../../config/api';
 
 export const saveUser = (data) => {
     return {
@@ -49,3 +52,44 @@ export const saveNewUser = (data) => {
             });
     };
 };
+
+export const editUser = (data) => {
+    return {
+        type: EDIT_USER,
+        payload: {
+            data
+        }
+    };
+};
+
+export const editUserSuccess = (data) => {
+    return {
+        type: EDIT_USER_SUCCESS,
+        payload: {
+            data,
+        },
+    };
+};
+
+export const editUserFailure = (data) => {
+    return { type: EDIT_USER_FAILURE };
+};
+
+export const editNewUser = (data) => {
+    return (dispatch) => {
+        dispatch(editUser(data));
+        updateUser(data)
+            .then((response) => {
+                
+                dispatch(editUserSuccess(response));
+                if (!response) {
+                    dispatch(editUserFailure());
+                }
+            })
+            .catch((error) => {
+                dispatch(editUserFailure(error))
+            });
+    };
+};
+
+

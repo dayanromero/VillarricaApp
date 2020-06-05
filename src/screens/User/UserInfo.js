@@ -25,7 +25,25 @@ const UserInfo = () => {
                                 Direccion:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>
-                                {user.address}
+                                {user.direccion}
+                            </Text>
+                        </View>
+                        <Divider />
+                        <View style={styles.textsContainer}>
+                            <Text style={[styles.textL, styles.texts]}>
+                                Telefono:
+                            </Text>
+                            <Text style={[styles.textR, styles.texts]}>
+                                {user.celular}
+                            </Text>
+                        </View>
+                        <Divider />
+                        <View style={styles.textsContainer}>
+                            <Text style={[styles.textL, styles.texts]}>
+                                Ciudad:
+                            </Text>
+                            <Text style={[styles.textR, styles.texts]}>
+                                {user.ciudad}
                             </Text>
                         </View>
                         <Divider />
@@ -46,15 +64,7 @@ const UserInfo = () => {
                                 {user.cedula}
                             </Text>
                         </View>
-                        <Divider />
-                        <View style={styles.textsContainer}>
-                            <Text style={[styles.textL, styles.texts]}>
-                                Telefono:
-                            </Text>
-                            <Text style={[styles.textR, styles.texts]}>
-                                {user.celular}
-                            </Text>
-                        </View>
+                        
                     </Card.Content>
                 </Card>
                 <Divider />

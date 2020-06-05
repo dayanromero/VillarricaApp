@@ -20,7 +20,7 @@ const InputText = ({ errorText, style, ...props }) => (
 const styles = StyleSheet.create({
    container: {
       width: '100%',
-      marginVertical: 6,
+      marginVertical: 2,
    },
    input: {
       backgroundColor: theme.colors.backg,
