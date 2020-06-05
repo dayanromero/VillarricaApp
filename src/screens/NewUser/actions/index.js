@@ -41,7 +41,6 @@ export const saveNewUser = (data) => {
         dispatch(saveUser(data));
         createUser(data)
             .then((response) => {
-                
                 dispatch(saveUserSuccess(response));
                 if (!response) {
                     dispatch(saveUserFailure());
@@ -53,12 +52,11 @@ export const saveNewUser = (data) => {
     };
 };
 
-export const editUser = (data) => {
+export const editUser = (id, data) => {
     return {
         type: EDIT_USER,
-        payload: {
-            data
-        }
+        payload: data
+
     };
 };
 
@@ -75,12 +73,11 @@ export const editUserFailure = (data) => {
     return { type: EDIT_USER_FAILURE };
 };
 
-export const editNewUser = (data) => {
+export const editNewUser = (id, values) => {
     return (dispatch) => {
-        dispatch(editUser(data));
-        updateUser(data)
+        dispatch(editUser(id, values));
+        updateUser(id, values)
             .then((response) => {
-                
                 dispatch(editUserSuccess(response));
                 if (!response) {
                     dispatch(editUserFailure());

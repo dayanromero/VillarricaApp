@@ -10,7 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { editNewUser, resetValues } from './actions';
 import { Formik } from 'formik';
-import * as yup from 'yup';
 import InputText from '../../components/Input/InputText';
 import DatePicker from '../../components/DatePicker/DatePicker';
 import InputSelect from '../../components/Input/InputSelect';
@@ -19,6 +18,13 @@ import { theme } from '../../core/theme';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
+import {
+   cities,
+   departments,
+   optionsId,
+   optionsTest,
+   validationSchema,
+} from './default';
 
 class EditUserScreen extends Component {
    state = {
@@ -29,35 +35,18 @@ class EditUserScreen extends Component {
       state: '',
    };
 
-   handleDatePicker = (dateP) =>
-      this.setState({
-         expeditionDate: dateP,
-      });
+   handleDatePicker = (dateP) => this.setState({ expeditionDate: dateP });
+   handleState = (text) => this.setState({ documentType: text });
+   handleStateTest = (text) => this.setState({ testData: text });
+   handleCity = (text) => this.setState({ city: text });
+   handleDept = (text) => this.setState({ state: text });
+   hideAlert = () => {
+      this.props.navigation.goBack();
+      this.props.setError();
+   };
 
-   handleState = (text) =>
-      this.setState({
-         documentType: text,
-      });
-
-   handleStateTest = (text) =>
-      this.setState({
-         testData: text,
-      });
-
-   handleCity = (text) =>
-      this.setState({
-         city: text,
-      });
-
-   handleDept = (text) =>
-      this.setState({
-         state: text,
-      });
-
-   hideAlert = () => this.props.navigation.goBack();
-
-   alertCreation = (editData, error) => {
-      if (editData) {
+   alertCreation = (registro, error) => {
+      if (registro) {
          return (
             <ShowAlert msg={'Actualizacion exitosa!'} setE={this.hideAlert} />
          );
@@ -71,37 +60,6 @@ class EditUserScreen extends Component {
       }
       return null;
    };
-
-   cities = ['Santander de quilichao', 'Villarrica', 'Puerto tejada', 'Caloto'];
-
-   departments = ['Cauca'];
-
-   optionsId = [
-      'Tarjeta de identidad',
-      'Cedula de ciudadania',
-      'Pasaporte',
-      'Cedula de extranjeria',
-   ];
-
-   optionsTest = [
-      'Positivo',
-      'Negativo',
-      'Sin prueba',
-      'En espera de resultados',
-   ];
-
-   validationSchema = yup.object({
-      name: yup.string().required('Campo requerido'),
-      address: yup.string().required('Campo requerido'),
-      city: yup.string().required('Campo requerido'),
-      state: yup.string().required('Campo requerido'),
-      documentType: yup.string().required('Campo requerido'),
-      id: yup.number().required('Campo requerido'),
-      expeditionDate: yup.string().required('Campo requerido'),
-      testResult: yup.string().required('Campo requerido'),
-      phone: yup.number().required('Campo requerido'),
-      email: yup.string().required('Campo requerido'),
-   });
 
    initialValues = {
       name: this.props.data.name,
@@ -117,7 +75,7 @@ class EditUserScreen extends Component {
    };
 
    render() {
-      const { loading, registro, error } = this.props;
+      const { loading, registro, error, data:{id}} = this.props;
       return (
          <SafeAreaView style={styles.container}>
             {this.alertCreation(registro, error)}
@@ -136,11 +94,10 @@ class EditUserScreen extends Component {
                         <Formik
                            initialValues={this.initialValues}
                            enableReinitialize
-                           validationSchema={this.validationSchema}
+                           validationSchema={validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              this.props.UpdateCiudadano(values);
-                              console.log('values', values);
+                              this.props.UpdateCiudadano(id, values);
                               resetForm({});
                               setSubmitting(false);
                            }}>
@@ -178,7 +135,7 @@ class EditUserScreen extends Component {
                                     }
                                  />
                                  <InputSelect
-                                    items={this.cities}
+                                    items={cities}
                                     value={this.state.city}
                                     onPress={handleChange('city')}
                                     onChangeText={this.handleCity}
@@ -188,7 +145,7 @@ class EditUserScreen extends Component {
                                     errorText={touched.city && errors.city}
                                  />
                                  <InputSelect
-                                    items={this.departments}
+                                    items={departments}
                                     value={this.state.state}
                                     onPress={handleChange('state')}
                                     onChangeText={this.handleDept}
@@ -198,7 +155,7 @@ class EditUserScreen extends Component {
                                     errorText={touched.state && errors.state}
                                  />
                                  <InputSelect
-                                    items={this.optionsId}
+                                    items={optionsId}
                                     value={this.state.documentType}
                                     onPress={handleChange('documentType')}
                                     onChangeText={this.handleState}
@@ -234,7 +191,7 @@ class EditUserScreen extends Component {
                                     }
                                  />
                                  <InputSelect
-                                    items={this.optionsTest}
+                                    items={optionsTest}
                                     value={this.state.testData}
                                     onPress={handleChange('testResult')}
                                     placeholder={'Prueba'}
@@ -277,7 +234,7 @@ class EditUserScreen extends Component {
                                     <Button
                                        style={styles.button}
                                        title={'Editar'}
-                                       // onPress={handleSubmit}
+                                       onPress={handleSubmit}
                                     >
                                        {'Editare'}
                                     </Button>
@@ -330,14 +287,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
    const { data } = state.search;
-   const { data: editData, loading, error } = state.editUser;
-   return { data, editData, loading, error };
+   const { data: editData, loading, registro, error } = state.editUser;
+   return { data, editData, loading, registro, error };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      UpdateCiudadano: (data) => {
-         return dispatch(editNewUser(data));
+      UpdateCiudadano: (id, values) => {
+         return dispatch(editNewUser(id, values));
       },
       setError: () => {
          return dispatch(resetValues());

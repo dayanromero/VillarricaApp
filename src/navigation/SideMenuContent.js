@@ -30,7 +30,7 @@ const SideMenuContent = (props) => {
                             labelStyle={{ fontSize: 16 }}
                             icon={() => (
                                 <Icon
-                                    name="home-circle"
+                                    name="home"
                                     color={theme.colors.grey}
                                     size={30}
                                 />
@@ -44,7 +44,7 @@ const SideMenuContent = (props) => {
                             labelStyle={{ fontSize: 16 }}
                             icon={() => (
                                 <Icon
-                                    name="account-circle"
+                                    name="account-plus"
                                     color={theme.colors.grey}
                                     size={30}
                                 />
@@ -54,7 +54,22 @@ const SideMenuContent = (props) => {
                                 props.navigation.navigate('crear-usuario');
                             }}
                         />
+                        <DrawerItem
+                            labelStyle={{ fontSize: 16 }}
+                            icon={() => (
+                                <Icon
+                                    name="map-marker-plus"
+                                    color={theme.colors.grey}
+                                    size={30}
+                                />
+                            )}
+                            label="Crear zona"
+                            onPress={() => {
+                                props.navigation.navigate('crear-usuario');
+                            }}
+                        />
                     </Drawer.Section>
+                    
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawerSection}>

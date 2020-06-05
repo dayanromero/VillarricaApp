@@ -50,7 +50,6 @@ class UserScreen extends Component {
             address,
             city
         } = this.props.data;
-        console.log('data2', this.props.data)
 
         const userData = {
             cedula: id,

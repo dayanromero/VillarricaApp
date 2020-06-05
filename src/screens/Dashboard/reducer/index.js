@@ -15,6 +15,7 @@ export default searchReducer = (state = initialState, action) => {
                 loading: true,
             };
         case SEARCH_SUCCESS:
+            console.log('SEARCH_SUCCESS')
             return {
                 ...state,
                 data: action.payload.data,

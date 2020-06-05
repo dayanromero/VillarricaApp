@@ -37,7 +37,7 @@ export const createUser = (data) => {
     .then(Response =>  Response.data)
 }
 
-export const updateUser = (data) => {
-    return instance.post(`${EDIT_USER}`, data)
+export const updateUser = (id, values) => {
+    return instance.put(`${EDIT_USER}${id}`, values)
     .then(Response =>  Response.data)
 }

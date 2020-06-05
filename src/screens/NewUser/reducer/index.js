@@ -73,6 +73,7 @@ export const editUserReducer = (state = initialState, action) => {
             ...state,
             error: false,
             loading: false,
+            registro: false,
          };
       default:
          return state;

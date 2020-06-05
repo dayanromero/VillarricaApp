@@ -10,7 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { saveNewUser, resetValues } from './actions/';
 import { Formik } from 'formik';
-import * as yup from 'yup';
 import InputText from '../../components/Input/InputText';
 import DatePicker from '../../components/DatePicker/DatePicker';
 import InputSelect from '../../components/Input/InputSelect';
@@ -19,6 +18,13 @@ import { theme } from '../../core/theme';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
+import {
+   cities,
+   departments,
+   optionsId,
+   optionsTest,
+   validationSchema,
+} from './default';
 
 class NewUserScreen extends Component {
    state = {
@@ -34,26 +40,10 @@ class NewUserScreen extends Component {
          expeditionDate: dateP,
       });
 
-   handleState = (text) =>
-      this.setState({
-         documentType: text,
-      });
-
-   handleStateTest = (text) =>
-      this.setState({
-         testData: text,
-      });
-   
-   handleCity = (text) =>
-      this.setState({
-         city: text,
-      });
-
-  handleDept = (text) =>
-      this.setState({
-         state: text,
-      });
-
+   handleState = (text) => this.setState({ documentType: text });
+   handleStateTest = (text) => this.setState({ testData: text });
+   handleCity = (text) => this.setState({ city: text });
+   handleDept = (text) => this.setState({ state: text });
    hideAlert = () => this.props.setError();
    userScreen = () => this.props.navigation.navigate('DashboardMap');
 
@@ -75,38 +65,6 @@ class NewUserScreen extends Component {
       }
       return null;
    };
-   cities = [
-      'Santander de quilichao',
-      'Villarrica',
-      'Puerto tejada',
-      'Caloto',
-   ];
-   departments = [
-      'Cauca'
-   ];
-   optionsId = [
-      'Tarjeta de identidad',
-      'Cedula de ciudadania',
-      'Pasaporte',
-      'Cedula de extranjeria',
-   ];
-   optionsTest = [
-      'Positivo',
-      'Negativo',
-      'Sin prueba',
-      'En espera de resultados',
-   ];
-   validationSchema = yup.object({
-      name: yup.string().required('Campo requerido'),
-      address: yup.string().required('Campo requerido'),
-      city: yup.string().required('Campo requerido'),
-      documentType: yup.string().required('Campo requerido'),
-      id: yup.number().required('Campo requerido'),
-      expeditionDate: yup.string().required('Campo requerido'),
-      testResult: yup.string().required('Campo requerido'),
-      phone: yup.number().required('Campo requerido'),
-      email: yup.string().required('Campo requerido'),
-   });
 
    initialValues = {
       name: '',
@@ -141,7 +99,7 @@ class NewUserScreen extends Component {
                         <Formik
                            initialValues={this.initialValues}
                            enableReinitialize
-                           validationSchema={this.validationSchema}
+                           validationSchema={validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
                               this.props.saveNewCiudadano(values);
@@ -183,7 +141,7 @@ class NewUserScreen extends Component {
                                     }
                                  />
                                  <InputSelect
-                                    items={this.cities}
+                                    items={cities}
                                     value={this.state.city}
                                     onPress={handleChange('city')}
                                     onChangeText={this.handleCity}
@@ -196,7 +154,7 @@ class NewUserScreen extends Component {
                                     }
                                  />
                                  <InputSelect
-                                    items={this.departments}
+                                    items={departments}
                                     value={this.state.state}
                                     onPress={handleChange('state')}
                                     onChangeText={this.handleDept}
@@ -209,7 +167,7 @@ class NewUserScreen extends Component {
                                     }
                                  />
                                  <InputSelect
-                                    items={this.optionsId}
+                                    items={optionsId}
                                     value={this.state.documentType}
                                     onPress={handleChange('documentType')}
                                     onChangeText={this.handleState}
@@ -245,7 +203,7 @@ class NewUserScreen extends Component {
                                     }
                                  />
                                  <InputSelect
-                                    items={this.optionsTest}
+                                    items={optionsTest}
                                     value={this.state.testData}
                                     onPress={handleChange('testResult')}
                                     placeholder={'Prueba'}

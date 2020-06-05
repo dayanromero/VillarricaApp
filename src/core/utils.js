@@ -1,6 +1,9 @@
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 
+export const IS_ANDROID = Platform.OS === 'android';
+export const DEFAULT_CENTER_COORDINATE = [-76.481856, 3.006929];
+
 export const emailValidator = (email) => {
     const re = /\S+@\S+\.\S+/;
 
