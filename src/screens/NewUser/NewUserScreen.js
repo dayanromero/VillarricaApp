@@ -24,7 +24,7 @@ import {
    optionsId,
    optionsTest,
    validationSchema,
-} from './default';
+} from '../../config/default';
 
 class NewUserScreen extends Component {
    state = {

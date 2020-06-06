@@ -1,8 +1,8 @@
 import {
-   CREATE_USER,
-   CREATE_USER_SUCCESS,
-   CREATE_USER_FAILURE,
    RESET,
+   EDIT_USER,
+   EDIT_USER_SUCCESS,
+   EDIT_USER_FAILURE
 } from '../constants';
 
 const initialState = {
@@ -12,22 +12,22 @@ const initialState = {
    registro: false,
 };
 
-export const createUserReducer = (state = initialState, action) => {
+export const editUserReducer = (state = initialState, action) => {
    switch (action.type) {
-      case CREATE_USER:
+      case EDIT_USER:
          return {
             ...state,
             data: null,
             loading: true,
          };
-      case CREATE_USER_SUCCESS:
+      case EDIT_USER_SUCCESS:
          return {
             ...state,
             data: action.payload.data,
             loading: false,
             registro: true,
          };
-      case CREATE_USER_FAILURE:
+      case EDIT_USER_FAILURE:
          return {
             ...state,
             loading: false,
@@ -36,8 +36,7 @@ export const createUserReducer = (state = initialState, action) => {
       case RESET:
          return {
             ...state,
-            error: false,
-            loading: false,
+            registro: false,
          };
       default:
          return state;

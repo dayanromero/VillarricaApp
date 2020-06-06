@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { editNewUser, resetValues } from './actions';
+import { searchDataSuccess } from '../Dashboard/actions';
 import { Formik } from 'formik';
 import InputText from '../../components/Input/InputText';
 import DatePicker from '../../components/DatePicker/DatePicker';
@@ -24,7 +25,7 @@ import {
    optionsId,
    optionsTest,
    validationSchema,
-} from './default';
+} from '../../config/default';
 
 class EditUserScreen extends Component {
    state = {
@@ -43,6 +44,7 @@ class EditUserScreen extends Component {
    hideAlert = () => {
       this.props.navigation.goBack();
       this.props.setError();
+      this.props.UpdateState(this.props.editData);
    };
 
    alertCreation = (registro, error) => {
@@ -75,7 +77,12 @@ class EditUserScreen extends Component {
    };
 
    render() {
-      const { loading, registro, error, data:{id}} = this.props;
+      const {
+         loading,
+         registro,
+         error,
+         data: { id },
+      } = this.props;
       return (
          <SafeAreaView style={styles.container}>
             {this.alertCreation(registro, error)}
@@ -234,8 +241,7 @@ class EditUserScreen extends Component {
                                     <Button
                                        style={styles.button}
                                        title={'Editar'}
-                                       onPress={handleSubmit}
-                                    >
+                                       onPress={handleSubmit}>
                                        {'Editare'}
                                     </Button>
                                  </View>
@@ -287,14 +293,17 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
    const { data } = state.search;
-   const { data: editData, loading, registro, error } = state.editUser;
-   return { data, editData, loading, registro, error };
+   const { loading, data: editData, registro, error } = state.editUser;
+   return { data, loading, editData, registro, error };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
       UpdateCiudadano: (id, values) => {
          return dispatch(editNewUser(id, values));
+      },
+      UpdateState: (data) => {
+         dispatch(searchDataSuccess(data[1][0]));
       },
       setError: () => {
          return dispatch(resetValues());

@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DashboardMap from '../screens/Dashboard/DashboardMap';
 import UserScreen from '../screens/User/UserScreen';
 import NewUserScreen from '../screens/NewUser/NewUserScreen';
-import EditUserScreen from '../screens/NewUser/EditUserScreen';
+import EditUserScreen from '../screens/UpdateUser/EditUserScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { theme } from '../core/theme';
 import SideMenuContent from './SideMenuContent';

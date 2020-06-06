@@ -4,6 +4,7 @@ const initialState = {
     data: null,
     loading: false,
     error: false,
+    registro: false
 };
 
 export default searchReducer = (state = initialState, action) => {
@@ -15,7 +16,6 @@ export default searchReducer = (state = initialState, action) => {
                 loading: true,
             };
         case SEARCH_SUCCESS:
-            console.log('SEARCH_SUCCESS')
             return {
                 ...state,
                 data: action.payload.data,
