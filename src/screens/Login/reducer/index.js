@@ -1,15 +1,16 @@
 import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
+import { RESET } from '../../NewUser/constants';
 
 const initialState = {
    email: '',
    password: '',
    error: '',
-   loading: false,
-   error: false,
    access_token: '',
    expiresIn: '',
    idToken: '',
    accessToken: '',
+   loading: false,
+   error: false,
 };
 
 export default loginReducer = (state = initialState, action) => {
@@ -17,7 +18,6 @@ export default loginReducer = (state = initialState, action) => {
       case LOGIN:
          return {
             ...state,
-            data: [],
             loading: true,
          };
       case LOGIN_SUCCESS:
@@ -30,10 +30,17 @@ export default loginReducer = (state = initialState, action) => {
             loading: false,
          };
       case LOGIN_FAILURE:
+         const { error } = action.payload;
+         console.log('error', error);
          return {
             ...state,
             loading: false,
             error: true,
+         };
+      case RESET:
+         return {
+            ...state,
+            ...initialState,
          };
       default:
          return state;

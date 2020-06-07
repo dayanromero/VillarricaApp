@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchDataLocations } from '../../store/actions/index';
-import { fetchActivity, resetValues } from '../../components/Modal/actions/index';
+import {
+   fetchActivity,
+   resetValues,
+} from '../../components/Modal/actions/index';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Dialog, Portal, Divider } from 'react-native-paper';
 import { formatDate } from '../../core/utils';
@@ -38,9 +41,9 @@ class ModalDialog extends Component {
    };
 
    hideAlert = () => {
-       this.props.setError();
-       this.props.onClose();
-   }
+      this.props.setError();
+      this.props.onClose();
+   };
 
    handleCreate = () => {
       if (!this.state.location) {
@@ -62,10 +65,12 @@ class ModalDialog extends Component {
          showModal: { visible, typeOfRegister },
          userData,
          data,
-         activityLoading, activityData
+         activityLoading,
+         activityData,
       } = this.props;
 
-      const items = data ? data.map((item) => item.name) : null;
+      const items =
+         data || data !== 'undefinded' ? data.map((item) => item.name) : null;
 
       return (
          <View>
@@ -218,8 +223,8 @@ const mapDispatchToProps = (dispatch) => {
          return dispatch(fetchActivity(data));
       },
       setError: () => {
-        return dispatch(resetValues());
-     },
+         return dispatch(resetValues());
+      },
    };
 };
 

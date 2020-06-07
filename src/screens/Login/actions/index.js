@@ -1,6 +1,6 @@
 import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
-
 import { authUser } from '../../../config/auth';
+import { RESET } from '../../NewUser/constants';
 
 export const logUser = () => {
    return {
@@ -15,13 +15,22 @@ export const logUserSuccess = (response) => {
       payload: {
          accessToken,
          idToken,
-         expiresIn
+         expiresIn,
       },
    };
 };
 
-export const logUserFailure = (data) => {
-   return { type: LOGIN_FAILURE };
+export const logUserFailure = (error) => {
+   return {
+      type: LOGIN_FAILURE,
+      payload: {
+         error,
+      },
+   };
+};
+
+export const resetValues = () => {
+   return { type: RESET};
 };
 
 export const authenticateUser = (username, password) => {
@@ -31,6 +40,6 @@ export const authenticateUser = (username, password) => {
          .then((response) => {
             dispatch(logUserSuccess(response));
          })
-         .catch((error) => console.log('error', error));
+         .catch((error) => dispatch(logUserFailure(error)));
    };
 };

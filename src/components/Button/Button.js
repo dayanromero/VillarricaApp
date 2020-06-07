@@ -10,7 +10,7 @@ const Button = ({ ...props }) => {
             onPress={onPress}
             disabled={loading}
             style={[
-                { backgroundColor: loading ? 'white' : theme.colors.primary },
+                { backgroundColor: loading ? 'transparent' : theme.colors.primary },
                 styles.container,
                 style,
             ]}>
