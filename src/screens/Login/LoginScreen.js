@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchData } from './actions';
+import { authenticateUser } from './actions';
 import { StyleSheet } from 'react-native';
 import Heading from '../../components/Heading/Heading';
-import Logo from '../../components/Logo';
 import Button from '../../components/Button/Button';
 import TextButton from '../../components/Button/TextButton';
 import AuthContainer from '../../components/AuthContainer';
 import { emailValidator, passwordValidator } from '../../core/utils';
 import InputText from '../../components/Input/InputText';
 import { theme } from '../../core/theme';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class LoginScreen extends Component {
     state = {
@@ -41,15 +41,23 @@ class LoginScreen extends Component {
             });
             return;
         }
-        this.props.getData('94537619');
+        let username = email.value;
+        let pass = password.value;
+        
+        this.props.loginUser(username, pass);
+        //console.log('user data', email.value, password.value)
     };
 
     render() {
         const { email, password } = this.state;
+        // console.log('PROPS', this.props)
         return (
             <AuthContainer>
-                <Logo />
-                <Heading style={styles.title}>Login</Heading>
+                <Icon
+                                name="account-circle-outline"
+                                style={styles.icon}
+                            />
+                <Heading style={styles.title}>Villarrica App Login</Heading>
                 <InputText
                     style={styles.input}
                     label="Correo electronico"
@@ -105,18 +113,28 @@ const styles = StyleSheet.create({
     label: {
         color: theme.colors.secondary,
     },
+    icon: {
+        width: 120,
+        height: 120,
+        textAlign: 'center',
+        fontSize: 120,
+        color: theme.colors.secondary,
+    },
 });
 
 const mapStateToProps = (state) => {
-    return {
-        dataUser: state.login.data,
-    };
+    const { loading, data, error } = state.login;
+   return {
+      data,
+      loading,
+      error,
+   };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getData: (id) => {
-            return dispatch(fetchData(id));
+        loginUser: (username, password) => {
+            return dispatch(authenticateUser(username, password));
         },
     };
 };

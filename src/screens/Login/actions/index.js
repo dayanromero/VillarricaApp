@@ -1,35 +1,36 @@
 import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
 
-import { fetchUser } from '../../../config/api';
+import { authUser } from '../../../config/auth';
 
-export const getData = (id) => {
-    return {
-        type: LOGIN,
-        payload: {
-            id,
-        },
-    };
+export const logUser = () => {
+   return {
+      type: LOGIN,
+   };
 };
 
-export const getDataSuccess = (data) => {
-    return {
-        type: LOGIN_SUCCESS,
-        payload: {
-            data,
-        },
-    };
+export const logUserSuccess = (response) => {
+   const { idToken, accessToken, expiresIn } = response;
+   return {
+      type: LOGIN_SUCCESS,
+      payload: {
+         accessToken,
+         idToken,
+         expiresIn
+      },
+   };
 };
 
-export const getDateFailure = (data) => {
-    return { type: LOGIN_FAILURE };
+export const logUserFailure = (data) => {
+   return { type: LOGIN_FAILURE };
 };
 
-export const fetchData = (id) => {
-    return (dispatch) => {
-        fetchUser(id)
-            .then(([response, json]) => {
-                dispatch(getDataSuccess(json));
-            })
-            .catch((error) => console.log(error));
-    };
+export const authenticateUser = (username, password) => {
+   return (dispatch) => {
+      dispatch(logUser());
+      authUser(username, password)
+         .then((response) => {
+            dispatch(logUserSuccess(response));
+         })
+         .catch((error) => console.log('error', error));
+   };
 };
