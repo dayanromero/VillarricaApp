@@ -1,14 +1,33 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { Component } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
+
+// Connect Redux
 import { connect } from 'react-redux';
+
+// Redux Actions
 import { fetchData, setErrorFalse } from './actions';
+
+//Components
 import Map from '../../components/MapLocations/Map';
 import SlideUp from '../../components/SlideUp/SlideUp';
 import SearchBar from '../../components/Search/SearchBar';
 import ModalDialog from '../../components/Modal/ModalDialog';
 import Loading from '../../components/Loading/Loading';
-import { MapLocationContext } from './context';
 import ShowAlert from '../../components/Alert/Alert';
+import { MapLocationContext } from './context';
+
+//Utilities
 import { DEFAULT_CENTER_COORDINATE } from '../../core/utils';
 
 class Dashboard extends Component {

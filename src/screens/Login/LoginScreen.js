@@ -1,14 +1,29 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { authenticateUser, resetValues } from './actions';
+
+// Components
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
 import TextButton from '../../components/Button/TextButton';
 import AuthContainer from '../../components/AuthContainer';
 import InputText from '../../components/Input/InputText';
 import ShowAlert from '../../components/Alert/Alert';
+
+// Utilities
 import { theme } from '../../core/theme';
 import { emailValidator, passwordValidator } from '../../core/utils';
 

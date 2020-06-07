@@ -1,3 +1,14 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { Component } from 'react';
 import {
    View,
@@ -7,17 +18,25 @@ import {
    SafeAreaView,
    KeyboardAvoidingView,
 } from 'react-native';
-import { connect } from 'react-redux';
-import { saveNewUser, resetValues } from './actions/';
 import { Formik } from 'formik';
+
+//Connect Redux
+import { connect } from 'react-redux';
+
+//Redux Actions
+import { saveNewUser, resetValues } from './actions/';
+
+//Components
 import InputText from '../../components/Input/InputText';
 import DatePicker from '../../components/DatePicker/DatePicker';
 import InputSelect from '../../components/Input/InputSelect';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { theme } from '../../core/theme';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
+
+//Utilities
+import { theme } from '../../core/theme';
 import {
    cities,
    departments,
