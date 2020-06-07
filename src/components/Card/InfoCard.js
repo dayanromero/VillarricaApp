@@ -1,7 +1,20 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+//Utilities
 import { theme } from '../../core/theme';
 import { formatDate } from '../../core/utils';
 

@@ -1,3 +1,14 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { useState } from 'react';
 import {
     View,
@@ -8,9 +19,13 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { theme } from '../../core/theme';
-import BottomButtons from '../Button/BottomButtons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Components
+import BottomButtons from '../Button/BottomButtons';
+
+//Utilities
+import { theme } from '../../core/theme';
 
 const dragImg = require('../../assets/drag-icon.png');
 const { height } = Dimensions.get('window');

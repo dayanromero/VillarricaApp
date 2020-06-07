@@ -1,7 +1,22 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React from 'react';
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import ReactNativePickerModule from 'react-native-picker-module';
+
+//Components
 import InputText from './InputText';
+
+//Utilities
 import { theme } from '../../core/theme';
 
 const InputSelect = ({ errorText, ...props }) => {

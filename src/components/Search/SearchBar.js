@@ -1,9 +1,24 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Searchbar as Search } from 'react-native-paper';
-import { theme } from '../../core/theme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Components
 import ShowAlert from '../Alert/Alert';
+
+//Utilities
+import { theme } from '../../core/theme';
 import { numValidator } from '../../core/utils';
 
 const SearchBar = ({ onPress, navigation }) => {

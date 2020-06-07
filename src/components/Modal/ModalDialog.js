@@ -1,19 +1,39 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { Component } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dialog, Portal, Divider } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Connect Redux
 import { connect } from 'react-redux';
+
+//Actions Redux
 import { fetchDataLocations } from '../../store/actions/index';
 import {
    fetchActivity,
    resetValues,
 } from '../../components/Modal/actions/index';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Dialog, Portal, Divider } from 'react-native-paper';
-import { formatDate } from '../../core/utils';
+
+//Components
+import ShowAlert from '../../components/Alert/Alert';
 import InputSelect from '../Input/InputSelect';
 import Button from '../Button/Button';
 import Loading from '../../components/Loading/Loading';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Utilities
+import { formatDate } from '../../core/utils';
 import { theme } from '../../core/theme';
-import ShowAlert from '../../components/Alert/Alert';
+
 
 const date = new Date();
 

@@ -1,8 +1,23 @@
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
+
+// Dependencies
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { formatDate } from '../../core/utils';
+
+//Components
 import InputText from '../Input/InputText';
+
+//Utilities
+import { formatDate } from '../../core/utils';
 import { theme } from '../../core/theme';
 
 const DatePicker = ({ errorText, ...props }) => {
