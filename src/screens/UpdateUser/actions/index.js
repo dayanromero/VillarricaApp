@@ -2,7 +2,7 @@ import {
     EDIT_USER,
     EDIT_USER_SUCCESS,
     EDIT_USER_FAILURE,
-    RESET
+    RESET_VALUES
 } from '../constants';
 
 import { updateUser } from '../../../config/api';
@@ -29,7 +29,7 @@ export const editUserFailure = (data) => {
 };
 
 export const resetValues = () => {
-    return { type: RESET};
+    return { type: RESET_VALUES};
 };
 
 export const editNewUser = (id, values) => {

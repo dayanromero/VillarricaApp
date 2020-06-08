@@ -29,6 +29,7 @@ import { MapLocationContext } from './context';
 
 //Utilities
 import { DEFAULT_CENTER_COORDINATE } from '../../core/utils';
+import { dataSource } from '../../config/default/'
 
 class Dashboard extends Component {
    state = {
@@ -42,10 +43,7 @@ class Dashboard extends Component {
       userId: 0,
    };
 
-   setLocation = (data) => {
-      this.setState({ location: data });
-   };
-
+   setLocation = (data) =>  this.setState({ location: data });
    hideAlert = () => this.props.setError();
 
    handleModalOpen = (data) => {
@@ -70,38 +68,14 @@ class Dashboard extends Component {
       this.setState({ showSlide: !this.state.showSlide });
    };
 
-   dataSource = (coor) => {
-      return {
-         type: 'FeatureCollection',
-         features: [
-            {
-               type: 'Feature',
-               id: '1',
-               properties: {
-                  icon: 'locationIcon',
-               },
-               geometry: {
-                  type: 'Point',
-                  coordinates: coor,
-               },
-            },
-         ],
-      };
-   };
-
    getUserData = (id) => this.props.searchById(id);
 
    render() {
       const { navigation, loading, data, error } = this.props;
       let coor;
-
-      if (error) {
-         console.log('hubo un error');
-      }
+      
       if (data) {
-         const {
-            data: { coordinates },
-         } = this.props;
+         const { data: { coordinates } } = this.props;
          if (coordinates) {
             coor = coordinates.split(',').reverse().map(Number);
          }
@@ -132,7 +106,7 @@ class Dashboard extends Component {
                         showContent: this.showContent,
                         setLocation: this.setLocation,
                         location: coor || this.state.location,
-                        dataSource: coor ? this.dataSource(coor) : null,
+                        dataSource: coor ? dataSource(coor) : null,
                      }}>
                      <Map />
                   </MapLocationContext.Provider>
@@ -162,11 +136,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
    const { loading, data, error } = state.search;
-   return {
-      data,
-      loading,
-      error,
-   };
+   return { data, loading, error };
 };
 
 const mapDispatchToProps = (dispatch) => {

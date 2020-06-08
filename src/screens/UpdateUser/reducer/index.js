@@ -1,5 +1,5 @@
 import {
-   RESET,
+   RESET_VALUES,
    EDIT_USER,
    EDIT_USER_SUCCESS,
    EDIT_USER_FAILURE
@@ -33,10 +33,11 @@ export const editUserReducer = (state = initialState, action) => {
             loading: false,
             error: true,
          };
-      case RESET:
+      case RESET_VALUES:
          return {
             ...state,
             registro: false,
+            loading: false
          };
       default:
          return state;

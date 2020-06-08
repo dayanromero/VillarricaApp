@@ -30,3 +30,22 @@ export const validationSchema = yup.object({
       phone: yup.number().required('Campo requerido'),
       email: yup.string().required('Campo requerido'),
    });
+
+   export const dataSource = (coor) => {
+      return {
+         type: 'FeatureCollection',
+         features: [
+            {
+               type: 'Feature',
+               id: '1',
+               properties: {
+                  icon: 'locationIcon',
+               },
+               geometry: {
+                  type: 'Point',
+                  coordinates: coor,
+               },
+            },
+         ],
+      };
+   };

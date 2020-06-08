@@ -54,14 +54,21 @@ class EditUserScreen extends Component {
       city: '',
       state: '',
    };
+
    handleDatePicker = (dateP) => this.setState({ expeditionDate: dateP });
    handleState = (text) => this.setState({ documentType: text });
    handleStateTest = (text) => this.setState({ testData: text });
    handleCity = (text) => this.setState({ city: text });
    handleDept = (text) => this.setState({ state: text });
+   cancelEdit = () => this.props.navigation.goBack();
    hideAlert = () => {
-      this.props.navigation.navigate('DashboardMap');
       this.props.setError();
+      this.props.navigation.goBack();
+      this.props.editData ?
+         this.props.UpdateState(this.props.editData) : null;   
+   };
+
+   hideAlertError = () => {
       this.props.editData ?
          this.props.UpdateState(this.props.editData) : null;
    };
@@ -106,7 +113,7 @@ class EditUserScreen extends Component {
       return (
          <SafeAreaView style={styles.container}>
             {this.alertCreation(registro, error)}
-            {loading ? (
+            {loading || !loading == 'undefinded' ? (
                <Loading />
             ) : (
                <ScrollView style={styles.scrollView}>
@@ -255,7 +262,7 @@ class EditUserScreen extends Component {
                                     <Button
                                        style={styles.button}
                                        title={'Cancelar'}
-                                       onPress={this.hideAlert}>
+                                       onPress={this.cancelEdit}>
                                        {'Cancelar'}
                                     </Button>
                                     <Button
