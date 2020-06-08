@@ -6,7 +6,7 @@ import { theme } from '../core/theme';
 
 const Tab = createMaterialTopTabNavigator();
 
-const UserProfileNavigation = (props) => {
+const UserProfileNavigation = () => {
     return (
         <Tab.Navigator
             tabBarOptions={{

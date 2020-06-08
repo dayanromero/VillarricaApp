@@ -2,16 +2,19 @@ import * as React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+//Screens
 import DashboardMap from '../screens/Dashboard/DashboardMap';
 import UserScreen from '../screens/User/UserScreen';
 import NewUserScreen from '../screens/NewUser/NewUserScreen';
+import NewZone from '../screens/NewZone/NewZone';
 import EditUserScreen from '../screens/UpdateUser/EditUserScreen';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Utilities
 import { theme } from '../core/theme';
 import SideMenuContent from './SideMenuContent';
 
 const MainStack = createStackNavigator();
-const SettingsStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const MainStackNavigator = ({ navigation }) => {
@@ -47,29 +50,17 @@ const MainStackNavigator = ({ navigation }) => {
             component={EditUserScreen}
             options={{ title: 'Editar Usuario' }}
          />
-      </MainStack.Navigator>
-   );
-};
-
-const SettingsStackNavigator = ({ navigation }) => {
-   return (
-      <SettingsStack.Navigator>
-         <SettingsStack.Screen
-            name="NewUserScreen"
+         <MainStack.Screen
+            name="crearCiudadano"
             component={NewUserScreen}
-            options={{
-               title: 'Crear usuario',
-               headerLeft: () => (
-                  <Icon.Button
-                     name="menu"
-                     size={30}
-                     color={theme.colors.primary}
-                     backgroundColor="white"
-                     onPress={() => navigation.openDrawer()}></Icon.Button>
-               ),
-            }}
+            options={{ title: 'Crear ciudadano' }}
          />
-      </SettingsStack.Navigator>
+         <MainStack.Screen
+            name="crearZona"
+            component={NewZone}
+            options={{ title: 'Crear Zona' }}
+         />
+      </MainStack.Navigator>
    );
 };
 
@@ -79,10 +70,6 @@ const DrawerStackNavigator = () => {
          initialRouteName="Inicio"
          drawerContent={(props) => <SideMenuContent {...props} />}>
          <Drawer.Screen name="inicio" component={MainStackNavigator} />
-         <Drawer.Screen
-            name="crear-usuario"
-            component={SettingsStackNavigator}
-         />
       </Drawer.Navigator>
    );
 };
@@ -91,7 +78,7 @@ const styles = StyleSheet.create({
    edit: {
       fontSize: 17,
       marginRight: 10,
-      fontWeight:'500'
+      fontWeight: '500',
    },
 });
 

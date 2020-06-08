@@ -89,6 +89,7 @@ class NewUserScreen extends Component {
       name: '',
       address: '',
       city: '',
+      state: '',
       documentType: '',
       id: '',
       expeditionDate: '',
@@ -122,7 +123,6 @@ class NewUserScreen extends Component {
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
                               this.props.saveNewCiudadano(values);
-                              console.log('values', values);
                               resetForm({});
                               setSubmitting(false);
                            }}>

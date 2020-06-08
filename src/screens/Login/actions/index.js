@@ -1,6 +1,7 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, SAVE_TOKEN, CLEAN_TOKEN } from '../constants';
 import { authUser } from '../../../config/auth';
 import { RESET } from '../../NewUser/constants';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const logUser = () => {
    return {
@@ -30,15 +31,46 @@ export const logUserFailure = (error) => {
 };
 
 export const resetValues = () => {
-   return { type: RESET};
+   return { type: RESET };
+};
+
+export const saveToken = (token) => {
+   return {
+      type: SAVE_TOKEN,
+      payload: token,
+   };
+};
+
+export const getToken = () => {
+   return (dispatch) => {
+      AsyncStorage.getItem('idToken').then((token) => {
+         dispatch(saveToken(token));
+      });
+   };
+};
+
+export const cleanToken = () => {
+   return {
+      type: CLEAN_TOKEN,
+   };
+};
+
+
+export const logout = () => {
+   return () => {
+      AsyncStorage.removeItem('idToken').then(()=> {
+         dispatch(cleanToken());
+      });
+   };
 };
 
 export const authenticateUser = (username, password) => {
    return (dispatch) => {
       dispatch(logUser());
       authUser(username, password)
-         .then((response) => {
+         .then(async (response) => {
             dispatch(logUserSuccess(response));
+            await AsyncStorage.setItem('idToken', response.accessToken);
          })
          .catch((error) => dispatch(logUserFailure(error)));
    };

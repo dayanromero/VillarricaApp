@@ -9,10 +9,14 @@
  */
 
 // Dependencies
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Connect redux
+import { connect } from 'react-redux';
+
+//Actions
 import { authenticateUser, resetValues } from './actions';
 
 // Components
@@ -72,7 +76,7 @@ class LoginScreen extends Component {
 
       return (
          <AuthContainer>
-            {error ? (
+            {error || !error == 'undefinded' ? (
                <ShowAlert
                   msg={'Correo electronico y/o contraseña incorrecta.'}
                   setE={this.hideAlert}
@@ -146,14 +150,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-   const { idToken, accessToken, expiresIn, loading, error } = state.login;
-   return {
-      idToken,
-      accessToken,
-      expiresIn,
-      loading,
-      error,
-   };
+   const { loading, error } = state.login;
+   return { loading, error };
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -34,7 +34,6 @@ import Loading from '../../components/Loading/Loading';
 import { formatDate } from '../../core/utils';
 import { theme } from '../../core/theme';
 
-
 const date = new Date();
 
 class ModalDialog extends Component {
@@ -90,7 +89,7 @@ class ModalDialog extends Component {
       } = this.props;
 
       const items =
-         data || data !== 'undefinded' ? data.map((item) => item.name) : null;
+         data || !data == 'undefinded' ? data.map((item) => item.name) : null;
 
       return (
          <View>

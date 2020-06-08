@@ -1,15 +1,14 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE } from '../constants';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, SAVE_TOKEN, CLEAN_TOKEN } from '../constants';
 import { RESET } from '../../NewUser/constants';
 
 const initialState = {
    email: '',
    password: '',
    error: '',
-   access_token: '',
    expiresIn: '',
    idToken: '',
    accessToken: '',
-   loading: false,
+   loading: true,
    error: false,
 };
 
@@ -29,9 +28,18 @@ export default loginReducer = (state = initialState, action) => {
             expiresIn,
             loading: false,
          };
+      case SAVE_TOKEN:
+         return {
+            ...state,
+            accessToken: action.payload,
+            loading: false,
+         };
+      case CLEAN_TOKEN:
+         return {
+            ...state,
+            accessToken: '',
+         }
       case LOGIN_FAILURE:
-         const { error } = action.payload;
-         console.log('error', error);
          return {
             ...state,
             loading: false,

@@ -3,6 +3,7 @@ import { es } from 'date-fns/locale';
 
 export const IS_ANDROID = Platform.OS === 'android';
 export const DEFAULT_CENTER_COORDINATE = [-76.481856, 3.006929];
+export const API_KEY = 'pk.eyJ1IjoiZGF5cm9tIiwiYSI6ImNrYTc5aXg0YzAxM2oyeXFlZWYwejU4cTYifQ.uQCDALmLyuOI-QzPxo1_EA';
 
 export const emailValidator = (email) => {
     const re = /\S+@\S+\.\S+/;

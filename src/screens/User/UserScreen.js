@@ -23,8 +23,9 @@ import ModalDialog from '../../components/Modal/ModalDialog';
 
 //Utilities
 import { theme } from '../../core/theme';
-import { UserContext } from './context/UserContext';
+import { UserContext } from '../../context/';
 
+//Assets
 const userImg = require('../../assets/user.png');
 
 class UserScreen extends Component {

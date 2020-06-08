@@ -19,19 +19,18 @@ import {
    KeyboardAvoidingView,
 } from 'react-native';
 import { Formik } from 'formik';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //Connect Redux
 import { connect } from 'react-redux';
 
 //Redux Actions
-import { editNewUser, resetValues } from './actions';
-import { searchDataSuccess } from '../Dashboard/actions';
+import { saveNewUser, resetValues } from './actions';
 
 //Components
 import InputText from '../../components/Input/InputText';
 import DatePicker from '../../components/DatePicker/DatePicker';
 import InputSelect from '../../components/Input/InputSelect';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
@@ -41,35 +40,27 @@ import { theme } from '../../core/theme';
 import {
    cities,
    departments,
-   optionsId,
-   optionsTest,
    validationSchema,
 } from '../../config/default';
 
-class EditUserScreen extends Component {
+class NewUserScreen extends Component {
    state = {
-      expeditionDate: '',
-      documentType: '',
-      testData: '',
       city: '',
-      state: '',
+      state: ''
    };
-   handleDatePicker = (dateP) => this.setState({ expeditionDate: dateP });
-   handleState = (text) => this.setState({ documentType: text });
-   handleStateTest = (text) => this.setState({ testData: text });
+
    handleCity = (text) => this.setState({ city: text });
    handleDept = (text) => this.setState({ state: text });
-   hideAlert = () => {
-      this.props.navigation.navigate('DashboardMap');
-      this.props.setError();
-      this.props.editData ?
-         this.props.UpdateState(this.props.editData) : null;
-   };
+   hideAlert = () => this.props.setError();
+   userScreen = () => this.props.navigation.navigate('DashboardMap');
 
    alertCreation = (registro, error) => {
       if (registro) {
          return (
-            <ShowAlert msg={'Actualizacion exitosa!'} setE={this.hideAlert} />
+            <ShowAlert
+               msg={'Registro exitoso'}
+               setE={this.hideAlert}
+            />
          );
       } else if (error) {
          return (
@@ -83,26 +74,14 @@ class EditUserScreen extends Component {
    };
 
    initialValues = {
-      name: this.props.data.name,
-      address: this.props.data.address,
-      city: this.props.data.city,
-      state: this.props.data.state,
-      documentType: this.props.data.documentType,
-      id: this.props.data.id,
-      expeditionDate: this.props.data.expeditionDate,
-      testResult: this.props.data.testResult,
-      phone: this.props.data.phone,
-      email: this.props.data.email,
+      name: '',
+      address: '',
+      city: '',
+      state: '',
    };
 
    render() {
-      const {
-         loading,
-         registro,
-         error,
-         data: { id },
-      } = this.props;
-
+      const { loading, registro, error } = this.props;
       return (
          <SafeAreaView style={styles.container}>
             {this.alertCreation(registro, error)}
@@ -111,9 +90,10 @@ class EditUserScreen extends Component {
             ) : (
                <ScrollView style={styles.scrollView}>
                   <View>
-                     <Icon name="account-circle-outline" style={styles.icon} />
+                     <Icon name="map-marker" style={styles.icon} />
                      <Text style={styles.text}>
-                        Editar la informacion del usuario
+                        Por favor llegue los campos a continuacion para
+                        registrar un nueva zona de registro.
                      </Text>
                   </View>
                   <KeyboardAvoidingView>
@@ -124,7 +104,7 @@ class EditUserScreen extends Component {
                            validationSchema={validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              this.props.UpdateCiudadano(id, values);
+                              this.props.saveNewCiudadano(values);
                               resetForm({});
                               setSubmitting(false);
                            }}>
@@ -140,7 +120,7 @@ class EditUserScreen extends Component {
                                  <InputText
                                     style={styles.input}
                                     returnKeyType="next"
-                                    placeholder={'Nombres'}
+                                    placeholder={'Nombre de la zona'}
                                     keyboardType={'default'}
                                     onChangeText={handleChange('name')}
                                     onBlur={handleBlur('name')}
@@ -169,7 +149,10 @@ class EditUserScreen extends Component {
                                     placeholder={'Ciudad'}
                                     onBlur={handleBlur}
                                     value={values.city}
-                                    errorText={touched.city && errors.city}
+                                    errorText={
+                                       touched.city &&
+                                       errors.city
+                                    }
                                  />
                                  <InputSelect
                                     items={departments}
@@ -179,90 +162,23 @@ class EditUserScreen extends Component {
                                     placeholder={'Departamento'}
                                     onBlur={handleBlur}
                                     value={values.state}
-                                    errorText={touched.state && errors.state}
-                                 />
-                                 <InputSelect
-                                    items={optionsId}
-                                    value={this.state.documentType}
-                                    onPress={handleChange('documentType')}
-                                    onChangeText={this.handleState}
-                                    placeholder={'Tipo de documento'}
-                                    onBlur={handleBlur}
-                                    value={values.documentType}
                                     errorText={
-                                       touched.documentType &&
-                                       errors.documentType
+                                       touched.state &&
+                                       errors.state
                                     }
-                                 />
-                                 <InputText
-                                    style={styles.input}
-                                    returnKeyType="next"
-                                    placeholder={'Numero de documento'}
-                                    keyboardType={'number-pad'}
-                                    onChangeText={handleChange('id')}
-                                    onBlur={handleBlur('id')}
-                                    autoCapitalize="none"
-                                    value={values.id}
-                                    errorText={touched.id && errors.id}
-                                 />
-                                 <DatePicker
-                                    onPress={handleChange('expeditionDate')}
-                                    styles={styles.input}
-                                    placeholder={'Fecha de expedicion'}
-                                    onChangeText={this.handleDatePicker}
-                                    onBlur={handleBlur('expeditionDate')}
-                                    value={this.state.expeditionDate}
-                                    errorText={
-                                       touched.expeditionDate &&
-                                       errors.expeditionDate
-                                    }
-                                 />
-                                 <InputSelect
-                                    items={optionsTest}
-                                    value={this.state.testData}
-                                    onPress={handleChange('testResult')}
-                                    placeholder={'Prueba'}
-                                    onChangeText={this.handleStateTest}
-                                    onBlur={handleBlur('testResult')}
-                                    value={values.testResult}
-                                    errorText={
-                                       touched.testResult && errors.testResult
-                                    }
-                                 />
-                                 <InputText
-                                    style={styles.input}
-                                    returnKeyType="next"
-                                    placeholder={'Telefono'}
-                                    keyboardType={'phone-pad'}
-                                    onChangeText={handleChange('phone')}
-                                    onBlur={handleBlur('phone')}
-                                    autoCapitalize="none"
-                                    value={values.phone}
-                                    errorText={touched.phone && errors.phone}
-                                 />
-                                 <InputText
-                                    style={styles.input}
-                                    returnKeyType="next"
-                                    placeholder={'Correo electronico'}
-                                    keyboardType={'email-address'}
-                                    onChangeText={handleChange('email')}
-                                    onBlur={handleBlur('email')}
-                                    autoCapitalize="none"
-                                    value={values.email}
-                                    errorText={touched.email && errors.email}
                                  />
                                  <View style={styles.downButton}>
                                     <Button
                                        style={styles.button}
                                        title={'Cancelar'}
-                                       onPress={this.hideAlert}>
+                                       onPress={this.userScreen}>
                                        {'Cancelar'}
                                     </Button>
                                     <Button
                                        style={styles.button}
-                                       title={'Editar'}
+                                       title={'Guardar'}
                                        onPress={handleSubmit}>
-                                       {'Editare'}
+                                       {'Guardar'}
                                     </Button>
                                  </View>
                               </View>
@@ -296,8 +212,9 @@ const styles = StyleSheet.create({
    },
    icon: {
       textAlign: 'center',
-      fontSize: 100,
+      fontSize: 90,
       color: theme.colors.secondary,
+      margin: 30,
    },
    downButton: {
       flex: 1,
@@ -312,18 +229,14 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-   const { data } = state.search;
-   const { loading, data: editData, registro, error } = state.editUser;
-   return { data, loading, editData, registro, error };
+   const { data, loading, error, registro } = state.createUser;
+   return { data, loading, error, registro };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      UpdateCiudadano: (id, values) => {
-         return dispatch(editNewUser(id, values));
-      },
-      UpdateState: (data) => {
-         dispatch(searchDataSuccess(data[1][0]));
+      saveNewCiudadano: (data) => {
+         return dispatch(saveNewUser(data));
       },
       setError: () => {
          return dispatch(resetValues());
@@ -331,4 +244,4 @@ const mapDispatchToProps = (dispatch) => {
    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditUserScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(NewUserScreen);

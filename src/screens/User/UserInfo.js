@@ -15,7 +15,7 @@ import { Divider, Card } from 'react-native-paper';
 
 //Utilities
 import { theme } from '../../core/theme';
-import { UserContext } from './context/UserContext';
+import { UserContext } from '../../context/';
 
 const UserInfo = () => {
     const user = useContext(UserContext);
