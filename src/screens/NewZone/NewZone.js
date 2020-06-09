@@ -24,44 +24,50 @@ import { Formik } from 'formik';
 import { connect } from 'react-redux';
 
 //Redux Actions
-import { saveNewUser, resetValues } from './actions';
+import { saveNewZone, resetZoneValues } from './actions';
 
 //Components
 import InputText from '../../components/Input/InputText';
-import DatePicker from '../../components/DatePicker/DatePicker';
 import InputSelect from '../../components/Input/InputSelect';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
+import SlideMap from '../../components/SlideUp/SlideMap';
 
 //Utilities
 import { theme } from '../../core/theme';
-import {
-   cities,
-   departments,
-   validationSchema,
-} from '../../config/default';
+import { cities, departments, validationZoneSchema } from '../../config/default';
 
 class NewUserScreen extends Component {
    state = {
       city: '',
-      state: ''
+      state: '',
+      showMap: false,
+      address: '',
+      coordinates: '',
+   };
+
+   setAddress = (params) => {
+      const {
+         response,
+         location: { lat, lon },
+      } = params;
+      this.setState({
+         address: response,
+         coordinates: `${lat}, ${lon}`,
+      });
    };
 
    handleCity = (text) => this.setState({ city: text });
+   showContent = () => this.setState({ showMap: !this.state.showMap });
    handleDept = (text) => this.setState({ state: text });
    hideAlert = () => this.props.setError();
    userScreen = () => this.props.navigation.navigate('DashboardMap');
 
    alertCreation = (registro, error) => {
       if (registro) {
-         return (
-            <ShowAlert
-               msg={'Registro exitoso'}
-               setE={this.hideAlert}
-            />
-         );
+         return <ShowAlert msg={'Registro exitoso'} setE={this.hideAlert} />;
       } else if (error) {
          return (
             <ShowAlert
@@ -82,6 +88,7 @@ class NewUserScreen extends Component {
 
    render() {
       const { loading, registro, error } = this.props;
+      console.log('Loading', loading, registro, error)
       return (
          <SafeAreaView style={styles.container}>
             {this.alertCreation(registro, error)}
@@ -99,12 +106,18 @@ class NewUserScreen extends Component {
                   <KeyboardAvoidingView>
                      <>
                         <Formik
-                           initialValues={this.initialValues}
+                           initialValues={{
+                              ...this.initialValues,
+                              address: this.state.address,
+                           }}
                            enableReinitialize
-                           validationSchema={validationSchema}
+                           validationSchema={validationZoneSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              this.props.saveNewCiudadano(values);
+                              this.props.saveNewZoneLocation({
+                                 ...values,
+                                 coordinates: this.state.coordinates,
+                              });
                               resetForm({});
                               setSubmitting(false);
                            }}>
@@ -130,6 +143,7 @@ class NewUserScreen extends Component {
                                  />
                                  <InputText
                                     style={styles.input}
+                                    onTouchStart={this.showContent}
                                     returnKeyType="next"
                                     placeholder={'Direccion'}
                                     keyboardType={'default'}
@@ -149,10 +163,7 @@ class NewUserScreen extends Component {
                                     placeholder={'Ciudad'}
                                     onBlur={handleBlur}
                                     value={values.city}
-                                    errorText={
-                                       touched.city &&
-                                       errors.city
-                                    }
+                                    errorText={touched.city && errors.city}
                                  />
                                  <InputSelect
                                     items={departments}
@@ -162,10 +173,7 @@ class NewUserScreen extends Component {
                                     placeholder={'Departamento'}
                                     onBlur={handleBlur}
                                     value={values.state}
-                                    errorText={
-                                       touched.state &&
-                                       errors.state
-                                    }
+                                    errorText={touched.state && errors.state}
                                  />
                                  <View style={styles.downButton}>
                                     <Button
@@ -188,6 +196,11 @@ class NewUserScreen extends Component {
                   </KeyboardAvoidingView>
                </ScrollView>
             )}
+            <SlideMap
+               slide={this.state.showMap}
+               showContent={this.showContent}
+               handleAddress={this.setAddress}
+            />
          </SafeAreaView>
       );
    }
@@ -229,17 +242,17 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-   const { data, loading, error, registro } = state.createUser;
+   const { data, loading, error, registro } = state.createZone;
    return { data, loading, error, registro };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      saveNewCiudadano: (data) => {
-         return dispatch(saveNewUser(data));
+      saveNewZoneLocation: (data) => {
+         return dispatch(saveNewZone(data));
       },
       setError: () => {
-         return dispatch(resetValues());
+         return dispatch(resetZoneValues());
       },
    };
 };

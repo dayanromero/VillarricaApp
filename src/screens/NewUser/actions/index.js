@@ -5,7 +5,7 @@ import {
     CLEAR_USER,
 } from '../constants';
 
-import { createUser, updateUser } from '../../../config/api';
+import { createUser } from '../../../config/api';
 
 export const saveUser = (data) => {
     return {

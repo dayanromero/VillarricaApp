@@ -1,50 +1,50 @@
 import {
-    CREATE_USER,
-    CREATE_USER_SUCCESS,
-    CREATE_USER_FAILURE,
-    RESET,
+    CREATE_ZONE,
+    CREATE_ZONE_SUCCESS,
+    CREATE_ZONE_FAILURE,
+    RESET_ZONE,
 } from '../constants';
 
-import { createUser, updateUser } from '../../../config/api';
+import { createZone} from '../../../config/api';
 
-export const saveUser = (data) => {
+export const saveZone = (data) => {
     return {
-        type: CREATE_USER,
+        type: CREATE_ZONE,
         payload: {
             data
         }
     };
 };
 
-export const saveUserSuccess = (data) => {
+export const saveZoneSuccess = (data) => {
     return {
-        type: CREATE_USER_SUCCESS,
+        type: CREATE_ZONE_SUCCESS,
         payload: {
             data,
         },
     };
 };
 
-export const saveUserFailure = (data) => {
-    return { type: CREATE_USER_FAILURE };
+export const saveZoneFailure = (data) => {
+    return { type: CREATE_ZONE_FAILURE };
 };
 
-export const resetValues = () => {
-    return { type: RESET};
+export const resetZoneValues = () => {
+    return { type: RESET_ZONE};
 };
 
-export const saveNewUser = (data) => {
+export const saveNewZone = (data) => {
     return (dispatch) => {
-        dispatch(saveUser(data));
-        createUser(data)
+        dispatch(saveZone(data));
+        createZone(data)
             .then((response) => {
-                dispatch(saveUserSuccess(response));
+                dispatch(saveZoneSuccess(response));
                 if (!response) {
-                    dispatch(saveUserFailure());
+                    dispatch(saveZoneFailure());
                 }
             })
             .catch((error) => {
-                dispatch(saveUserFailure(error))
+                dispatch(saveZoneFailure(error))
             });
     };
 };

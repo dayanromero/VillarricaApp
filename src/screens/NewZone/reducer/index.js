@@ -1,8 +1,8 @@
 import {
-   CREATE_USER,
-   CREATE_USER_SUCCESS,
-   CREATE_USER_FAILURE,
-   RESET,
+   CREATE_ZONE,
+   CREATE_ZONE_SUCCESS,
+   CREATE_ZONE_FAILURE,
+   RESET_ZONE,
 } from '../constants';
 
 const initialState = {
@@ -12,32 +12,31 @@ const initialState = {
    registro: false,
 };
 
-export const createUserReducer = (state = initialState, action) => {
+export const createZoneReducer = (state = initialState, action) => {
    switch (action.type) {
-      case CREATE_USER:
+      case CREATE_ZONE:
          return {
             ...state,
             data: null,
             loading: true,
          };
-      case CREATE_USER_SUCCESS:
+      case CREATE_ZONE_SUCCESS:
          return {
             ...state,
             data: action.payload.data,
             loading: false,
             registro: true,
          };
-      case CREATE_USER_FAILURE:
+      case CREATE_ZONE_FAILURE:
          return {
             ...state,
             loading: false,
             error: true,
          };
-      case RESET:
+      case RESET_ZONE:
          return {
             ...state,
-            error: false,
-            loading: false,
+            registro: false,
          };
       default:
          return state;
