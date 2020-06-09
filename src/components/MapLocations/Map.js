@@ -38,7 +38,7 @@ const Dashboard = () => {
 
    return (
       <MapLocationContext.Consumer>
-         {(value) => (
+         {(value) => (  
             <MapboxGL.MapView
                onPress={onPress}
                style={styles.container}

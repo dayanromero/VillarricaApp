@@ -2,7 +2,7 @@ import {
     CREATE_USER,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAILURE,
-    RESET,
+    CLEAR_USER,
 } from '../constants';
 
 import { createUser, updateUser } from '../../../config/api';
@@ -30,7 +30,7 @@ export const saveUserFailure = (data) => {
 };
 
 export const resetValues = () => {
-    return { type: RESET};
+    return { type: CLEAR_USER};
 };
 
 export const saveNewUser = (data) => {

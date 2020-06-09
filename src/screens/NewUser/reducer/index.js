@@ -2,7 +2,7 @@ import {
    CREATE_USER,
    CREATE_USER_SUCCESS,
    CREATE_USER_FAILURE,
-   RESET,
+   CLEAR_USER,
 } from '../constants';
 
 const initialState = {
@@ -33,11 +33,11 @@ export const createUserReducer = (state = initialState, action) => {
             loading: false,
             error: true,
          };
-      case RESET:
+      case CLEAR_USER:
          return {
             ...state,
-            error: false,
-            loading: false,
+            registro: false,
+            loading: false
          };
       default:
          return state;

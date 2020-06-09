@@ -34,6 +34,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
+import SlideMap from '../../components/SlideUp/SlideMap';
 
 //Utilities
 import { theme } from '../../core/theme';
@@ -51,13 +52,28 @@ class NewUserScreen extends Component {
       documentType: '',
       testData: '',
       city: '',
-      state: ''
+      state: '',
+      showMap: false,
+      address: '',
+      coordinates: '',
    };
+
+   setAddress = (params) => {
+      const { response, location: { lat, lon} } = params;
+      this.setState({
+         address: response,
+         coordinates: `${lat}, ${lon}`,
+      })
+   }
 
    handleDatePicker = (dateP) =>
       this.setState({
          expeditionDate: dateP,
       });
+
+   showContent = () => {
+      this.setState({ showMap: !this.state.showMap });
+   };
 
    handleState = (text) => this.setState({ documentType: text });
    handleStateTest = (text) => this.setState({ testData: text });
@@ -68,12 +84,7 @@ class NewUserScreen extends Component {
 
    alertCreation = (registro, error) => {
       if (registro) {
-         return (
-            <ShowAlert
-               msg={'Registro exitoso'}
-               setE={this.hideAlert}
-            />
-         );
+         return <ShowAlert msg={'Registro exitoso'} setE={this.hideAlert} />;
       } else if (error) {
          return (
             <ShowAlert
@@ -87,7 +98,6 @@ class NewUserScreen extends Component {
 
    initialValues = {
       name: '',
-      address: '',
       city: '',
       state: '',
       documentType: '',
@@ -117,12 +127,16 @@ class NewUserScreen extends Component {
                   <KeyboardAvoidingView>
                      <>
                         <Formik
-                           initialValues={this.initialValues}
+                           initialValues={{...this.initialValues, address: this.state.address,}}
                            enableReinitialize
                            validationSchema={validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              this.props.saveNewCiudadano(values);
+                              console.log('values', {...values,  coordinates: this.state.coordinates,})
+                              this.props.saveNewCiudadano({
+                                 ...values,
+                                 coordinates: this.state.coordinates,
+                              });
                               resetForm({});
                               setSubmitting(false);
                            }}>
@@ -146,8 +160,10 @@ class NewUserScreen extends Component {
                                     value={values.name}
                                     errorText={touched.name && errors.name}
                                  />
+
                                  <InputText
                                     style={styles.input}
+                                    onTouchStart={this.showContent}
                                     returnKeyType="next"
                                     placeholder={'Direccion'}
                                     keyboardType={'default'}
@@ -159,6 +175,7 @@ class NewUserScreen extends Component {
                                        touched.address && errors.address
                                     }
                                  />
+
                                  <InputSelect
                                     items={cities}
                                     value={this.state.city}
@@ -167,10 +184,7 @@ class NewUserScreen extends Component {
                                     placeholder={'Ciudad'}
                                     onBlur={handleBlur}
                                     value={values.city}
-                                    errorText={
-                                       touched.city &&
-                                       errors.city
-                                    }
+                                    errorText={touched.city && errors.city}
                                  />
                                  <InputSelect
                                     items={departments}
@@ -180,10 +194,7 @@ class NewUserScreen extends Component {
                                     placeholder={'Departamento'}
                                     onBlur={handleBlur}
                                     value={values.state}
-                                    errorText={
-                                       touched.state &&
-                                       errors.state
-                                    }
+                                    errorText={touched.state && errors.state}
                                  />
                                  <InputSelect
                                     items={optionsId}
@@ -276,6 +287,11 @@ class NewUserScreen extends Component {
                   </KeyboardAvoidingView>
                </ScrollView>
             )}
+            <SlideMap
+               slide={this.state.showMap}
+               showContent={this.showContent}
+               handleAddress={this.setAddress}
+            />
          </SafeAreaView>
       );
    }
