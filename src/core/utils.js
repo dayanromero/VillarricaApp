@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import mapboxClient from '@mapbox/mapbox-sdk';
 import mapboxGeocodingClient from '@mapbox/mapbox-sdk/services/geocoding';
+import ShowAlert from '../components/Alert/Alert';
 
 export const IS_ANDROID = Platform.OS === 'android';
 export const DEFAULT_CENTER_COORDINATE = [-76.481856, 3.006929];
@@ -52,4 +53,18 @@ export const getAddress = async (location) => {
       return address;
    }
    return 'Tu direccion no fue encontrada, pero utilizaremos las coordenadas para ubicarte en el mapa.';
+};
+
+export const alertCreation = (registro, error) => {
+   if (registro) {
+      return <ShowAlert msg={'Registro exitoso'} setE={this.hideAlert} />;
+   } else if (error) {
+      return (
+         <ShowAlert
+            msg={'Hubo un error, intente nuevamente.'}
+            setE={this.hideAlert}
+         />
+      );
+   }
+   return null;
 };

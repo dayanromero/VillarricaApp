@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 
 //Actions
-import { cleanToken } from '../screens/Login/actions';
+import { logout } from '../screens/Login/actions';
 
 //Utilities
 import { theme } from '../core/theme';
@@ -145,7 +145,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
    return {
       clearDown: () => {
-         return dispatch(cleanToken());
+         return dispatch(logout());
       },
    };
 };

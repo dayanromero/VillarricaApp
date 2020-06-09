@@ -1,6 +1,5 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, SAVE_TOKEN, CLEAN_TOKEN } from '../constants';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, SAVE_TOKEN, RESET, CLEAN_TOKEN } from '../constants';
 import { authUser } from '../../../config/auth';
-import { RESET } from '../../NewUser/constants';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const logUser = () => {
@@ -31,7 +30,9 @@ export const logUserFailure = (error) => {
 };
 
 export const resetValues = () => {
-   return { type: RESET };
+   return { 
+      type: RESET
+   };
 };
 
 export const saveToken = (token) => {
@@ -55,12 +56,10 @@ export const cleanToken = () => {
    };
 };
 
-
 export const logout = () => {
-   return () => {
-      AsyncStorage.removeItem('idToken').then(()=> {
-         dispatch(cleanToken());
-      });
+   return (dispatch) => {
+      AsyncStorage.removeItem('idToken')
+         .then(()=> dispatch(cleanToken()));
    };
 };
 

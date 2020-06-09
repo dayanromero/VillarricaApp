@@ -33,8 +33,8 @@ const UserInfo = () => {
                             </Text>
                         </View>
                         <Divider />
-                        <View style={styles.textsContainer}>
-                            <Text style={[styles.textL, styles.texts]}>
+                        <View>
+                            <Text style={[{paddingTop: 20}, styles.textL]}>
                                 Direccion:
                             </Text>
                             <Text style={[styles.textR, styles.texts]}>

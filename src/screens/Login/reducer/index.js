@@ -1,5 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, SAVE_TOKEN, CLEAN_TOKEN } from '../constants';
-import { RESET } from '../../NewUser/constants';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, SAVE_TOKEN, CLEAN_TOKEN, RESET } from '../constants';
 
 const initialState = {
    email: '',
@@ -48,7 +47,8 @@ export default loginReducer = (state = initialState, action) => {
       case RESET:
          return {
             ...state,
-            ...initialState,
+            loading: false,
+            error: false,
          };
       default:
          return state;

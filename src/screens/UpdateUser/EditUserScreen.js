@@ -35,6 +35,7 @@ import InputSelect from '../../components/Input/InputSelect';
 import Button from '../../components/Button/Button';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
+import SlideMap from '../../components/SlideUp/SlideMap';
 
 //Utilities
 import { theme } from '../../core/theme';
@@ -53,9 +54,24 @@ class EditUserScreen extends Component {
       testData: '',
       city: '',
       state: '',
+      showMap: false,
+      address: this.props.data.address,
+      coordinates: '',
+   };
+
+   setAddress = (params) => {
+      const {
+         response,
+         location: { lat, lon },
+      } = params;
+      this.setState({
+         address: response,
+         coordinates: `${lat}, ${lon}`,
+      });
    };
 
    handleDatePicker = (dateP) => this.setState({ expeditionDate: dateP });
+   showContent = () => this.setState({ showMap: !this.state.showMap });
    handleState = (text) => this.setState({ documentType: text });
    handleStateTest = (text) => this.setState({ testData: text });
    handleCity = (text) => this.setState({ city: text });
@@ -64,13 +80,11 @@ class EditUserScreen extends Component {
    hideAlert = () => {
       this.props.setError();
       this.props.navigation.goBack();
-      this.props.editData ?
-         this.props.UpdateState(this.props.editData) : null;   
+      this.props.editData ? this.props.UpdateState(this.props.editData) : null;
    };
 
    hideAlertError = () => {
-      this.props.editData ?
-         this.props.UpdateState(this.props.editData) : null;
+      this.props.editData ? this.props.UpdateState(this.props.editData) : null;
    };
 
    alertCreation = (registro, error) => {
@@ -126,12 +140,18 @@ class EditUserScreen extends Component {
                   <KeyboardAvoidingView>
                      <>
                         <Formik
-                           initialValues={this.initialValues}
+                           initialValues={{
+                              ...this.initialValues,
+                              address: this.state.address,
+                           }}
                            enableReinitialize
                            validationSchema={validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              this.props.UpdateCiudadano(id, values);
+                              this.props.UpdateCiudadano(id, {
+                                 ...values,
+                                 coordinates: this.state.coordinates,
+                              });
                               resetForm({});
                               setSubmitting(false);
                            }}>
@@ -157,6 +177,7 @@ class EditUserScreen extends Component {
                                  />
                                  <InputText
                                     style={styles.input}
+                                    onTouchStart={this.showContent}
                                     returnKeyType="next"
                                     placeholder={'Direccion'}
                                     keyboardType={'default'}
@@ -279,6 +300,11 @@ class EditUserScreen extends Component {
                   </KeyboardAvoidingView>
                </ScrollView>
             )}
+            <SlideMap
+               slide={this.state.showMap}
+               showContent={this.showContent}
+               handleAddress={this.setAddress}
+            />
          </SafeAreaView>
       );
    }

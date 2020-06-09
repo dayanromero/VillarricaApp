@@ -66,15 +66,8 @@ class NewUserScreen extends Component {
       })
    }
 
-   handleDatePicker = (dateP) =>
-      this.setState({
-         expeditionDate: dateP,
-      });
-
-   showContent = () => {
-      this.setState({ showMap: !this.state.showMap });
-   };
-
+   handleDatePicker = (dateP) => this.setState({ expeditionDate: dateP });
+   showContent = () => this.setState({ showMap: !this.state.showMap });
    handleState = (text) => this.setState({ documentType: text });
    handleStateTest = (text) => this.setState({ testData: text });
    handleCity = (text) => this.setState({ city: text });
@@ -127,12 +120,11 @@ class NewUserScreen extends Component {
                   <KeyboardAvoidingView>
                      <>
                         <Formik
-                           initialValues={{...this.initialValues, address: this.state.address,}}
+                           initialValues={{...this.initialValues, address: this.state.address}}
                            enableReinitialize
                            validationSchema={validationSchema}
                            onSubmit={(values, { setSubmitting, resetForm }) => {
                               setSubmitting(true);
-                              console.log('values', {...values,  coordinates: this.state.coordinates,})
                               this.props.saveNewCiudadano({
                                  ...values,
                                  coordinates: this.state.coordinates,

@@ -23,24 +23,10 @@ import { API_KEY } from '../../core/utils';
 MapboxGL.setAccessToken(API_KEY);
 
 const Dashboard = () => {
-   const [latitude, setLatitude] = useState('');
-   const [longitude, setLongitude] = useState('');
-
-   const onPress = (event) => {
-      const { geometry } = event;
-
-      setLatitude(geometry.coordinates[1]);
-      setLongitude(geometry.coordinates[0]);
-
-      console.log('LAT', geometry.coordinates[1]);
-      console.log('LON', geometry.coordinates[0]);
-   };
-
    return (
       <MapLocationContext.Consumer>
          {(value) => (  
             <MapboxGL.MapView
-               onPress={onPress}
                style={styles.container}
                zoomLevel={10}
                showUserLocation={true}>

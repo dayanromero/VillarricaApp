@@ -76,7 +76,7 @@ class LoginScreen extends Component {
 
       return (
          <AuthContainer>
-            {error || !error == 'undefinded' ? (
+            {error ? (
                <ShowAlert
                   msg={'Correo electronico y/o contraseña incorrecta.'}
                   setE={this.hideAlert}
