@@ -15,8 +15,8 @@ import {View, StyleSheet, Platform} from 'react-native';
 //Components
 import Button from './Button';
 
-const BottomButtons = (props) => {
-  const {btns} = props;
+const BottomButtons = ({...props}) => {
+  const {btns, style} = props;
 
   return (
     <View style={styles.buttonContainer}>
@@ -24,7 +24,7 @@ const BottomButtons = (props) => {
         <Button
           key={i}
           title={btn.title}
-          style={styles.button}
+          style={[styles.button, style]}
           onPress={btn.action}>
           {btn.title}
         </Button>

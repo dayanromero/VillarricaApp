@@ -8,6 +8,7 @@ const CREATE_ACTIVITY = '/event/create/'
 const CREATE_USER = '/user/create/'
 const EDIT_USER = '/user/update/'
 const CREATE_ZONE = '/location/create/'
+const GET_ZONE = '/location/all'
 
 const instance = axios.create({
     baseURL: URL,
@@ -45,5 +46,10 @@ export const updateUser = (id, values) => {
 
 export const createZone = (data) => {
     return instance.post(`${CREATE_ZONE}`, data)
+    .then(Response =>  Response.data)
+}
+
+export const getZones = () => {
+    return instance.get(`${GET_ZONE}`)
     .then(Response =>  Response.data)
 }

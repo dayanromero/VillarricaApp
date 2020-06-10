@@ -39,10 +39,6 @@ const AddressCard = (props) => {
 };
 
 const styles = StyleSheet.create({
-   textsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-   },
    texts: {
       paddingTop: 5,
       paddingBottom: 8,

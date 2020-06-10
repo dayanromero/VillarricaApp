@@ -2,8 +2,8 @@ import {
     CREATE_ACTIVITY,
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
+    RESET_ACTIVITY
 } from '../constants';
-import { RESET } from '../../../screens/NewUser/constants';
 
 import { createActivity } from '../../../config/api';
 
@@ -30,7 +30,7 @@ export const saveActivityFailure = (data) => {
 };
 
 export const resetValues = () => {
-    return { type: RESET};
+    return { type: RESET_ACTIVITY};
 };
 
 export const fetchActivity = (data) => {
@@ -38,7 +38,6 @@ export const fetchActivity = (data) => {
         dispatch(saveActivity(data));
         createActivity(data)
             .then((response) => {
-                
                 dispatch(saveActivitySuccess(response));
                 if (!response) {
                     dispatch(saveActivityFailure());

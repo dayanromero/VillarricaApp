@@ -81,14 +81,14 @@ class SideMenuContent extends Component {
                         labelStyle={{ fontSize: 16 }}
                         icon={() => (
                            <Icon
-                              name="map-marker-plus"
+                              name="map-marker"
                               color={theme.colors.grey}
                               size={30}
                            />
                         )}
-                        label="Crear zona"
+                        label="Puestos de control"
                         onPress={() => {
-                           this.props.navigation.navigate('crearZona');
+                           this.props.navigation.navigate('zonas');
                         }}
                      />
                   </Drawer.Section>

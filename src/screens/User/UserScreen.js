@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: 'black',
    },
-   edit: {},
 });
 
 const mapStateToProps = (state) => {

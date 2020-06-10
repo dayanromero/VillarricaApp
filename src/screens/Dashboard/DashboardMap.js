@@ -29,7 +29,7 @@ import { MapLocationContext } from './context';
 
 //Utilities
 import { DEFAULT_CENTER_COORDINATE } from '../../core/utils';
-import { dataSource } from '../../config/default/'
+import { dataSource } from '../../config/default/';
 
 class Dashboard extends Component {
    state = {
@@ -43,7 +43,7 @@ class Dashboard extends Component {
       userId: 0,
    };
 
-   setLocation = (data) =>  this.setState({ location: data });
+   setLocation = (data) => this.setState({ location: data });
    hideAlert = () => this.props.setError();
 
    handleModalOpen = (data) => {
@@ -73,9 +73,11 @@ class Dashboard extends Component {
    render() {
       const { navigation, loading, data, error } = this.props;
       let coor;
-      
+
       if (data) {
-         const { data: { coordinates } } = this.props;
+         const {
+            data: { coordinates },
+         } = this.props;
          if (coordinates) {
             coor = coordinates.split(',').reverse().map(Number);
          }
@@ -83,10 +85,12 @@ class Dashboard extends Component {
 
       return (
          <SafeAreaView style={styles.container}>
-            <ModalDialog
-               showModal={this.state.setModalVisible}
-               onClose={this.handleModalClose}
-            />
+            {this.state.setModalVisible.visible ? (
+               <ModalDialog
+                  showModal={this.state.setModalVisible}
+                  onClose={this.handleModalClose}
+               />
+            ) : null}
             {error ? (
                <ShowAlert
                   msg={'Numero de cedula no encontrado.'}
@@ -127,7 +131,7 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-   }
+   },
 });
 
 const mapStateToProps = (state) => {

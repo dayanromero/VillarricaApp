@@ -5,9 +5,6 @@ import { fetchLocation } from '../../config/api/index';
 export const getLocation = () => {
     return {
         type: LOCATION,
-        payload: {
-            id,
-        },
     };
 };
 
@@ -26,6 +23,7 @@ export const getLocationFailure = (data) => {
 
 export const fetchDataLocations = () => {
     return (dispatch) => {
+        dispatch(getLocation());
         fetchLocation()
             .then((response) => {
                 dispatch(getLocationSuccess(response));

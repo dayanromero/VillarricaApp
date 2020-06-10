@@ -8,6 +8,7 @@ import DashboardMap from '../screens/Dashboard/DashboardMap';
 import UserScreen from '../screens/User/UserScreen';
 import NewUserScreen from '../screens/NewUser/NewUserScreen';
 import NewZone from '../screens/NewZone/NewZone';
+import ZoneScreen from '../screens/Zones/Zones';
 import EditUserScreen from '../screens/UpdateUser/EditUserScreen';
 
 //Utilities
@@ -58,7 +59,13 @@ const MainStackNavigator = ({ navigation }) => {
          <MainStack.Screen
             name="crearZona"
             component={NewZone}
-            options={{ title: 'Crear Zona' }}
+            options={{title: 'Crear puesto de control' }}
+            
+         />
+         <MainStack.Screen
+            name="zonas"
+            component={ZoneScreen}
+            options={{ title: 'Puestos de control' }}
          />
       </MainStack.Navigator>
    );

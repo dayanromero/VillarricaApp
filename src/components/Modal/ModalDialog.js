@@ -47,6 +47,7 @@ class ModalDialog extends Component {
 
    componentDidMount() {
       this.props.getLocationById();
+      this.props.setError();
    }
 
    _hideDialog = () => this.props.onClose();
@@ -84,12 +85,13 @@ class ModalDialog extends Component {
          showModal: { visible, typeOfRegister },
          userData,
          data,
+         loading,
          activityLoading,
          activityData,
       } = this.props;
 
-      const items =
-         data || !data == 'undefinded' ? data.map((item) => item.name) : null;
+      const items = data ? data.map((item) => item.name) : null;
+      console.log('loadup', loading);
 
       return (
          <View>
@@ -147,8 +149,19 @@ class ModalDialog extends Component {
                                  onPress={this.handleState}
                               />
                            ) : (
-                              <Text style={styles.warning}>
-                                 No hay zonas disponibles.
+                              <Text style={styles.notice}>
+                                 {loading ? (
+                                    <Text
+                                       style={{
+                                          color: theme.colors.secondary,
+                                       }}>
+                                       Cargando zonas
+                                    </Text>
+                                 ) : (
+                                    <Text style={{ color: 'red' }}>
+                                       No hay zonas disponibles
+                                    </Text>
+                                 )}
                               </Text>
                            )}
                            {this.state.warning ? (
@@ -196,11 +209,10 @@ const styles = StyleSheet.create({
    loginButton: {
       marginVertical: 8,
    },
-   warning: {
+   notice: {
       marginTop: 30,
       textAlign: 'center',
       fontSize: 16,
-      color: 'red',
    },
    icon: {
       alignSelf: 'flex-end',
