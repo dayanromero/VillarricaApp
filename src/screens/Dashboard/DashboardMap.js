@@ -26,6 +26,8 @@ import ModalDialog from '../../components/Modal/ModalDialog';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
 import { MapLocationContext } from './context';
+import BottomMenu from '../../components/BottomMenu/BottomMenu';
+
 //Utilities
 import { DEFAULT_CENTER_COORDINATE } from '../../core/utils';
 import { dataSource } from '../../config/default/';
@@ -115,6 +117,7 @@ class Dashboard extends Component {
                   </MapLocationContext.Provider>
                </View>
             )}
+            <BottomMenu inicio={true} navigation={navigation} />
             <SlideUp
                slide={this.state.showSlide}
                showContent={this.showContent}

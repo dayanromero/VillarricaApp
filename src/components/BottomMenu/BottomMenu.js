@@ -14,16 +14,16 @@ const { height } = Dimensions.get('window');
 const BottomMenu = (props) => {
    return (
       <View style={styles.container}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
             style={styles.texts}
-            onPress={() => props.navigation.navigate('inicio')}>
-            <Icon name="home" color='white' size={30} />
+            onPress={() => props.navigation.goBack('inicio')}>
+            <Icon name="home" color={props.inicio ? theme.colors.secondary :'white'} size={30} />
             <Text style={{color: 'white'}}>Inicio</Text>
-         </TouchableOpacity>
+         </TouchableOpacity> */}
          <TouchableOpacity
             style={styles.texts}
-            onPress={() => props.navigation.navigate('Statistics')}>
-            <Icon name="poll" color='white' size={30} />
+            onPress={() => props.navigation.navigate('statistics')}>
+            <Icon name="poll" color={props.stats ? theme.colors.secondary :'white'} size={30} />
             <Text style={{color: 'white'}}>Estadisticas</Text>
          </TouchableOpacity>
       </View>

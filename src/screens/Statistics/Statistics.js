@@ -15,6 +15,9 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 // Connect Redux
 import { connect } from 'react-redux';
 
+//Components
+import BottomMenu from '../../components/BottomMenu/BottomMenu';
+
 // Redux Actions
 import { fetchData } from './actions';
 
@@ -24,11 +27,13 @@ class Statistics extends Component {
    }
 
    render() {
+       const { navigation } = this.props;
       return (
          <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                <Text>Statistics</Text>
             </View>
+            <BottomMenu stats={true} navigation={navigation} />
          </SafeAreaView>
       );
    }

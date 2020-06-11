@@ -61,7 +61,7 @@ class SideMenuContent extends Component {
                         )}
                         label="Inicio"
                         onPress={() => {
-                           this.props.navigation.navigate('Inicio');
+                           this.props.navigation.navigate('inicio');
                         }}
                      />
                      <DrawerItem

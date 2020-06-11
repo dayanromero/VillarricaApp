@@ -29,7 +29,7 @@ const BottomTabNavigator = ({ navigation }) => (
     <Tab.Navigator
         initialRouteName='Inicio'
         activeColor='white'
-        backgroundColor= {theme.colors.primary}
+        activeBackgroundColor= {theme.colors.primary}
     >
         <Tab.Screen
             name='Inicio'

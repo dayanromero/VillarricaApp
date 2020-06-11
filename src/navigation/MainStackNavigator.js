@@ -65,7 +65,7 @@ const MainStackNavigator = ({ navigation }) => {
             options={{ title: 'Puestos de control' }}
          />
          <MainStack.Screen
-            name="Statistics"
+            name="statistics"
             component={Statistics}
             options={{ title: 'Estadisticas' }}
          />
