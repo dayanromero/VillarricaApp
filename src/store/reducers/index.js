@@ -7,7 +7,7 @@ import createActivityReducer from '../../components/Modal/reducer';
 import {createUserReducer} from '../../screens/NewUser/reducer';
 import {editUserReducer} from '../../screens/UpdateUser/reducer';
 import {createZoneReducer} from '../../screens/NewZone/reducer';
-import {ZonesReducer} from '../../screens/Zones/reducer';
+import {ZonesReducer, deleteZonesReducer} from '../../screens/Zones/reducer';
 
 export default combineReducers({
     login: loginReducer,
@@ -18,5 +18,6 @@ export default combineReducers({
     createUser: createUserReducer,
     editUser: editUserReducer,
     createZone: createZoneReducer,
-    zones: ZonesReducer
+    zones: ZonesReducer,
+    deleteZone: deleteZonesReducer
 })

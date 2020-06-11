@@ -3,9 +3,13 @@ import {
     FETCH_ZONE_SUCCESS,
     FETCH_ZONE_FAILURE,
     RESET_FETCH_ZONE,
-} from '../constants';
+    DELETE_ZONE,
+    DELETE_ZONE_SUCCESS,
+    DELETE_ZONE_FAILURE,
+    DELETE_ZONE_DATA
+ } from '../constants';
 
-import { getZones} from '../../../config/api';
+import { getZones, deleteZones } from '../../../config/api';
 
 export const fecthZone = (data) => {
     return {
@@ -45,6 +49,48 @@ export const fetchZones = (data) => {
             })
             .catch((error) => {
                 dispatch(fecthZoneFailure(error))
+            });
+    };
+};
+
+export const deleteZone = (id) => {
+    return {
+        type: DELETE_ZONE,
+        payload: {
+            id
+        }
+    };
+};
+
+export const deleteZoneSuccess = (data) => {
+    return {
+        type: DELETE_ZONE_SUCCESS,
+        payload: {
+            data,
+        },
+    };
+};
+
+export const deleteZoneFailure = (data) => {
+    return { type: DELETE_ZONE_FAILURE };
+};
+
+export const deleteZoneData = () => {
+    return { type: DELETE_ZONE_DATA };
+};
+
+export const deleteZonesLocation = (id) => {
+    return (dispatch) => {
+        dispatch(deleteZone(id));
+        deleteZones(id)
+            .then((response) => {
+                dispatch(deleteZoneSuccess(response));
+                if (!response) {
+                    dispatch(deleteZoneFailure());
+                }
+            })
+            .catch((error) => {
+                dispatch(deleteZoneFailure(error))
             });
     };
 };

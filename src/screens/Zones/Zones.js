@@ -10,7 +10,14 @@
 
 // Dependencies
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   SafeAreaView,
+   FlatList,
+   TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //Connect Redux
@@ -21,13 +28,13 @@ import { fetchDataLocations } from '../../store/actions/index';
 
 //Components
 import BottomButtons from '../../components/Button/BottomButtons';
-import { Card, Divider } from 'react-native-paper';
+import { Card } from 'react-native-paper';
+import Loading from '../../components/Loading/Loading';
 
 //Utilities
 import { theme } from '../../core/theme';
 
 class ZoneScreen extends Component {
-   state = {};
    componentDidMount() {
       this.props.getLocations();
    }
@@ -39,35 +46,31 @@ class ZoneScreen extends Component {
                <View>
                   <Text style={styles.textL}>{item.name}</Text>
                   <Text style={styles.texts}>{item.address}</Text>
-                  <Text style={{fontWeight: 'bold'}}>{item.city}</Text>
+                  <Text style={{ fontWeight: 'bold' }}>{item.city}</Text>
                </View>
             </Card.Content>
          </Card>
       );
    };
-   btns = [
-      {
-         title: 'Crear nuevo',
-         action: () => this.props.navigation.navigate('crearZona'),
-      },
-   ];
 
    render() {
-      const { data } = this.props;
-      console.log('separator', data);
+      const { data, loading } = this.props;
       return (
          <SafeAreaView style={styles.container}>
-            <View style={styles.view} >
+            <View style={styles.view}>
                <Icon name="map-marker" style={styles.icon} />
                <Text style={styles.text}>Puestos de control registrados.</Text>
             </View>
-            <FlatList
-               style={styles.view}
-               data={data}
-               renderItem={({item}) => this.Cards(item)}
-               keyExtractor={(item, index) => index.toString()}
-            />
-             <BottomButtons btns={this.btns} style={styles.button} />
+            {loading ? (
+               <Loading />
+            ) : (
+               <FlatList
+                  style={styles.view}
+                  data={data}
+                  renderItem={({ item }) => this.Cards(item)}
+                  keyExtractor={(item, index) => index.toString()}
+               />
+            )}
          </SafeAreaView>
       );
    }
@@ -81,9 +84,20 @@ const styles = StyleSheet.create({
    view: {
       padding: 16,
    },
+   textsContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+   },
    icon: {
       textAlign: 'center',
       fontSize: 60,
+      color: theme.colors.secondary,
+      margin: 5,
+   },
+   iconEdit: {
+      textAlign: 'center',
+      fontSize: 30,
       color: theme.colors.secondary,
       margin: 5,
    },
@@ -106,15 +120,11 @@ const styles = StyleSheet.create({
    card: {
       marginBottom: 8,
    },
-   button: {
-      width: '100%',
-      marginVertical: 8,
-    },
 });
 
 const mapStateToProps = (state) => {
-   const { data } = state.location;
-   return { data };
+   const { data, loading } = state.location;
+   return { data, loading };
 };
 
 const mapDispatchToProps = (dispatch) => {

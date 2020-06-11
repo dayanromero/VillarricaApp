@@ -9,6 +9,7 @@ const CREATE_USER = '/user/create/'
 const EDIT_USER = '/user/update/'
 const CREATE_ZONE = '/location/create/'
 const GET_ZONE = '/location/all'
+const DELETE_ZONE = '/location/delete/'
 
 const instance = axios.create({
     baseURL: URL,
@@ -51,5 +52,10 @@ export const createZone = (data) => {
 
 export const getZones = () => {
     return instance.get(`${GET_ZONE}`)
+    .then(Response =>  Response.data)
+}
+
+export const deleteZones = (id) => {
+    return instance.delete(`${DELETE_ZONE}${id}`)
     .then(Response =>  Response.data)
 }
