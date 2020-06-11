@@ -8,6 +8,7 @@ import {createUserReducer} from '../../screens/NewUser/reducer';
 import {editUserReducer} from '../../screens/UpdateUser/reducer';
 import {createZoneReducer} from '../../screens/NewZone/reducer';
 import {ZonesReducer, deleteZonesReducer} from '../../screens/Zones/reducer';
+import getStatisticsReducer from '../../screens/Statistics/reducer';
 
 export default combineReducers({
     login: loginReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
     editUser: editUserReducer,
     createZone: createZoneReducer,
     zones: ZonesReducer,
-    deleteZone: deleteZonesReducer
+    deleteZone: deleteZonesReducer,
+    statistics: getStatisticsReducer
 })

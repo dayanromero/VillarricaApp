@@ -23,7 +23,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //Components
 import AuthStackNavigator from './navigation/AuthStackNavigator';
-import DrawerStackNavigator from './navigation/MainStackNavigator';
+import DrawerStackNavigator from './navigation/DrawerStackNavigator';
 import Loading from './components/Loading/Loading';
 
 const RootStack = createStackNavigator();
@@ -42,12 +42,7 @@ class App extends Component {
       if (loading) {
          return <RootStack.Screen name={'Loading'} component={Loading} />;
       } else if (accessToken) {
-         return (
-            <RootStack.Screen
-               name={'MainStack'}
-               component={DrawerStackNavigator}
-            />
-         );
+         return <RootStack.Screen name={'MainStack'} component={DrawerStackNavigator} />;
       } else {
          return <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />;
       }

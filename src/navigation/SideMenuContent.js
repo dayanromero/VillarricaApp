@@ -8,10 +8,12 @@
  * All Rights Reserved.
  */
 
-// Dependencies
+// Libreries
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Title, Drawer } from 'react-native-paper';
+
+//Dependencies
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -25,9 +27,8 @@ import { logout } from '../screens/Login/actions';
 import { theme } from '../core/theme';
 
 class SideMenuContent extends Component {
-   signOut() {
-      this.props.clearDown();
-   }
+   signOut() { this.props.clearDown() }
+   
    render() {
       return (
          <View style={{ flex: 1 }}>
@@ -60,7 +61,7 @@ class SideMenuContent extends Component {
                         )}
                         label="Inicio"
                         onPress={() => {
-                           this.props.navigation.navigate('inicio');
+                           this.props.navigation.navigate('Inicio');
                         }}
                      />
                      <DrawerItem

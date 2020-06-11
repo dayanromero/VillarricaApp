@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const URL = 'https://zestian-map-finder.herokuapp.com'
+const URL_GOV_DATA = 'https://www.datos.gov.co/resource/gt2j-8ykr.json?'
 const GET_USER = '/user/id/'
 const GET_LOCATIONS = '/location/all'
 const GET_ACTIVITY = '/event/find?userId='
@@ -57,5 +58,10 @@ export const getZones = () => {
 
 export const deleteZones = (id) => {
     return instance.delete(`${DELETE_ZONE}${id}`)
+    .then(Response =>  Response.data)
+}
+
+export const fetGovData = () => {
+    return instance.get(`${URL_GOV_DATA}`)
     .then(Response =>  Response.data)
 }

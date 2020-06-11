@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
 //Screens
 import DashboardMap from '../screens/Dashboard/DashboardMap';
@@ -10,13 +9,12 @@ import NewUserScreen from '../screens/NewUser/NewUserScreen';
 import NewZone from '../screens/NewZone/NewZone';
 import ZoneScreen from '../screens/Zones/Zones';
 import EditUserScreen from '../screens/UpdateUser/EditUserScreen';
+import Statistics from '../screens/Statistics/Statistics';
 
 //Utilities
 import { theme } from '../core/theme';
-import SideMenuContent from './SideMenuContent';
 
 const MainStack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 const MainStackNavigator = ({ navigation }) => {
    return (
@@ -60,24 +58,18 @@ const MainStackNavigator = ({ navigation }) => {
             name="crearZona"
             component={NewZone}
             options={{title: 'Crear puesto de control' }}
-            
          />
          <MainStack.Screen
             name="zonas"
             component={ZoneScreen}
             options={{ title: 'Puestos de control' }}
          />
+         <MainStack.Screen
+            name="Statistics"
+            component={Statistics}
+            options={{ title: 'Estadisticas' }}
+         />
       </MainStack.Navigator>
-   );
-};
-
-const DrawerStackNavigator = () => {
-   return (
-      <Drawer.Navigator
-         initialRouteName="Inicio"
-         drawerContent={(props) => <SideMenuContent {...props} />}>
-         <Drawer.Screen name="inicio" component={MainStackNavigator} />
-      </Drawer.Navigator>
    );
 };
 
@@ -89,4 +81,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default DrawerStackNavigator;
+export default MainStackNavigator;

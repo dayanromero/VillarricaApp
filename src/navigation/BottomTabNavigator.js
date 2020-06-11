@@ -1,80 +1,59 @@
-import * as React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/Ionicons';
-import DashboardMap from '../screens/DashboardMap';
-import NewUserScreen from '../screens/NewUserScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { theme } from '../core/theme';
+/**
+ * This source code is the confidential, proprietary information of
+ * GoDevelop, you may not disclose such information,
+ * and may only use it in accordance with the terms of the license
+ * agreement you entered into with GoDevelop.
+ *
+ * GoDevelop.
+ * All Rights Reserved.
+ */
 
-const MainStack = createStackNavigator();
-const SettingsStack = createStackNavigator();
+//Libreries
+import * as React from 'react';
+
+//Depen dencies
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+//Screens
+import DashboardMap from '../screens/Dashboard/DashboardMap';
+import Statistics from '../screens/Statistics/Statistics';
+import MainStackNavigator from '../navigation/MainStackNavigator';
+
+//Utilities
+import { theme } from '../core/theme';
 
 const Tab = createMaterialBottomTabNavigator();
 
-const MainTabScreen = ({ navigation }) => (
+const BottomTabNavigator = ({ navigation }) => (
     <Tab.Navigator
         initialRouteName='Inicio'
         activeColor='white'
+        backgroundColor= {theme.colors.primary}
     >
         <Tab.Screen
             name='Inicio'
-            component={DashboardMap}
+            component={MainStackNavigator}
             options={{
                 tabBarLabel: 'Inicio',
                 tabBarColor: theme.colors.primary,
-                tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name='ios-home' color={color} size={size} />
-                ),
+                tabBarIcon: () => <Icon name="home" color='white' size={25} />
             }}
         />
         <Tab.Screen
-            name='Agregar usuario'
-            component={NewUserScreen}
+            name='Estadisticas'
+            component={Statistics}
             screenOptions={{
                 headerShown: true,
             }}
             options={{
-                tabBarLabel: 'Agregar usuario',
+                tabBarLabel: 'Estadisticas',
                 tabBarColor: theme.colors.primary,
-                tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name='ios-person' color={color} size={size} />
-                ),
+                tabBarIcon: () => <Icon name="poll" color='white' size={25} />
             }}
         />
+        
     </Tab.Navigator>
 )
 
-export default MainTabScreen;
-
-const MainStackNavigator = ({ navigation }) => {
-    return (
-        <MainStack.Navigator
-            screenOptions={{
-                headerShown: false,
-            }}
-        >
-            <MainStack.Screen name="DashboardMap" component={DashboardMap} />
-        </MainStack.Navigator>
-    )
-}
-
-const SettingsStackNavigator = ({ navigation }) => {
-    return (
-        <SettingsStack.Navigator>
-            <SettingsStack.Screen
-                name="SettingsStack"
-                component={SettingsScreen}
-                options={{
-                    title: 'Settings',
-                    headerLeft: () => (
-                        <Icon.Button name='ios-menu' size={25}
-                            backgroundColor={theme.colors.primary}
-                            onPress={() => navigation.openDrawer()}
-                        ></Icon.Button>
-                    )
-                }}
-            />
-        </SettingsStack.Navigator>
-    )
-}
+export default BottomTabNavigator;

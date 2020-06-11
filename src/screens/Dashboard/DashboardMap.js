@@ -26,7 +26,6 @@ import ModalDialog from '../../components/Modal/ModalDialog';
 import Loading from '../../components/Loading/Loading';
 import ShowAlert from '../../components/Alert/Alert';
 import { MapLocationContext } from './context';
-
 //Utilities
 import { DEFAULT_CENTER_COORDINATE } from '../../core/utils';
 import { dataSource } from '../../config/default/';
