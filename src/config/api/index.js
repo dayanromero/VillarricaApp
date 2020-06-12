@@ -12,6 +12,11 @@ const CREATE_ZONE = '/location/create/'
 const GET_ZONE = '/location/all'
 const DELETE_ZONE = '/location/delete/'
 
+const queries = {
+    totalHMR: '$order=total DESC&$select=atenci_n as type, COUNT(*) as total&$group=atenci_n&$where=atenci_n in("Casa", "Fallecido", "Hospital", "Hospital UCI", "Recuperado")',
+    total: '$order=total DESC&$select=COUNT(*) as total'
+}
+
 const instance = axios.create({
     baseURL: URL,
   });
@@ -61,7 +66,12 @@ export const deleteZones = (id) => {
     .then(Response =>  Response.data)
 }
 
-export const fetGovData = () => {
-    return instance.get(`${URL_GOV_DATA}`)
+export const fetTotal = () => {
+    return instance.get(`${URL_GOV_DATA}${queries.total}`)
+    .then(Response =>  Response.data)
+}
+
+export const fetHosMuerec = () => {
+    return instance.get(`${URL_GOV_DATA}${queries.totalHMR}`)
     .then(Response =>  Response.data)
 }

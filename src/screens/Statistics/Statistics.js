@@ -10,9 +10,14 @@
 
 //liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import {
+   View,
+   StyleSheet,
+   SafeAreaView,
+   ScrollView,
+   Dimensions,
+} from 'react-native';
 import { VictoryPie } from 'victory-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Connect Redux
 import { connect } from 'react-redux';
@@ -21,64 +26,81 @@ import { connect } from 'react-redux';
 import { fetchData } from './actions';
 
 //Components
-import BottomMenu from '../../components/BottomMenu/BottomMenu';
-import { Card } from 'react-native-paper';
+import Loading from '../../components/Loading/Loading';
 
 //Utilities
 import { theme } from '../../core/theme';
+import { cardStatistics } from '../../core/utils';
 
-const data = [
-   { x: 1, y: 24000, label: 'Infectados', icon: 'account-settings', color:'tomato' },
-   { x: 2, y: 2250, label: 'Hospitalizados', icon: 'account-alert', color: 'orange' },
-   { x: 3, y: 16500, label: 'Recuperdos', icon: 'account-multiple-check', color: 'gold' },
-   { x: 4, y: 5000, label: 'Muertos', icon: 'account-remove', color: 'navy' },
-];
+const { height } = Dimensions.get('window');
 
 class Statistics extends Component {
    componentDidMount() {
       this.props.getStatistics();
    }
 
-   cardStatistics = (item) => {
-      return (
-         <TouchableOpacity>
-            <Card style={styles.card}>
-               <Card.Content style={styles.textsContainer}>
-                  <View style={{ marginRight: 20 }}>
-                     <Icon name={item.icon} color={item.color} size={40} />
-                  </View>
-                  <View>
-                     <Text style={styles.textL}>{item.label}</Text>
-                     <Text style={styles.texts}>{item.y}</Text>
-                  </View>
-               </Card.Content>
-            </Card>
-         </TouchableOpacity>
-      );
-   };
-
    render() {
-      const { navigation } = this.props;
+      const { loading, data } = this.props;
+
+      const datos = data
+         ? data.map((items, index) => {
+              const assets = [
+                 {
+                    icon: 'home-account',
+                    color: 'orange',
+                 },
+                 {
+                    icon: 'account-heart',
+                    color: 'gold',
+                 },
+                 {
+                    icon: 'home-plus',
+                    color: '#FF4E02',
+                 },
+                 {
+                    icon: 'account-remove',
+                    color: '#7D4E9E',
+                 },
+                 {
+                    icon: 'home-plus',
+                    color: 'red',
+                 },
+              ];
+
+              return {
+                 key: index,
+                 x: 3,
+                 y: items.total,
+                 label: items.type,
+                 icon: assets[index].icon,
+                 color: assets[index].color,
+              };
+           })
+         : [];
+
       return (
          <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
-               <VictoryPie
-                  padAngle={({ datum }) => datum.x}
-                  innerRadius={90}
-                  origin={{ y: 200 }}
-                  padding={50}
-                  data={data}
-                  colorScale={data.map((it) => it.color)}
-                  labelRadius={({ innerRadius }) => innerRadius -75 }
-               />
-               <FlatList
-                  style={styles.view}
-                  data={data}
-                  renderItem={({ item }) => this.cardStatistics(item)}
-                  keyExtractor={(item, index) => index.toString()}
-               />
-            </View>
-            {/* <BottomMenu stats={true} navigation={navigation} /> */}
+            {loading ? (
+               <Loading />
+            ) : (
+               <ScrollView>
+                  <View>
+                     <VictoryPie
+                        height={height / 2.5}
+                        padAngle={({ datum }) => datum.x}
+                        innerRadius={150}
+                        origin={{ y: 180 }}
+                        padding={80}
+                        data={datos}
+                        colorScale={datos.map((item) => item.color)}
+                        labelRadius={({ innerRadius }) => innerRadius - 115}
+                     />
+                     <View style={{ padding: 16 }}>
+                        {datos.map((item) => cardStatistics(item))}
+                     </View>
+                  </View>
+               </ScrollView>
+            )}
          </SafeAreaView>
       );
    }
@@ -87,37 +109,9 @@ class Statistics extends Component {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-   },
-   view: {
+      backgroundColor: theme.colors.grey,
       padding: 16,
-      marginBottom: 10,
    },
-   icon: {
-      textAlign: 'center',
-      fontSize: 60,
-      color: theme.colors.secondary,
-      margin: 5,
-   },
-   texts: {
-      paddingBottom: 8,
-      fontSize: 20,
-      color: 'white'
-   },
-   textL: {
-      fontWeight: 'bold',
-      textTransform: 'uppercase',
-      fontSize: 16,
-      paddingTop: 5,
-      color: 'white'
-   },
-   card: {
-      marginBottom: 10,
-      backgroundColor: '#4C2A80'
-   },
-   textsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
- },
 });
 
 const mapStateToProps = (state) => {
