@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-around',
       flexDirection: 'row',
-      height: height / 12,
+      height: height / 14,
       backgroundColor: theme.colors.primary,
    },
    texts: {

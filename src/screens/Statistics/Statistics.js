@@ -96,7 +96,7 @@ class Statistics extends Component {
                         labelRadius={({ innerRadius }) => innerRadius - 115}
                      />
                      <View style={{ padding: 16 }}>
-                        {datos.map((item) => cardStatistics(item))}
+                        {datos.map((item, index) => cardStatistics(item, index))}
                      </View>
                   </View>
                </ScrollView>

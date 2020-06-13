@@ -109,9 +109,9 @@ export const alertCreation = (registro, error) => {
  * cardStatistics
  * @param {*} item
  */
-export const cardStatistics = (item) => {
+export const cardStatistics = (item, index) => {
    return (
-      <TouchableOpacity>
+      <TouchableOpacity key={index}>
          <Card style={styles.card}>
             <Card.Content style={styles.textsContainer}>
                <View style={{ marginRight: 20 }}>
